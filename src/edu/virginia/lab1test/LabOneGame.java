@@ -2,9 +2,12 @@ package edu.virginia.lab1test;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.awt.event.KeyEvent;
+import java.awt.Point;
 
 import edu.virginia.engine.display.Game;
 import edu.virginia.engine.display.Sprite;
+
 
 /**
  * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
@@ -31,6 +34,7 @@ public class LabOneGame extends Game{
 		super.update(pressedKeys);
 		
 		/* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
+
 		if(mario != null) mario.update(pressedKeys);
 
 		if(pressedKeys.contains(KeyEvent.VK_V)) {
@@ -38,11 +42,11 @@ public class LabOneGame extends Game{
 		}
 
 		if(pressedKeys.contains(KeyEvent.VK_Z)) {
-			mario.setAlpha(mario.getAlpha() - 1.0);
+			mario.setAlpha(mario.getAlpha() - 1.0f);
 		}
 
 		if(pressedKeys.contains(KeyEvent.VK_X)) {
-			mario.setAlpha(mario.getAlpha() + 1.0);
+			mario.setAlpha(mario.getAlpha() + 1.0f);
 		}
 
 		if(pressedKeys.contains(KeyEvent.VK_A)) {
@@ -51,11 +55,41 @@ public class LabOneGame extends Game{
 		}
 
 		if(pressedKeys.contains(KeyEvent.VK_S)) {
-			mario.setScale(mario.getScale() - 1.0);
-			mario.setScaleY(mario.getScale() - 1.0);
+			mario.setScaleY(mario.getScaleY() - 1.0);
+			mario.setScaleY(mario.getScaleY() - 1.0);
 		}
 
-		
+		if (pressedKeys.contains(KeyEvent.VK_UP)){
+			mario.setPosition(new Point(mario.getPosition().x,
+					mario.getPosition().y - 5));
+		}
+		if (pressedKeys.contains(KeyEvent.VK_DOWN)){
+			mario.setPosition(new Point(mario.getPosition().x,
+					mario.getPosition().y + 5));
+		}
+		if (pressedKeys.contains(KeyEvent.VK_LEFT)){
+			mario.setPosition(new Point(mario.getPosition().x - 5,
+					mario.getPosition().y ));
+		}
+		if (pressedKeys.contains(KeyEvent.VK_RIGHT)){
+			mario.setPosition(new Point(mario.getPosition().x + 5,
+					mario.getPosition().y ));
+		}
+		if (pressedKeys.contains(KeyEvent.VK_W)){
+			mario.setRotation(mario.getRotation() + 5);
+		}
+		if (pressedKeys.contains(KeyEvent.VK_Q)){
+			mario.setRotation(mario.getRotation() - 5);
+		}
+		if (pressedKeys.contains(KeyEvent.VK_J)){
+			mario.setPivotPoint(new Point(mario.getPivotPoint().x - 1,
+					mario.getPosition().y ));
+		}
+		if (pressedKeys.contains(KeyEvent.VK_L)){
+			mario.setPivotPoint(new Point(mario.getPivotPoint().x + 1,
+					mario.getPosition().y ));
+		}
+		mario.update(pressedKeys);
 	}
 	
 	/**
