@@ -21,6 +21,12 @@ public class DisplayObject {
 	/* The image that is displayed by this object */
 	private BufferedImage displayImage;
 
+	private Boolean visible;
+	private Float alpha;
+	private Float oldAlpha;
+	private Double scaleX;
+	private Double scaleY;
+
 	/**
 	 * Constructors: can pass in the id OR the id and image's file path and
 	 * position OR the id and a buffered image and position
@@ -32,6 +38,11 @@ public class DisplayObject {
 	public DisplayObject(String id, String fileName) {
 		this.setId(id);
 		this.setImage(fileName);
+		this.setAlpha(1.0f);
+		this.setVisible(true);
+		this.setOldAlpha(0.0f);
+		this.setScaleX(1.0);
+		this.setScaleY(1.0);
 	}
 
 	public void setId(String id) {
@@ -42,6 +53,20 @@ public class DisplayObject {
 		return id;
 	}
 
+	public void setVisible(Boolean x){ this.visible = x; }
+	public Boolean getVisible(){ return visible; }
+
+	public void setAlpha(Float a){ this.alpha = a; }
+	public Float getAlpha(){return alpha;}
+
+	public void setOldAlpha(Float a){ this.oldAlpha = a; }
+	public Float getOldAlpha(){return oldAlpha;}
+
+	public void setScaleX(Double scaleX){this.scaleX = scaleX;}
+	public Double getScaleX() { return scaleX;}
+
+	public void setScaleY(Double scaleY){this.scaleY = scaleY;}
+	public Double getScaleY() { return scaleY;}
 
 	/**
 	 * Returns the unscaled width and height of this display object
@@ -135,16 +160,25 @@ public class DisplayObject {
 	 * Applies transformations for this display object to the given graphics
 	 * object
 	 * */
-	protected void applyTransformations(Graphics2D g2d) {
-	
+	protected void applyTransformations(Graphics2D g2d){
+		g2d.translate(this.position.x, this.position.y);
+		g2d.rotate(Math.toRadians(this.getRotation()));
+		g2d.scale(this.scaleX, this.scaleY);
+		float curAlpha;
+		this.oldAlpha = curAlpha = ((AlphaComposite)
+				g2d.getComposite()).getAlpha();
+		g2d.setComposite(AlphaComposite.getInstance(3, curAlpha *
+				this.alpha));
 	}
 
 	/**
 	 * Reverses transformations for this display object to the given graphics
 	 * object
 	 * */
-	protected void reverseTransformations(Graphics2D g2d) {
-
+	protected void reverseTransformations(Graphics2D g2d){
+		g2d.setComposite(AlphaComposite.getInstance(3,
+				this.oldAlpha));
+		g2d.scale(1.0, 1.0);
 	}
 
 }

@@ -32,6 +32,29 @@ public class LabOneGame extends Game{
 		
 		/* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
 		if(mario != null) mario.update(pressedKeys);
+
+		if(pressedKeys.contains(KeyEvent.VK_V)) {
+			mario.setVisible(!mario.getVisible());
+		}
+
+		if(pressedKeys.contains(KeyEvent.VK_Z)) {
+			mario.setAlpha(mario.getAlpha() - 1.0);
+		}
+
+		if(pressedKeys.contains(KeyEvent.VK_X)) {
+			mario.setAlpha(mario.getAlpha() + 1.0);
+		}
+
+		if(pressedKeys.contains(KeyEvent.VK_A)) {
+			mario.setScaleX(mario.getScaleX() + 1.0);
+			mario.setScaleY(mario.getScaleY() + 1.0);
+		}
+
+		if(pressedKeys.contains(KeyEvent.VK_S)) {
+			mario.setScale(mario.getScale() - 1.0);
+			mario.setScaleY(mario.getScale() - 1.0);
+		}
+
 		
 	}
 	
