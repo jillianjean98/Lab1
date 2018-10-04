@@ -50,13 +50,13 @@ public class LabOneGame extends Game{
 		}
 
 		if(pressedKeys.contains(KeyEvent.VK_A)) {
-			mario.setScaleX(mario.getScaleX() + 1.0);
-			mario.setScaleY(mario.getScaleY() + 1.0);
+			mario.setScaleX(mario.getScaleX() + 0.1);
+			mario.setScaleY(mario.getScaleY() + 0.1);
 		}
 
 		if(pressedKeys.contains(KeyEvent.VK_S)) {
-			mario.setScaleY(mario.getScaleY() - 1.0);
-			mario.setScaleY(mario.getScaleY() - 1.0);
+			mario.setScaleX(mario.getScaleX() - 0.1);
+			mario.setScaleY(mario.getScaleY() - 0.1);
 		}
 
 		if (pressedKeys.contains(KeyEvent.VK_UP)){

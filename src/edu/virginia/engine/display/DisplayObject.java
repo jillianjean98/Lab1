@@ -218,7 +218,7 @@ public class DisplayObject {
 	protected void reverseTransformations(Graphics2D g2d){
 		g2d.setComposite(AlphaComposite.getInstance(3,
 				this.oldAlpha));
-		g2d.scale(1.0, 1.0);
+		g2d.scale(0.5, 0.5);
 
 		g2d.rotate(Math.toRadians(this.getRotation()), this.pivotPoint.x, this.pivotPoint.y);
 		g2d.translate(this.position.x, this.position.y);
