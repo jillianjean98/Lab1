@@ -1,7 +1,6 @@
 package edu.virginia.engine.display;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -21,17 +20,33 @@ public class DisplayObject {
 	/* The image that is displayed by this object */
 	private BufferedImage displayImage;
 
+	/* The x, y position where the object is displayed */
+	private Point position;
+
+	/* The point which the object rotates around */
+	private Point pivotPoint;
+
+	/* The amount (in degrees) to rotate the object */
+	private double rotation;
+
+
 	/**
 	 * Constructors: can pass in the id OR the id and image's file path and
 	 * position OR the id and a buffered image and position
 	 */
 	public DisplayObject(String id) {
 		this.setId(id);
+		this.setPosition(new Point(0, 0));
+		this.setPivotPoint(new Point(0, 0));
+		this.setRotation(0);
 	}
 
 	public DisplayObject(String id, String fileName) {
 		this.setId(id);
 		this.setImage(fileName);
+		this.setPosition(new Point(0, 0));
+		this.setPivotPoint(new Point(0, 0));
+		this.setRotation(0);
 	}
 
 	public void setId(String id) {
@@ -70,6 +85,29 @@ public class DisplayObject {
 		}
 	}
 
+	public Point getPosition() {
+		return position;
+	}
+
+	public Point getPivotPoint() {
+		return pivotPoint;
+	}
+
+	public double getRotation() {
+		return rotation;
+	}
+
+	public void setPosition(Point position) {
+		this.position = position;
+	}
+
+	public void setPivotPoint(Point pivotPoint) {
+		this.pivotPoint = pivotPoint;
+	}
+
+	public void setRotation(double rotation) {
+		this.rotation = rotation;
+	}
 
 	/**
 	 * Helper function that simply reads an image from the given image name
@@ -119,9 +157,8 @@ public class DisplayObject {
 			applyTransformations(g2d);
 
 			/* Actually draw the image, perform the pivot point translation here */
-			g2d.drawImage(displayImage, 0, 0,
-					(int) (getUnscaledWidth()),
-					(int) (getUnscaledHeight()), null);
+			g2d.drawImage(displayImage, 0, 0, (int) (getUnscaledWidth()),
+					(int)(getUnscaledHeight()), null);
 			
 			/*
 			 * undo the transformations so this doesn't affect other display
@@ -136,7 +173,8 @@ public class DisplayObject {
 	 * object
 	 * */
 	protected void applyTransformations(Graphics2D g2d) {
-	
+		g2d.translate(this.position.x, this.position.y);
+		g2d.rotate(Math.toRadians(this.getRotation()), this.pivotPoint.x, this.pivotPoint.y);
 	}
 
 	/**
@@ -145,6 +183,8 @@ public class DisplayObject {
 	 * */
 	protected void reverseTransformations(Graphics2D g2d) {
 
+		g2d.rotate(Math.toRadians(this.getRotation()), this.pivotPoint.x, this.pivotPoint.y);
+		g2d.translate(this.position.x, this.position.y);
 	}
 
 }
