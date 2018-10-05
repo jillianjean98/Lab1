@@ -42,11 +42,11 @@ public class LabOneGame extends Game{
 		}
 
 		if(pressedKeys.contains(KeyEvent.VK_Z)) {
-			mario.setAlpha(mario.getAlpha() - 1.0f);
+			mario.setAlpha(mario.getAlpha() - 0.01f);
 		}
 
 		if(pressedKeys.contains(KeyEvent.VK_X)) {
-			mario.setAlpha(mario.getAlpha() + 1.0f);
+			mario.setAlpha(mario.getAlpha() + 0.01f);
 		}
 
 		if(pressedKeys.contains(KeyEvent.VK_A)) {
