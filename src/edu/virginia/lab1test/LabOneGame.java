@@ -39,6 +39,14 @@ public class LabOneGame extends Game{
 
 		if(pressedKeys.contains(KeyEvent.VK_V)) {
 			mario.setVisible(!mario.getVisible());
+			try
+			{
+				Thread.sleep(100);
+			}
+			catch(InterruptedException ex)
+			{
+				Thread.currentThread().interrupt();
+			}
 		}
 
 		if(pressedKeys.contains(KeyEvent.VK_Z)) {
