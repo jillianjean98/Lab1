@@ -25,14 +25,8 @@ public class DisplayObject {
 	private Float oldAlpha;
 	private Double scaleX;
 	private Double scaleY;
-
-	/* The x, y position where the object is displayed */
 	private Point position;
-
-	/* The point which the object rotates around */
 	private Point pivotPoint;
-
-	/* The amount (in degrees) to rotate the object */
 	private double rotation;
 
 	/**
@@ -83,7 +77,26 @@ public class DisplayObject {
 	public void setScaleY(Double scaleY){this.scaleY = scaleY;}
 	public Double getScaleY() { return scaleY;}
 
-	/**
+    public void setPosition(Point position) {
+        this.position = position;
+    }
+    public Point getPosition() {
+        return position;
+    }
+
+    public void setPivotPoint(Point pivotPoint) { this.pivotPoint = pivotPoint; }
+    public Point getPivotPoint() {
+        return pivotPoint;
+    }
+
+    public void setRotation(double rotation) {
+        this.rotation = rotation;
+    }
+    public double getRotation() {
+        return rotation;
+    }
+
+    /**
 	 * Returns the unscaled width and height of this display object
 	 * */
 	public int getUnscaledWidth() {
@@ -108,30 +121,6 @@ public class DisplayObject {
 		if (displayImage == null) {
 			System.err.println("[DisplayObject.setImage] ERROR: " + imageName + " does not exist!");
 		}
-	}
-
-	public Point getPosition() {
-		return position;
-	}
-
-	public Point getPivotPoint() {
-		return pivotPoint;
-	}
-
-	public double getRotation() {
-		return rotation;
-	}
-
-	public void setPosition(Point position) {
-		this.position = position;
-	}
-
-	public void setPivotPoint(Point pivotPoint) {
-		this.pivotPoint = pivotPoint;
-	}
-
-	public void setRotation(double rotation) {
-		this.rotation = rotation;
 	}
 
 	/**
@@ -182,7 +171,7 @@ public class DisplayObject {
 			applyTransformations(g2d);
 
 			/* Actually draw the image, perform the pivot point translation here */
-			g2d.drawImage(displayImage, 0, 0, (int) (getUnscaledWidth()),
+			g2d.drawImage(displayImage, 0,0, (int) (getUnscaledWidth()),
 					(int)(getUnscaledHeight()), null);
 
 			/*
@@ -200,7 +189,6 @@ public class DisplayObject {
 
 	protected void applyTransformations(Graphics2D g2d){
 		g2d.translate(this.position.x, this.position.y);
-		//g2d.rotate(Math.toRadians(this.getRotation()));
 		g2d.rotate(Math.toRadians(this.getRotation()), this.pivotPoint.x, this.pivotPoint.y);
 		g2d.scale(this.scaleX, this.scaleY);
 		float curAlpha;
@@ -219,9 +207,8 @@ public class DisplayObject {
 		g2d.setComposite(AlphaComposite.getInstance(3,
 				this.oldAlpha));
 		g2d.scale(0.5, 0.5);
-
-		g2d.rotate(Math.toRadians(this.getRotation()), this.pivotPoint.x, this.pivotPoint.y);
-		g2d.translate(this.position.x, this.position.y);
+		g2d.rotate(Math.toRadians(-this.getRotation()), this.pivotPoint.x, this.pivotPoint.y);
+		g2d.translate(0,0);
 
 	}
 

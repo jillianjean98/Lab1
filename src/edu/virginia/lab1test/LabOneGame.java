@@ -35,8 +35,8 @@ public class LabOneGame extends Game{
 		
 		/* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
 
-		if(mario != null) mario.update(pressedKeys);
-
+		if(mario != null) {
+			
 		if(pressedKeys.contains(KeyEvent.VK_V)) {
 			mario.setVisible(!mario.getVisible());
 			try
@@ -49,55 +49,65 @@ public class LabOneGame extends Game{
 			}
 		}
 
-		if(pressedKeys.contains(KeyEvent.VK_Z)) {
-			mario.setAlpha(mario.getAlpha() - 0.01f);
-		}
 
-		if(pressedKeys.contains(KeyEvent.VK_X)) {
-			mario.setAlpha(mario.getAlpha() + 0.01f);
-		}
+			if (pressedKeys.contains(KeyEvent.VK_Z)) {
+				mario.setAlpha(mario.getAlpha() - 0.01f);
+			}
 
-		if(pressedKeys.contains(KeyEvent.VK_A)) {
-			mario.setScaleX(mario.getScaleX() + 0.1);
-			mario.setScaleY(mario.getScaleY() + 0.1);
-		}
+			if (pressedKeys.contains(KeyEvent.VK_X)) {
+				mario.setAlpha(mario.getAlpha() + 0.01f);
+			}
 
-		if(pressedKeys.contains(KeyEvent.VK_S)) {
-			mario.setScaleX(mario.getScaleX() - 0.1);
-			mario.setScaleY(mario.getScaleY() - 0.1);
-		}
+			if (pressedKeys.contains(KeyEvent.VK_A)) {
+				mario.setScaleX(mario.getScaleX() + 0.1);
+				mario.setScaleY(mario.getScaleY() + 0.1);
+			}
 
-		if (pressedKeys.contains(KeyEvent.VK_UP)){
-			mario.setPosition(new Point(mario.getPosition().x,
-					mario.getPosition().y - 5));
+			if (pressedKeys.contains(KeyEvent.VK_S)) {
+				mario.setScaleX(mario.getScaleX() - 0.1);
+				mario.setScaleY(mario.getScaleY() - 0.1);
+			}
+
+			if (pressedKeys.contains(KeyEvent.VK_UP)) {
+				mario.setPosition(new Point(mario.getPosition().x,
+						mario.getPosition().y - 5));
+			}
+			if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
+				mario.setPosition(new Point(mario.getPosition().x,
+						mario.getPosition().y + 5));
+			}
+			if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
+				mario.setPosition(new Point(mario.getPosition().x - 5,
+						mario.getPosition().y));
+			}
+			if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
+				mario.setPosition(new Point(mario.getPosition().x + 5,
+						mario.getPosition().y));
+			}
+			if (pressedKeys.contains(KeyEvent.VK_W)) {
+				mario.setRotation(mario.getRotation() + 5);
+			}
+			if (pressedKeys.contains(KeyEvent.VK_Q)) {
+				mario.setRotation(mario.getRotation() - 5);
+			}
+			if (pressedKeys.contains(KeyEvent.VK_J)) {
+				mario.setPivotPoint(new Point(mario.getPivotPoint().x - 1,
+						mario.getPivotPoint().y));
+			}
+			if (pressedKeys.contains(KeyEvent.VK_L)) {
+				mario.setPivotPoint(new Point(mario.getPivotPoint().x + 1,
+						mario.getPivotPoint().y));
+			}
+			if (pressedKeys.contains(KeyEvent.VK_I)) {
+				mario.setPivotPoint(new Point(mario.getPivotPoint().x,
+						mario.getPivotPoint().y - 1));
+			}
+			if (pressedKeys.contains(KeyEvent.VK_K)) {
+				mario.setPivotPoint(new Point(mario.getPivotPoint().x,
+						mario.getPivotPoint().y + 1));
+			}
+			mario.update(pressedKeys);
 		}
-		if (pressedKeys.contains(KeyEvent.VK_DOWN)){
-			mario.setPosition(new Point(mario.getPosition().x,
-					mario.getPosition().y + 5));
-		}
-		if (pressedKeys.contains(KeyEvent.VK_LEFT)){
-			mario.setPosition(new Point(mario.getPosition().x - 5,
-					mario.getPosition().y ));
-		}
-		if (pressedKeys.contains(KeyEvent.VK_RIGHT)){
-			mario.setPosition(new Point(mario.getPosition().x + 5,
-					mario.getPosition().y ));
-		}
-		if (pressedKeys.contains(KeyEvent.VK_W)){
-			mario.setRotation(mario.getRotation() + 5);
-		}
-		if (pressedKeys.contains(KeyEvent.VK_Q)){
-			mario.setRotation(mario.getRotation() - 5);
-		}
-		if (pressedKeys.contains(KeyEvent.VK_J)){
-			mario.setPivotPoint(new Point(mario.getPivotPoint().x - 1,
-					mario.getPosition().y ));
-		}
-		if (pressedKeys.contains(KeyEvent.VK_L)){
-			mario.setPivotPoint(new Point(mario.getPivotPoint().x + 1,
-					mario.getPosition().y ));
-		}
-		mario.update(pressedKeys);
 	}
 	
 	/**
