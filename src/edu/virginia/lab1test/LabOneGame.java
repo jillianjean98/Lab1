@@ -41,7 +41,7 @@ public class LabOneGame extends Game{
 			mario.setVisible(!mario.getVisible());
 			try
 			{
-				Thread.sleep(100);
+				Thread.sleep(300);
 			}
 			catch(InterruptedException ex)
 			{
@@ -50,13 +50,13 @@ public class LabOneGame extends Game{
 		}
 
 
-			if (pressedKeys.contains(KeyEvent.VK_Z)) {
+			if (pressedKeys.contains(KeyEvent.VK_X)) {
 				if(mario.getAlpha()-0.1f>0.0f) {
 					mario.setAlpha(mario.getAlpha() - 0.01f);
 				}
 			}
 
-			if (pressedKeys.contains(KeyEvent.VK_X)) {
+			if (pressedKeys.contains(KeyEvent.VK_Z)) {
 				if(mario.getAlpha()!=1.00f) {
 					mario.setAlpha(mario.getAlpha() + 0.01f);
 				}
