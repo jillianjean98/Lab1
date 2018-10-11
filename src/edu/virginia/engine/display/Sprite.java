@@ -8,13 +8,9 @@ import java.util.ArrayList;
  * */
 public class Sprite extends DisplayObject {
 
-	public Sprite(String id) {
-		super(id);
-	}
+	public Sprite(String id) { super(id); }
 
-	public Sprite(String id, String imageFileName) {
-		super(id, imageFileName);
-	}
+	public Sprite(String id, String imageFileName) { super(id, imageFileName); }
 	
 	@Override
 	public void update(ArrayList<Integer> pressedKeys) {
