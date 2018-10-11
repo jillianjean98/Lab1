@@ -16,7 +16,7 @@ public class AnimatedSprite extends Sprite {
     private int startFrame;
     private int endFrame;
 
-    static int DEFAULT_ANIMATION_SPEED = 1;
+    private static int DEFAULT_ANIMATION_SPEED = 1;
 
     private int animationSpeed;
     private GameClock gameClock;
