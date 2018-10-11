@@ -18,10 +18,10 @@ public class AnimatedSprite extends Sprite{
 
     private GameClock gameClock;
 
-    public Sprite(String ID, String fileName) {
+    public AnimatedSprite(String ID, String fileName) {
         super(ID, fileName);
         gameClock = new GameClock();
-        animationSpeed = 2;
+        animationSpeed = DEFAULT_ANIMATION_SPEED;
     }
 
     public void initGameClock(){
