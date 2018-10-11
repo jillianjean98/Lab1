@@ -25,6 +25,14 @@ public class AnimatedSprite extends Sprite{
         animationSpeed = DEFAULT_ANIMATION_SPEED;
     }
 
+    private int getAnimationSpeed(){
+        return this.animationSpeed;
+    }
+
+    private void setAnimationSpeed(int speed){
+        this.animationSpeed = speed;
+    }
+
     public void initGameClock(){
         if(gameClock == null){
                 gameClock = new GameClock();
@@ -32,4 +40,3 @@ public class AnimatedSprite extends Sprite{
     }
 
 }
-
