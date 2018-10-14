@@ -12,27 +12,27 @@ public class Animation {
         this.setEndFrame(endFrame);
     }
 
-    private String getId(){
+    public String getId(){
         return id;
     }
 
-    private void setId(String id){
+    public void setId(String id){
         this.id = id;
     }
 
-    private int getStartFrame() {
+    public int getStartFrame() {
         return startFrame;
     }
 
-    private void setStartFrame(int sf){
+    public void setStartFrame(int sf){
         this.startFrame = sf;
     }
 
-    private int getEndFrame(){
+    public int getEndFrame(){
         return endFrame;
     }
 
-    private void setEndFrame(int ef){
+    public void setEndFrame(int ef){
         this.endFrame = ef;
     }
 
