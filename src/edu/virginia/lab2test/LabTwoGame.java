@@ -1,28 +1,30 @@
-package edu.virginia.lab1test;
-
-import java.awt.Graphics;
-import java.util.ArrayList;
-import java.awt.event.KeyEvent;
-import java.awt.Point;
+package edu.virginia.lab2test;
 
 import edu.virginia.engine.display.Game;
 import edu.virginia.engine.display.AnimatedSprite;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
+import edu.virginia.engine.display.AnimatedSprite;
 
 /**
  * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
  * although, for now, it won't be a very fun game :)
  * */
-public class LabOneGame extends Game{
+public class LabTwoGame extends Game{
 
+	private String[] fileStrings = {"mario/walk_00.png", "mario/walk_01.png", "mario/run_00.png", "mario/run_01.png","mario/jump_00.png", "mario/jump_01.png", "mario/thumbs_00.png", "mario/thumbs_01.png"};
+	private ArrayList<String> filenames = new ArrayList<>(Arrays.asList(fileStrings));
 	/* Create a sprite object for our game. We'll use mario */
-	AnimatedSprite mario = new AnimatedSprite("Mario", "Mario.png");
-	
+	AnimatedSprite mario = new AnimatedSprite("Mario", filenames);
+
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
 	 * */
-	public LabOneGame() {
-		super("Lab One Test Game", 500, 300);
+	public LabTwoGame() {
+		super("Lab Two Test Game", 500, 300);
 	}
 	
 	/**
@@ -121,7 +123,7 @@ public class LabOneGame extends Game{
 	@Override
 	public void draw(Graphics g){
 		super.draw(g);
-		
+
 		/* Same, just check for null in case a frame gets thrown in before Mario is initialized */
 		if((mario != null) && mario.getVisible()) mario.draw(g);
 	}
@@ -129,11 +131,11 @@ public class LabOneGame extends Game{
 	/**
 	 * Quick main class that simply creates an instance of our game and starts the timer
 	 * that calls update() and draw() every frame
-	 *
+	 * */
 	public static void main(String[] args) {
-		LabOneGame game = new LabOneGame();
+		LabTwoGame game = new LabTwoGame();
+//		AnimatedSprite.initGameClock();
 		game.start();
 
 	}
-	 */
 }
