@@ -1,8 +1,12 @@
 package edu.virginia.engine.display;
 import edu.virginia.engine.util.GameClock;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
-import java.io.*;
 
 public class AnimatedSprite extends Sprite{
 
@@ -15,6 +19,8 @@ public class AnimatedSprite extends Sprite{
     private int endFrame;
     private static final int DEFAULT_ANIMATION_SPEED = 1;
     private int animationSpeed;
+
+    private BufferedImage displayImage;
 
     private GameClock gameClock;
 
@@ -38,5 +44,19 @@ public class AnimatedSprite extends Sprite{
         }
     }
 
+    @Override
+    public void draw(Graphics g) {
+        super.draw(g);
+        if(playing){
+            super.setImage(frames.get(currentFrame));
+            if(currentFrame == endFrame){
+                currentFrame = startFrame;
+            }
+            else{
+                currentFrame++;
+            }
+        }
+
+    }
 }
 
