@@ -57,7 +57,7 @@ public class AnimatedSprite extends Sprite{
     @Override
     public void draw(Graphics g) {
         if(playing){
-            if(gameClock.getElapsedTime() == getAnimationSpeed()) {
+            if(this.gameClock.getElapsedTime() == getAnimationSpeed()) {
                 super.setImage(frames.get(currentFrame));
                 if (currentFrame == endFrame) {
                     currentFrame = startFrame;
@@ -65,7 +65,7 @@ public class AnimatedSprite extends Sprite{
                     currentFrame++;
                 }
             }
-             gameClock.resetGameClock();
+             this.gameClock.resetGameClock();
         }
         super.draw(g);
     }
@@ -92,6 +92,7 @@ public class AnimatedSprite extends Sprite{
         }
         this.currentFrame = 0;
     }
+
 
     @Override
     public BufferedImage readImage(String imageName) {

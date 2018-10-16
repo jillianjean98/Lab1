@@ -134,7 +134,6 @@ public class LabTwoGame extends Game{
 	 * */
 	public static void main(String[] args) {
 		LabTwoGame game = new LabTwoGame();
-//		AnimatedSprite.initGameClock();
 		game.start();
 
 	}
