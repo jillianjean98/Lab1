@@ -50,8 +50,7 @@ public class LabTwoGame extends Game{
 				Thread.currentThread().interrupt();
 			}
 		}
-
-
+			boolean animated = false;
 			if (pressedKeys.contains(KeyEvent.VK_X)) {
 				if(mario.getAlpha()-0.1f>0.0f) {
 					mario.setAlpha(mario.getAlpha() - 0.01f);
@@ -76,20 +75,25 @@ public class LabTwoGame extends Game{
 
 			if (pressedKeys.contains(KeyEvent.VK_UP)) {
 				mario.setPosition(new Point(mario.getPosition().x,
-						mario.getPosition().y - 5));
+						mario.getPosition().y - 1));
 			}
 			if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
 				mario.setPosition(new Point(mario.getPosition().x,
-						mario.getPosition().y + 5));
+						mario.getPosition().y + 1));
 			}
 			if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
-				mario.setPosition(new Point(mario.getPosition().x - 5,
+				mario.setPosition(new Point(mario.getPosition().x - 1,
 						mario.getPosition().y));
+				mario.animate("walk");
+				animated = true;
 			}
 			if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
-				mario.setPosition(new Point(mario.getPosition().x + 5,
+				mario.setPosition(new Point(mario.getPosition().x + 1,
 						mario.getPosition().y));
+				mario.animate("walk");
+				animated = true;
 			}
+
 			if (pressedKeys.contains(KeyEvent.VK_W)) {
 				mario.setRotation(mario.getRotation() + 5);
 			}
@@ -111,6 +115,24 @@ public class LabTwoGame extends Game{
 			if (pressedKeys.contains(KeyEvent.VK_K)) {
 				mario.setPivotPoint(new Point(mario.getPivotPoint().x,
 						mario.getPivotPoint().y + 1));
+			}
+			if(pressedKeys.contains(KeyEvent.VK_EQUALS)) {
+				mario.setAnimationSpeed(mario.getAnimationSpeed() + 10);
+			}
+			if(pressedKeys.contains(KeyEvent.VK_MINUS)) {
+				mario.setAnimationSpeed(mario.getAnimationSpeed() - 10);
+			}
+			if (pressedKeys.contains(KeyEvent.VK_SPACE)) {
+				mario.animate("jump");
+				animated = true;
+			}
+			if (pressedKeys.contains(KeyEvent.VK_ENTER)) {
+				mario.animate("thumbs");
+				animated = true;
+			}
+
+			if(!animated) {
+				mario.stopAnimation();
 			}
 			mario.update(pressedKeys);
 		}

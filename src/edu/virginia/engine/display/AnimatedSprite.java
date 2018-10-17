@@ -17,7 +17,7 @@ public class AnimatedSprite extends Sprite{
     private int currentFrame = 0;
     private int startFrame;
     private int endFrame;
-    private static final int DEFAULT_ANIMATION_SPEED = 1;
+    private static final int DEFAULT_ANIMATION_SPEED = 500;
     private int animationSpeed;
 
     private BufferedImage displayImage;
@@ -28,7 +28,8 @@ public class AnimatedSprite extends Sprite{
         super(ID);
         gameClock = new GameClock();
         animationSpeed = DEFAULT_ANIMATION_SPEED;
-        this.setFrames(fileNames);
+        this.initializeFrames(fileNames);
+        this.playing = false;
         super.setImage(this.frames.get(this.currentFrame));
         super.setAlpha(1.0f);
         super.setVisible(true);
@@ -44,6 +45,10 @@ public class AnimatedSprite extends Sprite{
         return this.animationSpeed;
     }
 
+    public Boolean getPlaying() {
+        return playing;
+    }
+
     public void setAnimationSpeed(int speed){
         this.animationSpeed = speed;
     }
@@ -57,24 +62,26 @@ public class AnimatedSprite extends Sprite{
     @Override
     public void draw(Graphics g) {
         if(playing){
-            if(this.gameClock.getElapsedTime() == getAnimationSpeed()) {
+            if(this.gameClock.getElapsedTime() > getAnimationSpeed()) {
                 super.setImage(frames.get(currentFrame));
                 if (currentFrame == endFrame) {
                     currentFrame = startFrame;
                 } else {
                     currentFrame++;
                 }
+                this.gameClock.resetGameClock();
             }
-             this.gameClock.resetGameClock();
+
         }
         super.draw(g);
     }
 
 
-    private void setFrames(ArrayList<String> imageNames) {
+    private void initializeFrames(ArrayList<String> imageNames) {
         if (imageNames == null) {
             return;
         }
+        int frameCounter = 0;
         for(String imageName : imageNames) {
             BufferedImage img = readImage(imageName);
             if (img == null) {
@@ -82,13 +89,14 @@ public class AnimatedSprite extends Sprite{
             }
             //add the image even if it is null, in order to keep numbering accurate
             frames.add(img);
-            String animationID[] = imageName.split("_");
-            Animation a = getAnimation(animationID[0]);
+            String animationID[] = imageName.split("/|_");
+            Animation a = getAnimation(animationID[1]);
             if(a != null) {
                 a.setEndFrame(a.getEndFrame()+1);
             }else {
-                animations.add(new Animation(animationID[0], 0, 0));
+                animations.add(new Animation(animationID[1], frameCounter, frameCounter));
             }
+            frameCounter++;
         }
         this.currentFrame = 0;
     }
@@ -117,13 +125,16 @@ public class AnimatedSprite extends Sprite{
     }
 
     public void animate(Animation animation) {
-        this.startFrame = animation.getStartFrame();
-        this.endFrame = animation.getEndFrame();
+        animate(animation.getStartFrame(), animation.getEndFrame());
     }
 
     public void animate(int startFrame, int endFrame) {
-        this.startFrame = startFrame;
-        this.endFrame = endFrame;
+        if(!playing) {
+            this.startFrame = startFrame;
+            this.endFrame = endFrame;
+            this.currentFrame = startFrame;
+            this.playing = true;
+        }
     }
 
     public void animate(String id) {
@@ -131,5 +142,15 @@ public class AnimatedSprite extends Sprite{
        if(a != null) {
            animate(a);
        }
+    }
+
+    public void stopAnimation() {
+        stopAnimation(this.startFrame);
+    }
+
+    public void stopAnimation(int frameNumber) {
+            super.setImage(frames.get(frameNumber));
+            this.currentFrame = frameNumber;
+            this.playing = false;
     }
 }

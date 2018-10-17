@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.Point;
 
 import edu.virginia.engine.display.Game;
-import edu.virginia.engine.display.AnimatedSprite;
+import edu.virginia.engine.display.Sprite;
 
 
 /**
@@ -16,7 +16,7 @@ import edu.virginia.engine.display.AnimatedSprite;
 public class LabOneGame extends Game{
 
 	/* Create a sprite object for our game. We'll use mario */
-	AnimatedSprite mario = new AnimatedSprite("Mario", "Mario.png");
+	Sprite mario = new Sprite("Mario", "Mario.png");
 	
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
