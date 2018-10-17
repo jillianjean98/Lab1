@@ -84,14 +84,24 @@ public class LabTwoGame extends Game{
 			if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
 				mario.setPosition(new Point(mario.getPosition().x - 1,
 						mario.getPosition().y));
-				mario.animate("walk");
-				animated = true;
+				if(pressedKeys.contains(KeyEvent.VK_SHIFT)) {
+					mario.animate("run");
+					animated = true;
+				} else {
+					mario.animate("walk");
+					animated = true;
+				}
 			}
 			if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
 				mario.setPosition(new Point(mario.getPosition().x + 1,
 						mario.getPosition().y));
-				mario.animate("walk");
-				animated = true;
+				if(pressedKeys.contains(KeyEvent.VK_SHIFT)) {
+					mario.animate("run");
+					animated = true;
+				} else {
+					mario.animate("walk");
+					animated = true;
+				}
 			}
 
 			if (pressedKeys.contains(KeyEvent.VK_W)) {
@@ -117,10 +127,10 @@ public class LabTwoGame extends Game{
 						mario.getPivotPoint().y + 1));
 			}
 			if(pressedKeys.contains(KeyEvent.VK_EQUALS)) {
-				mario.setAnimationSpeed(mario.getAnimationSpeed() + 10);
+				mario.setAnimationSpeed(mario.getAnimationSpeed() - 10);
 			}
 			if(pressedKeys.contains(KeyEvent.VK_MINUS)) {
-				mario.setAnimationSpeed(mario.getAnimationSpeed() - 10);
+				mario.setAnimationSpeed(mario.getAnimationSpeed() + 10);
 			}
 			if (pressedKeys.contains(KeyEvent.VK_SPACE)) {
 				mario.animate("jump");
