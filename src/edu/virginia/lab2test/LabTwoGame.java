@@ -1,28 +1,30 @@
-package edu.virginia.lab1test;
-
-import java.awt.Graphics;
-import java.util.ArrayList;
-import java.awt.event.KeyEvent;
-import java.awt.Point;
+package edu.virginia.lab2test;
 
 import edu.virginia.engine.display.Game;
-import edu.virginia.engine.display.Sprite;
+import edu.virginia.engine.display.AnimatedSprite;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
+import edu.virginia.engine.display.AnimatedSprite;
 
 /**
  * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
  * although, for now, it won't be a very fun game :)
  * */
-public class LabOneGame extends Game{
+public class LabTwoGame extends Game{
 
+	private String[] fileStrings = {"mario/walk_00.png", "mario/walk_01.png", "mario/run_00.png", "mario/run_01.png","mario/jump_00.png", "mario/jump_01.png", "mario/thumbs_00.png", "mario/thumbs_01.png"};
+	private ArrayList<String> filenames = new ArrayList<>(Arrays.asList(fileStrings));
 	/* Create a sprite object for our game. We'll use mario */
-	Sprite mario = new Sprite("Mario", "Mario.png");
-	
+	AnimatedSprite mario = new AnimatedSprite("Mario", filenames);
+
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
 	 * */
-	public LabOneGame() {
-		super("Lab One Test Game", 500, 300);
+	public LabTwoGame() {
+		super("Lab Two Test Game", 500, 300);
 	}
 	
 	/**
@@ -48,8 +50,7 @@ public class LabOneGame extends Game{
 				Thread.currentThread().interrupt();
 			}
 		}
-
-
+			boolean animated = false;
 			if (pressedKeys.contains(KeyEvent.VK_X)) {
 				if(mario.getAlpha()-0.1f>0.0f) {
 					mario.setAlpha(mario.getAlpha() - 0.01f);
@@ -74,20 +75,35 @@ public class LabOneGame extends Game{
 
 			if (pressedKeys.contains(KeyEvent.VK_UP)) {
 				mario.setPosition(new Point(mario.getPosition().x,
-						mario.getPosition().y - 5));
+						mario.getPosition().y - 1));
 			}
 			if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
 				mario.setPosition(new Point(mario.getPosition().x,
-						mario.getPosition().y + 5));
+						mario.getPosition().y + 1));
 			}
 			if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
-				mario.setPosition(new Point(mario.getPosition().x - 5,
+				mario.setPosition(new Point(mario.getPosition().x - 1,
 						mario.getPosition().y));
+				if(pressedKeys.contains(KeyEvent.VK_SHIFT)) {
+					mario.animate("run");
+					animated = true;
+				} else {
+					mario.animate("walk");
+					animated = true;
+				}
 			}
 			if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
-				mario.setPosition(new Point(mario.getPosition().x + 5,
+				mario.setPosition(new Point(mario.getPosition().x + 1,
 						mario.getPosition().y));
+				if(pressedKeys.contains(KeyEvent.VK_SHIFT)) {
+					mario.animate("run");
+					animated = true;
+				} else {
+					mario.animate("walk");
+					animated = true;
+				}
 			}
+
 			if (pressedKeys.contains(KeyEvent.VK_W)) {
 				mario.setRotation(mario.getRotation() + 5);
 			}
@@ -110,6 +126,24 @@ public class LabOneGame extends Game{
 				mario.setPivotPoint(new Point(mario.getPivotPoint().x,
 						mario.getPivotPoint().y + 1));
 			}
+			if(pressedKeys.contains(KeyEvent.VK_EQUALS)) {
+				mario.setAnimationSpeed(mario.getAnimationSpeed() - 10);
+			}
+			if(pressedKeys.contains(KeyEvent.VK_MINUS)) {
+				mario.setAnimationSpeed(mario.getAnimationSpeed() + 10);
+			}
+			if (pressedKeys.contains(KeyEvent.VK_SPACE)) {
+				mario.animate("jump");
+				animated = true;
+			}
+			if (pressedKeys.contains(KeyEvent.VK_ENTER)) {
+				mario.animate("thumbs");
+				animated = true;
+			}
+
+			if(!animated) {
+				mario.stopAnimation();
+			}
 			mario.update(pressedKeys);
 		}
 	}
@@ -121,7 +155,7 @@ public class LabOneGame extends Game{
 	@Override
 	public void draw(Graphics g){
 		super.draw(g);
-		
+
 		/* Same, just check for null in case a frame gets thrown in before Mario is initialized */
 		if((mario != null) && mario.getVisible()) mario.draw(g);
 	}
@@ -129,11 +163,10 @@ public class LabOneGame extends Game{
 	/**
 	 * Quick main class that simply creates an instance of our game and starts the timer
 	 * that calls update() and draw() every frame
-	 *
+	 * */
 	public static void main(String[] args) {
-		LabOneGame game = new LabOneGame();
+		LabTwoGame game = new LabTwoGame();
 		game.start();
 
 	}
-	 */
 }
