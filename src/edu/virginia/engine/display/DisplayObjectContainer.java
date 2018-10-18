@@ -29,15 +29,15 @@ public class DisplayObjectContainer extends DisplayObject{
 		children = new ArrayList<>();
 	}
 
-	public void addChild(DisplayObjectContainer child) {
+	public void addChild(DisplayObject child) {
 		children.add(child);
 	}
 
-	public void addChildAtIndex(DisplayObjectContainer child, int index) {
+	public void addChildAtIndex(DisplayObject child, int index) {
 		children.add(index, child);
 	}
 
-	public void removeChild(DisplayObjectContainer child) {
+	public void removeChild(DisplayObject child) {
 		children.remove(child);
 	}
 
@@ -48,4 +48,38 @@ public class DisplayObjectContainer extends DisplayObject{
 	public void removeAll() {
 		children.clear();
 	}
+
+	public Boolean contains(DisplayObject obj){
+		Boolean found = false;
+		if(children.isEmpty()) {
+			return false;
+		}
+		if(children.contains(obj)){
+			return true;
+		}
+		else {
+			for (DisplayObject child : children) {
+				if (children.contains(obj)) {
+					found = true;
+				}
+			}
+		}
+		return found;
+	}
+
+	public DisplayObject getChild(String id){
+		if(children.isEmpty()) {
+			return null;
+		}
+		for(DisplayObject child: children){
+			if(child.getId() == id){
+				return child;
+			}
+			else{
+				return child.getChild(id);
+			}
+		}
+	}
+
+	
 }
