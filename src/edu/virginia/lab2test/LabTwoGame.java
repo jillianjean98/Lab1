@@ -163,10 +163,11 @@ public class LabTwoGame extends Game{
 	/**
 	 * Quick main class that simply creates an instance of our game and starts the timer
 	 * that calls update() and draw() every frame
-	 * */
+	 *
 	public static void main(String[] args) {
 		LabTwoGame game = new LabTwoGame();
 		game.start();
 
 	}
+	 */
 }
