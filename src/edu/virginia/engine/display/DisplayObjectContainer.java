@@ -81,5 +81,10 @@ public class DisplayObjectContainer extends DisplayObject{
 		}
 	}
 
-	
+	public DisplayObject getChild(int index){
+		return children.get(index);
+
+	}
+
 }
+
