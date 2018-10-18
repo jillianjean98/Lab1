@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * */
 public class DisplayObjectContainer extends DisplayObject{
 
-	private ArrayList<DisplayObjectContainer> children;
+	private ArrayList<DisplayObject> children;
 
 	/**
 	 * Constructors: can pass in the id OR the id and image's file path and
