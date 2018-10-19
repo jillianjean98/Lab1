@@ -50,21 +50,10 @@ public class DisplayObjectContainer extends DisplayObject{
 	}
 
 	public Boolean contains(DisplayObject obj){
-		Boolean found = false;
 		if(children.isEmpty()) {
 			return false;
 		}
-		if(children.contains(obj)){
-			return true;
-		}
-		else {
-			for (DisplayObject child : children) {
-				if (children.contains(obj)) {
-					found = true;
-				}
-			}
-		}
-		return found;
+		return children.contains(obj);
 	}
 
 	public DisplayObject getChild(String id){
@@ -75,9 +64,19 @@ public class DisplayObjectContainer extends DisplayObject{
 			if(child.getId() == id){
 				return child;
 			}
-			else{
-				return child.getChild(id);
-			}
+		}
+		return null;
+	}
+	/**
+	 * Invoked on every frame before drawing. Used to update this display
+	 * objects state before the draw occurs. Should be overridden if necessary
+	 * to update objects appropriately.
+	 * */
+	@Override
+	protected void update(ArrayList<Integer> pressedKeys) {
+		super.update(pressedKeys);
+		for(DisplayObject child: children) {
+			child.update(pressedKeys);
 		}
 	}
 
@@ -88,8 +87,8 @@ public class DisplayObjectContainer extends DisplayObject{
 	 * */
 	@Override
 	public void draw(Graphics g) {
-
-		super.draw(g);
+		if (this.getDisplayImage() != null) {
+			super.draw(g);
 
 			/*
 			 * Get the graphics and apply this objects transformations
@@ -98,8 +97,8 @@ public class DisplayObjectContainer extends DisplayObject{
 			Graphics2D g2d = (Graphics2D) g;
 			applyTransformations(g2d);
 
-			/* Actually draw the image, perform the pivot point translation here */
-			for(DisplayObject child : children) {
+			/* draw each child */
+			for (DisplayObject child : children) {
 				child.draw(g2d);
 			}
 			/*
@@ -108,32 +107,6 @@ public class DisplayObjectContainer extends DisplayObject{
 			 */
 			reverseTransformations(g2d);
 		}
-	}
-
-	protected void applyTransformations(Graphics2D g2d){
-			g2d.translate(this.getPosition().x, this.getPosition().y);
-			g2d.rotate(Math.toRadians(this.getRotation()), this.getPivotPoint().x, this.getPivotPoint().y);
-			g2d.scale(this.getScaleX(), this.getScaleY());
-			float curAlpha;
-			this.setOldAlpha(curAlpha = ((AlphaComposite)
-					g2d.getComposite()).getAlpha());
-			g2d.setComposite(AlphaComposite.getInstance(3, curAlpha *
-					this.getAlpha()));
-
-	}
-
-	/**
-	 * Reverses transformations for this display object to the given graphics
-	 * object
-	 * */
-
-	protected void reverseTransformations(Graphics2D g2d){
-		g2d.setComposite(AlphaComposite.getInstance(3,
-				this.getOldAlpha()));
-		g2d.scale(0.5, 0.5);
-		g2d.rotate(Math.toRadians(-this.getRotation()), this.getPivotPoint().x, this.getPivotPoint().y);
-		g2d.translate(0,0);
-
 	}
 
 }
