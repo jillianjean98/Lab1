@@ -1,6 +1,8 @@
 package edu.virginia.lab3test;
 
 import edu.virginia.engine.display.AnimatedSprite;
+import edu.virginia.engine.display.DisplayObject;
+import edu.virginia.engine.display.DisplayObjectContainer;
 import edu.virginia.engine.display.Game;
 
 import java.awt.*;
@@ -167,5 +169,17 @@ public class LabThreeGame extends Game{
 		LabThreeGame game = new LabThreeGame();
 		game.start();
 
+		DisplayObjectContainer level = new DisplayObjectContainer("level");
+		DisplayObject ralph = new DisplayObject("ralph");
+		DisplayObjectContainer mariocontainer = new DisplayObjectContainer("mariocontainer");
+		DisplayObject hammer = new DisplayObject("hammer");
+		DisplayObject bag = new DisplayObject("bag");
+		level.addChild(ralph);
+		level.addChild(mariocontainer);
+		mariocontainer.addChild(hammer);
+		mariocontainer.addChild(bag);
+		mariocontainer.setPosition(new Point(10, 10));
+		hammer.setPosition(new Point(5, 5));
+		System.out.println(hammer.localToGlobal(hammer.getPosition()));
 	}
 }

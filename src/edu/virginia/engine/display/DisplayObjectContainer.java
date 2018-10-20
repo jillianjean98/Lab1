@@ -31,21 +31,28 @@ public class DisplayObjectContainer extends DisplayObject{
 
 	public void addChild(DisplayObject child) {
 		children.add(child);
+		child.setParent(this);
 	}
 
 	public void addChildAtIndex(DisplayObject child, int index) {
 		children.add(index, child);
+		child.setParent(this);
 	}
 
 	public void removeChild(DisplayObject child) {
 		children.remove(child);
+		child.setParent(null);
 	}
 
 	public void removeByIndex(int index) {
+		children.get(index).setParent(null);
 		children.remove(index);
 	}
 
 	public void removeAll() {
+		for(DisplayObject child: children) {
+			child.setParent(null);
+		}
 		children.clear();
 	}
 

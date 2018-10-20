@@ -97,7 +97,15 @@ public class DisplayObject {
         return rotation;
     }
 
-    /**
+	public void setParent(DisplayObject parent) {
+		this.parent = parent;
+	}
+
+	public DisplayObject getParent() {
+		return parent;
+	}
+
+	/**
 	 * Returns the unscaled width and height of this display object
 	 * */
 	public int getUnscaledWidth() {
@@ -211,6 +219,19 @@ public class DisplayObject {
 		g2d.rotate(Math.toRadians(-this.getRotation()), this.pivotPoint.x, this.pivotPoint.y);
 		g2d.translate(0,0);
 
+	}
+
+	public Point localToGlobal(Point local) {
+		if(this.parent == null) {
+			return local;
+		}
+		return parent.localToGlobal(new Point(local.x+this.position.x, local.y+this.position.y));
+	}
+	public Point globalToLocal(Point global) {
+		if(this.parent == null) {
+			return global;
+		}
+		return parent.globalToLocal(new Point(global.x-this.position.x, global.y-this.position.y));
 	}
 
 }
