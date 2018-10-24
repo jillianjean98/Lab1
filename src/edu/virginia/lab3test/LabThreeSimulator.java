@@ -14,7 +14,7 @@ import java.util.Arrays;
  * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
  * although, for now, it won't be a very fun game :)
  * */
-public class LabThreeGame extends Game{
+public class LabThreeSimulator extends Game{
 
 	private String[] fileStrings = {"mario/walk_00.png", "mario/walk_01.png", "mario/run_00.png", "mario/run_01.png","mario/jump_00.png", "mario/jump_01.png", "mario/thumbs_00.png", "mario/thumbs_01.png"};
 	private ArrayList<String> filenames = new ArrayList<>(Arrays.asList(fileStrings));
@@ -24,8 +24,8 @@ public class LabThreeGame extends Game{
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
 	 * */
-	public LabThreeGame() {
-		super("Lab Two Test Game", 500, 300);
+	public LabThreeSimulator() {
+		super("Lab Three Test Game", 500, 300);
 	}
 	
 	/**
@@ -166,7 +166,7 @@ public class LabThreeGame extends Game{
 	 * that calls update() and draw() every frame
 	 * */
 	public static void main(String[] args) {
-		LabThreeGame game = new LabThreeGame();
+		LabThreeSimulator game = new LabThreeSimulator();
 		game.start();
 
 		DisplayObjectContainer level = new DisplayObjectContainer("level");
@@ -180,6 +180,7 @@ public class LabThreeGame extends Game{
 		mariocontainer.addChild(bag);
 		mariocontainer.setPosition(new Point(10, 10));
 		hammer.setPosition(new Point(5, 5));
-		System.out.println(hammer.localToGlobal(hammer.getPosition()));
+
+
 	}
 }
