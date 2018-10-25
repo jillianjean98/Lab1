@@ -16,6 +16,12 @@ import java.util.Arrays;
  * */
 public class LabThreeSimulator extends Game{
 
+	Sprite sun = new Sprite("Sun", "sun.png");
+	Sprite earth = new Sprite("Earth", "earth.png");
+	Sprite mars = new Sprite("Mars", "mars.png");
+	Sprite moon1 = new Sprite("Moon1", "moon1.png");
+	Sprite moon2 = new Sprite("Moon2", "moon2.png");
+
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
 	 * */
@@ -68,11 +74,6 @@ public class LabThreeSimulator extends Game{
 		mariocontainer.setPosition(new Point(10, 10));
 		hammer.setPosition(new Point(5, 5));
 */
-		Sprite sun = new Sprite("Sun", "sun.png");
-		Sprite earth = new Sprite("Earth", "earth.png");
-		Sprite mars = new Sprite("Mars", "mars.png");
-		Sprite moon1 = new Sprite("Moon1", "moon1.png");
-		Sprite moon2 = new Sprite("Moon2", "moon2.png");
 		sun.addChild(earth);
 		sun.addChild(mars);
 		earth.addChild(moon1);
@@ -80,9 +81,8 @@ public class LabThreeSimulator extends Game{
 		sun.setPosition(new Point(250, 150));
 		earth.setPosition(new Point(100,0));
 		mars.setPosition(new Point(200,100));
-		earth.setPivotPoint(new Point(250, 150));
-		mars.setPivotPoint(new Point(250, 150));
-		
+
+
 
 	}
 }
