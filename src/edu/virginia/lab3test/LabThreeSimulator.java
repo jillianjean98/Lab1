@@ -80,6 +80,8 @@ public class LabThreeSimulator extends Game{
 		sun.setPosition(new Point(250, 150));
 		earth.setPosition(new Point(100,0));
 		mars.setPosition(new Point(200,100));
+		earth.setPivotPoint(new Point(250, 150));
+		mars.setPivotPoint(new Point(250, 150));
 		
 
 	}
