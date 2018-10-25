@@ -27,6 +27,13 @@ public class LabThreeSimulator extends Game{
 	 * */
 	public LabThreeSimulator() {
 		super("Lab Three Test Game", 500, 300);
+		sun.addChild(earth);
+		sun.addChild(mars);
+		earth.addChild(moon1);
+		mars.addChild(moon2);
+		sun.setPosition(new Point(250, 150));
+		earth.setPosition(new Point(100,0));
+		mars.setPosition(new Point(200,100));
 	}
 	
 	/**
@@ -34,12 +41,11 @@ public class LabThreeSimulator extends Game{
 	 * the set of keys (as strings) that are currently being pressed down
 	 * */
 	@Override
-	public void update(ArrayList<Integer> pressedKeys){
+	public void update(ArrayList<Integer> pressedKeys) {
 		super.update(pressedKeys);
-		
+
 		/* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
 
-		}
 	}
 	
 	/**
@@ -74,15 +80,6 @@ public class LabThreeSimulator extends Game{
 		mariocontainer.setPosition(new Point(10, 10));
 		hammer.setPosition(new Point(5, 5));
 */
-		sun.addChild(earth);
-		sun.addChild(mars);
-		earth.addChild(moon1);
-		mars.addChild(moon2);
-		sun.setPosition(new Point(250, 150));
-		earth.setPosition(new Point(100,0));
-		mars.setPosition(new Point(200,100));
-
-
 
 	}
 }
