@@ -27,13 +27,14 @@ public class LabThreeSimulator extends Game{
 	 * */
 	public LabThreeSimulator() {
 		super("Lab Three Test Game", 500, 300);
+		sun.setPosition(new Point(100, 150));
+		earth.setPosition(new Point(100,0));
+		mars.setPosition(new Point(-500,-100));
 		sun.addChild(earth);
 		sun.addChild(mars);
 		earth.addChild(moon1);
 		mars.addChild(moon2);
-		sun.setPosition(new Point(250, 150));
-		earth.setPosition(new Point(100,0));
-		mars.setPosition(new Point(200,100));
+
 	}
 	
 	/**
@@ -55,6 +56,9 @@ public class LabThreeSimulator extends Game{
 	@Override
 	public void draw(Graphics g){
 		super.draw(g);
+		sun.draw(g);
+		earth.draw(g);
+		mars.draw(g);
 
 		/* Same, just check for null in case a frame gets thrown in before Mario is initialized */
 
