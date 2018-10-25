@@ -49,42 +49,18 @@ public class DisplayObjectContainer extends DisplayObject{
 		children.clear();
 	}
 
-	public Boolean contains(DisplayObject obj){
-		Boolean found = false;
+	public Boolean contains(DisplayObject child){
+//		Boolean found = false;
 		if(children.isEmpty()) {
 			return false;
 		}
-		if(children.contains(obj)){
-			return true;
-		}
-		else {
-			for (DisplayObject child : children) {
-				if (children.contains(obj)) {
-					found = true;
-				}
-			}
-		}
-		return found;
+		return children.contains(child);
 	}
 
-	public DisplayObject getChild(String id){
-		if(children.isEmpty()) {
-			return null;
-		}
-		for(DisplayObject child: children){
-			if(child.getId() == id){
-				return child;
-			}
-			else{
-				return child.getChild(id);
-			}
-		}
+	public ArrayList<DisplayObjectContainer> getChildren(){
+		return this.children;
 	}
 
-	public DisplayObject getChild(int index){
-		return children.get(index);
-
-	}
 
 }
 
