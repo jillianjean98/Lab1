@@ -77,7 +77,10 @@ public class LabThreeSimulator extends Game{
 		sun.addChild(mars);
 		earth.addChild(moon1);
 		mars.addChild(moon2);
-		sun.setPosition(newPoint(250, 150));
+		sun.setPosition(new Point(250, 150));
+		earth.setPosition(new Point(100,0));
+		mars.setPosition(new Point(200,100));
+		
 
 	}
 }
