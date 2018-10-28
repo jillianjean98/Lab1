@@ -19,22 +19,34 @@ public class LabThreeSimulator extends Game{
 	Sprite sun = new Sprite("Sun", "sun.png");
 	Sprite earth = new Sprite("Earth", "earth.png");
 	Sprite mars = new Sprite("Mars", "mars.png");
-	Sprite moon1 = new Sprite("Moon1", "moon1.png");
-	Sprite moon2 = new Sprite("Moon2", "moon2.png");
+	Sprite moon1 = new Sprite("Moon1", "moon.png");
+	Sprite moon2 = new Sprite("Moon2", "moon.png");
 
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
 	 * */
 	public LabThreeSimulator() {
-		super("Lab Three Test Game", 500, 300);
-		sun.setPosition(new Point(100, 150));
-		earth.setPosition(new Point(100,0));
-		mars.setPosition(new Point(-500,-100));
-		sun.addChild(earth);
+		super("Lab Three Test Game", 1000, 800);
+		sun.setPosition(new Point(350, 250));
 		sun.addChild(mars);
+		sun.addChild(earth);
 		earth.addChild(moon1);
 		mars.addChild(moon2);
+		//scale sprites
+		sun.setScaleX(0.3);
+		sun.setScaleY(0.3);
+		earth.setScaleX(0.5);
+		earth.setScaleY(0.5);
+		mars.setScaleX(0.5);
+		mars.setScaleY(0.5);
+		moon1.setScaleX(0.5);
+		moon1.setScaleY(0.5);
+		moon2.setScaleX(0.5);
+		moon2.setScaleY(0.5);
 
+		mars.setPosition(new Point(900,300));
+		earth.setPosition(new Point(1500,400));
+		moon1.setPosition(new Point(100, 100));
 	}
 	
 	/**
@@ -44,7 +56,7 @@ public class LabThreeSimulator extends Game{
 	@Override
 	public void update(ArrayList<Integer> pressedKeys) {
 		super.update(pressedKeys);
-
+		sun.update(pressedKeys);
 		/* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
 
 	}
@@ -57,9 +69,6 @@ public class LabThreeSimulator extends Game{
 	public void draw(Graphics g){
 		super.draw(g);
 		sun.draw(g);
-		earth.draw(g);
-		mars.draw(g);
-
 		/* Same, just check for null in case a frame gets thrown in before Mario is initialized */
 
 	}

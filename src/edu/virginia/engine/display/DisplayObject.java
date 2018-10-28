@@ -215,9 +215,9 @@ public class DisplayObject {
 	protected void reverseTransformations(Graphics2D g2d){
 		g2d.setComposite(AlphaComposite.getInstance(3,
 				this.oldAlpha));
-		g2d.scale(0.5, 0.5);
+		g2d.scale(1/this.scaleX, 1/this.scaleY);
 		g2d.rotate(Math.toRadians(-this.getRotation()), this.pivotPoint.x, this.pivotPoint.y);
-		g2d.translate(0,0);
+		g2d.translate(-this.position.x, -this.position.y);
 
 	}
 
@@ -233,5 +233,4 @@ public class DisplayObject {
 		}
 		return parent.globalToLocal(new Point(global.x-this.position.x, global.y-this.position.y));
 	}
-
 }
