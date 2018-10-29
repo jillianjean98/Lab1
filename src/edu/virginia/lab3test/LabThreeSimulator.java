@@ -46,7 +46,7 @@ public class LabThreeSimulator extends Game{
 
 		mars.setPosition(new Point(900,300));
 		earth.setPosition(new Point(1500,400));
-		moon1.setPosition(new Point(100, 100));
+		moon1.setPosition(new Point(-500, -50));
 	}
 	
 	/**
@@ -56,7 +56,11 @@ public class LabThreeSimulator extends Game{
 	@Override
 	public void update(ArrayList<Integer> pressedKeys) {
 		super.update(pressedKeys);
-		sun.update(pressedKeys);
+		if(sun!=null){
+			sun.rotateAroundParent();
+			sun.update(pressedKeys);
+		}
+
 		/* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
 
 	}

@@ -79,12 +79,18 @@ public class DisplayObject {
 	public Double getScaleY() { return scaleY;}
 
     public void setPosition(Point position) {
-        this.position = position;
+		//System.out.println(this.getId() + " global: " + localToGlobal(position));
+        this.position = localToGlobal(position);
     }
     public Point getPosition() {
-        return position;
+		System.out.println(this.getId() + " local: " + globalToLocal(position));
+        return globalToLocal(position);
     }
 
+	public Point getGlobalPosition() {
+		System.out.println(this.getId() + " global: " + localToGlobal(position));
+		return localToGlobal(position);
+	}
     public void setPivotPoint(Point pivotPoint) { this.pivotPoint = pivotPoint; }
     public Point getPivotPoint() {
         return pivotPoint;

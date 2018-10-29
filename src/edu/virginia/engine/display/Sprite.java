@@ -9,7 +9,8 @@ import java.util.ArrayList;
  * */
 public class Sprite extends DisplayObjectContainer {
 
-	private int rate = 500;
+	private int rate = 5;
+	private int angle = 0;
 
 	public int getRate() {
 		return rate;
@@ -17,6 +18,14 @@ public class Sprite extends DisplayObjectContainer {
 
 	public void setRate(int rate) {
 		this.rate = rate;
+	}
+
+	public int getAngle() {
+		return angle;
+	}
+
+	public void setAngle(int angle) {
+		this.angle = angle;
 	}
 
 	public Sprite(String id) {
@@ -33,12 +42,16 @@ public class Sprite extends DisplayObjectContainer {
 	}
 
 	public void rotateAroundParent() {
-		int rate = this.getRate();
-		int x = (int)Math.cos(rate);
-		int y = (int)Math.sin(rate);
-		Point global = this.localToGlobal(new Point(0,0));
-		Point newPoint = new Point(x*global.x, y*global.y);
-		this.setPosition(newPoint);
+		//rather, we should use setRotation method, then set the pivot point to be the origin of the parent
+		if(this.getParent() != null) {
+			double x = Math.cos(Math.toRadians(angle)) * 50;
+			double y = Math.sin(Math.toRadians(angle)) * 50;
+
+			Point newPoint = new Point((int) x + getParent().getGlobalPosition().x, (int) y + getParent().getGlobalPosition().y);
+			this.setPosition(newPoint);
+			System.out.println(this.getId() + ": " + localToGlobal(newPoint));
+			this.angle = (this.angle + this.rate) % 360;
+		}
 		ArrayList<DisplayObject> children = this.getChildren();
 		for(DisplayObject child : children){
 			if(child instanceof Sprite) {
