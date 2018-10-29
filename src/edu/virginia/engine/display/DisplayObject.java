@@ -78,13 +78,20 @@ public class DisplayObject {
 	public void setScaleY(Double scaleY){this.scaleY = scaleY;}
 	public Double getScaleY() { return scaleY;}
 
+	public double getGlobalScale(double scale) {
+		if(parent == null) {
+			return scale;
+		}
+		return this.parent.getGlobalScale(this.scaleX * scale);
+	}
+
     public void setPosition(Point position) {
 		//System.out.println(this.getId() + " global: " + localToGlobal(position));
-        this.position = localToGlobal(position);
+        this.position = position;
     }
     public Point getPosition() {
 		System.out.println(this.getId() + " local: " + globalToLocal(position));
-        return globalToLocal(position);
+        return position;
     }
 
 	public Point getGlobalPosition() {

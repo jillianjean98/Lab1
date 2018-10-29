@@ -33,8 +33,8 @@ public class LabThreeSimulator extends Game{
 		earth.addChild(moon1);
 		mars.addChild(moon2);
 		//scale sprites
-		sun.setScaleX(0.3);
-		sun.setScaleY(0.3);
+		sun.setScaleX(0.2);
+		sun.setScaleY(0.2);
 		earth.setScaleX(0.5);
 		earth.setScaleY(0.5);
 		mars.setScaleX(0.5);
@@ -44,9 +44,12 @@ public class LabThreeSimulator extends Game{
 		moon2.setScaleX(0.5);
 		moon2.setScaleY(0.5);
 
-		mars.setPosition(new Point(900,300));
-		earth.setPosition(new Point(1500,400));
+		mars.setPosition(new Point(1000,300));
+		earth.setPosition(new Point(1500,300));
 		moon1.setPosition(new Point(-500, -50));
+		moon2.setPosition(new Point(-500, -50));
+		mars.setRate(1);
+		earth.setRate(2);
 	}
 	
 	/**
@@ -72,7 +75,9 @@ public class LabThreeSimulator extends Game{
 	@Override
 	public void draw(Graphics g){
 		super.draw(g);
-		sun.draw(g);
+		if(sun != null) {
+			sun.draw(g);
+		}
 		/* Same, just check for null in case a frame gets thrown in before Mario is initialized */
 
 	}

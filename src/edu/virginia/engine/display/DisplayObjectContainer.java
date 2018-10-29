@@ -120,15 +120,16 @@ public class DisplayObjectContainer extends DisplayObject{
 			 * (rotation, etc.)
 			 */
 
-
+			Graphics2D g2d = (Graphics2D) g;
+			applyTransformations(g2d);
 			/* draw each child */
 
 			for (DisplayObject child : children) {
-				Graphics2D g2d = (Graphics2D) g;
-				applyTransformations(g2d);
+
 				child.draw(g2d);
-				reverseTransformations(g2d);
+
 			}
+			reverseTransformations(g2d);
 
 			/*
 			 * undo the transformations so this doesn't affect other display

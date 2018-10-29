@@ -44,13 +44,21 @@ public class Sprite extends DisplayObjectContainer {
 	public void rotateAroundParent() {
 		//rather, we should use setRotation method, then set the pivot point to be the origin of the parent
 		if(this.getParent() != null) {
-			double x = Math.cos(Math.toRadians(angle)) * 50;
+			Point pivotPoint = new Point(this.getParent().getPosition().x -this.getPosition().x,
+					this.getParent().getPosition().y -this.getPosition().y);
+			//translate pivot point to center of object, rather than corner
+			int shift = (int)Math.round(400*this.getGlobalScale(this.getScaleX()));
+			System.out.println(this.getId() + " shift: " + shift);
+			setPivotPoint(new Point(pivotPoint.x + shift, pivotPoint.y + shift));
+			setRotation(getRotation() + this.rate);
+			System.out.println(this.getId() + " pivot point: " + this.getPivotPoint());
+			/*double x = Math.cos(Math.toRadians(angle)) * 50;
 			double y = Math.sin(Math.toRadians(angle)) * 50;
 
 			Point newPoint = new Point((int) x + getParent().getGlobalPosition().x, (int) y + getParent().getGlobalPosition().y);
 			this.setPosition(newPoint);
 			System.out.println(this.getId() + ": " + localToGlobal(newPoint));
-			this.angle = (this.angle + this.rate) % 360;
+			this.angle = (this.angle + this.rate) % 360;*/
 		}
 		ArrayList<DisplayObject> children = this.getChildren();
 		for(DisplayObject child : children){
