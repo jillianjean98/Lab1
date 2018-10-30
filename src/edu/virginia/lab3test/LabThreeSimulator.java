@@ -66,6 +66,17 @@ public class LabThreeSimulator extends Game{
 
 		/* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
 
+		//zoom in
+		if (pressedKeys.contains(KeyEvent.VK_Q)) {
+			sun.setScaleX(sun.getScaleX() + 0.01);
+			sun.setScaleY(sun.getScaleY() + 0.01);
+		}
+
+		//zoom out
+		if (pressedKeys.contains(KeyEvent.VK_W)) {
+			sun.setScaleX(sun.getScaleX() - 0.01);
+			sun.setScaleY(sun.getScaleY() - 0.01);
+		}
 	}
 	
 	/**
