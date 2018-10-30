@@ -77,6 +77,23 @@ public class LabThreeSimulator extends Game{
 			sun.setScaleX(sun.getScaleX() - 0.01);
 			sun.setScaleY(sun.getScaleY() - 0.01);
 		}
+
+		if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
+			sun.setPosition(new Point(sun.getPosition().x,
+					sun.getPosition().y - 5));
+		}
+		if (pressedKeys.contains(KeyEvent.VK_UP)) {
+			sun.setPosition(new Point(sun.getPosition().x,
+					sun.getPosition().y + 5));
+		}
+		if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
+			sun.setPosition(new Point(sun.getPosition().x - 5,
+					sun.getPosition().y));
+		}
+		if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
+			sun.setPosition(new Point(sun.getPosition().x + 5,
+					sun.getPosition().y));
+		}
 	}
 	
 	/**
