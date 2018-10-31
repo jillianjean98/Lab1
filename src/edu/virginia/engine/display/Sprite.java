@@ -70,6 +70,7 @@ public class Sprite extends DisplayObjectContainer {
 		ArrayList<DisplayObject> children = this.getChildren();
 		for(DisplayObject child : children){
 			if(child instanceof Sprite) {
+				((Sprite) child).setClockwise(this.getClockwise());
 				((Sprite) child).rotateAroundParent();
 			}
 		}

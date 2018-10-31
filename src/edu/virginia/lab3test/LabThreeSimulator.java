@@ -97,16 +97,16 @@ public class LabThreeSimulator extends Game{
 		//ccw
 		if (pressedKeys.contains(KeyEvent.VK_A)) {
 			sun.setClockwise(false);
-			earth.setClockwise(false);
-			mars.setClockwise(false);
-			moon1.setClockwise(false);
+			//earth.setClockwise(false);
+			//mars.setClockwise(false);
+			//moon1.setClockwise(false);
 		}
 		//cw
 		if (pressedKeys.contains(KeyEvent.VK_S)) {
 			sun.setClockwise(true);
-			earth.setClockwise(true);
-			mars.setClockwise(true);
-			moon2.setClockwise(true);
+			//earth.setClockwise(true);
+			//mars.setClockwise(true);
+			//moon2.setClockwise(true);
 		}
 	}
 	
