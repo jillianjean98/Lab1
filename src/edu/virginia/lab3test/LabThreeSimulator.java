@@ -79,11 +79,12 @@ public class LabThreeSimulator extends Game{
 
 		//zoom out
 		if (pressedKeys.contains(KeyEvent.VK_W)) {
-			if(sun.getScaleX()-0.1f>0.0f)
-			sun.setPosition(new Point(sun.getPosition().x+4,
-					sun.getPosition().y+4));
-			sun.setScaleX(sun.getScaleX() - 0.01);
-			sun.setScaleY(sun.getScaleY() - 0.01);
+			if(sun.getScaleX()-0.1f>0.0f) {
+				sun.setPosition(new Point(sun.getPosition().x + 4,
+						sun.getPosition().y + 4));
+				sun.setScaleX(sun.getScaleX() - 0.01);
+				sun.setScaleY(sun.getScaleY() - 0.01);
+			}
 		}
 
 		if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
