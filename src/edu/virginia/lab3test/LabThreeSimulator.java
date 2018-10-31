@@ -68,12 +68,20 @@ public class LabThreeSimulator extends Game{
 
 		//zoom in
 		if (pressedKeys.contains(KeyEvent.VK_Q)) {
+			//Point currP = sun.getPosition();
+			//sun.setPosition(new Point(175, 125));//this is so the sun is center but u need center of sun @ center
+			sun.setPosition(new Point(sun.getPosition().x-4,
+							sun.getPosition().y-4));
 			sun.setScaleX(sun.getScaleX() + 0.01);
 			sun.setScaleY(sun.getScaleY() + 0.01);
+			//sun.setPosition(currP);
 		}
 
 		//zoom out
 		if (pressedKeys.contains(KeyEvent.VK_W)) {
+			if(sun.getScaleX()-0.1f>0.0f)
+			sun.setPosition(new Point(sun.getPosition().x+4,
+					sun.getPosition().y+4));
 			sun.setScaleX(sun.getScaleX() - 0.01);
 			sun.setScaleY(sun.getScaleY() - 0.01);
 		}
