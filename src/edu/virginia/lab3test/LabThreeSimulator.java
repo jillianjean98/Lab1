@@ -94,6 +94,20 @@ public class LabThreeSimulator extends Game{
 			sun.setPosition(new Point(sun.getPosition().x + 5,
 					sun.getPosition().y));
 		}
+		//ccw
+		if (pressedKeys.contains(KeyEvent.VK_A)) {
+			sun.setClockwise(false);
+			earth.setClockwise(false);
+			mars.setClockwise(false);
+			moon1.setClockwise(false);
+		}
+		//cw
+		if (pressedKeys.contains(KeyEvent.VK_S)) {
+			sun.setClockwise(true);
+			earth.setClockwise(true);
+			mars.setClockwise(true);
+			moon2.setClockwise(true);
+		}
 	}
 	
 	/**
@@ -117,19 +131,5 @@ public class LabThreeSimulator extends Game{
 	public static void main(String[] args) {
 		LabThreeSimulator game = new LabThreeSimulator();
 		game.start();
-/*
-		DisplayObjectContainer level = new DisplayObjectContainer("level");
-		DisplayObject ralph = new DisplayObject("ralph");
-		DisplayObjectContainer mariocontainer = new DisplayObjectContainer("mariocontainer");
-		DisplayObject hammer = new DisplayObject("hammer");
-		DisplayObject bag = new DisplayObject("bag");
-		level.addChild(ralph);
-		level.addChild(mariocontainer);
-		mariocontainer.addChild(hammer);
-		mariocontainer.addChild(bag);
-		mariocontainer.setPosition(new Point(10, 10));
-		hammer.setPosition(new Point(5, 5));
-*/
-
 	}
 }

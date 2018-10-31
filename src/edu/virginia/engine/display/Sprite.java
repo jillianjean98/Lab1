@@ -12,6 +12,7 @@ public class Sprite extends DisplayObjectContainer {
 	private int rate = 5;
 	private int angle = 0;
 
+
 	public int getRate() {
 		return rate;
 	}
@@ -48,10 +49,16 @@ public class Sprite extends DisplayObjectContainer {
 					this.getParent().getPosition().y -this.getPosition().y);
 			//translate pivot point to center of object, rather than corner
 			int shift = (int)Math.round(400*this.getGlobalScale(this.getScaleX()));
-			System.out.println(this.getId() + " shift: " + shift);
+			//System.out.println(this.getId() + " shift: " + shift);
 			setPivotPoint(new Point(pivotPoint.x + shift, pivotPoint.y + shift));
-			setRotation(getRotation() + this.rate);
-			System.out.println(this.getId() + " pivot point: " + this.getPivotPoint());
+			System.out.println(this.getClockwise());
+			if(this.getClockwise()) {
+				setRotation(getRotation() + this.rate);
+			}
+			else{
+				setRotation(getRotation() - this.rate);
+			}
+			//System.out.println(this.getId() + " pivot point: " + this.getPivotPoint());
 			/*double x = Math.cos(Math.toRadians(angle)) * 50;
 			double y = Math.sin(Math.toRadians(angle)) * 50;
 

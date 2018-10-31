@@ -28,6 +28,7 @@ public class DisplayObject {
 	private Point position;
 	private Point pivotPoint;
 	private double rotation;
+	private boolean clockwise;
 
 	private DisplayObject parent;
 	/**
@@ -39,6 +40,7 @@ public class DisplayObject {
 		this.setPosition(new Point(0, 0));
 		this.setPivotPoint(new Point(0, 0));
 		this.setRotation(0);
+		this.setClockwise(true);
 	}
 
 	public DisplayObject(String id, String fileName) {
@@ -52,7 +54,16 @@ public class DisplayObject {
 		this.setPosition(new Point(0, 0));
 		this.setPivotPoint(new Point(0, 0));
 		this.setRotation(0);
+		this.setClockwise(true);
 
+	}
+
+	public void setClockwise(Boolean x){
+		this.clockwise = x;
+	}
+
+	public boolean getClockwise(){
+		return this.clockwise;
 	}
 
 	public void setId(String id) {
