@@ -32,9 +32,6 @@ public class DisplayObjectContainer extends DisplayObject{
 	public void addChild(DisplayObject child) {
 		children.add(child);
 		child.setParent(this);
-		System.out.println("setting parent of child");
-		System.out.println(child.getId());
-		System.out.println(child.getParent().getId());
 	}
 
 	public void addChildAtIndex(DisplayObject child, int index) {
@@ -58,16 +55,6 @@ public class DisplayObjectContainer extends DisplayObject{
 		}
 		children.clear();
 	}
-
-	/*
-	public Boolean contains(DisplayObject child){
-//		Boolean found = false;
-		if(children.isEmpty()) {
-			return false;
-		}
-		return children.contains(child);
-	}
-	*/
 
 	public ArrayList<DisplayObject> getChildren(){
 		return this.children;
@@ -129,12 +116,13 @@ public class DisplayObjectContainer extends DisplayObject{
 				child.draw(g2d);
 
 			}
-			reverseTransformations(g2d);
 
 			/*
 			 * undo the transformations so this doesn't affect other display
 			 * objects
 			 */
+			reverseTransformations(g2d);
+
 		}
 	}
 

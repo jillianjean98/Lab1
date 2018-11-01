@@ -2,6 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8896a01c-c98c-4e42-b8c1-c22ad30f76fc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Lab1/edu/virginia/engine/display/AnimatedSprite.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Lab1/edu/virginia/engine/display/AnimatedSprite.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Lab1/edu/virginia/engine/display/DisplayObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Lab1/edu/virginia/engine/display/DisplayObject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Lab1/edu/virginia/engine/display/DisplayObjectContainer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Lab1/edu/virginia/engine/display/DisplayObjectContainer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Lab1/edu/virginia/engine/display/Game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Lab1/edu/virginia/engine/display/Game$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Lab1/edu/virginia/engine/display/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Lab1/edu/virginia/engine/display/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Lab1/edu/virginia/engine/display/GameScenePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Lab1/edu/virginia/engine/display/GameScenePanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Lab1/edu/virginia/engine/display/Sprite.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Lab1/edu/virginia/engine/display/Sprite.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Lab1/edu/virginia/lab1test/LabOneGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Lab1/edu/virginia/lab1test/LabOneGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Lab1/edu/virginia/lab2test/LabTwoGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Lab1/edu/virginia/lab2test/LabTwoGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Lab1/edu/virginia/lab3test/LabThreeSimulator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Lab1/edu/virginia/lab3test/LabThreeSimulator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/virginia/engine/display/DisplayObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/virginia/engine/display/DisplayObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/virginia/engine/display/DisplayObjectContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/virginia/engine/display/DisplayObjectContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/virginia/engine/display/Sprite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/virginia/engine/display/Sprite.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/virginia/lab3test/LabThreeSimulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/virginia/lab3test/LabThreeSimulator.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -51,41 +66,42 @@
     <session id="126313353">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="1850" />
+          <entry key="java" value="2252" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="1850" />
+          <entry key="JAVA" value="2252" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="2" />
+          <entry key="java" value="3" />
           <entry key="png" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Image" value="2" />
-          <entry key="JAVA" value="2" />
+          <entry key="JAVA" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.open.time.5" value="1" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edu/virginia/lab3test/LabThreeSimulator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="80" column="33" lean-forward="true" selection-start-line="80" selection-start-column="33" selection-end-line="80" selection-end-column="33" />
+            <state relative-caret-position="-467">
+              <caret line="45" column="44" selection-start-line="45" selection-start-column="44" selection-end-line="45" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -94,19 +110,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/edu/virginia/engine/display/Sprite.java">
+        <entry file="file://$PROJECT_DIR$/src/edu/virginia/lab1test/LabOneGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="631">
-              <caret line="73" column="54" selection-start-line="73" selection-start-column="54" selection-end-line="73" selection-end-column="54" />
+            <state relative-caret-position="80">
+              <caret line="53" column="46" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="46" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/edu/virginia/lab1test/LabOneGame.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/edu/virginia/engine/display/Sprite.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="80">
-              <caret line="53" column="46" lean-forward="true" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="46" />
+            <state relative-caret-position="346">
+              <caret line="59" column="78" selection-start-line="59" selection-start-column="71" selection-end-line="59" selection-end-column="78" />
             </state>
           </provider>
         </entry>
@@ -114,8 +130,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edu/virginia/engine/display/DisplayObject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-310">
-              <caret line="60" column="29" selection-start-line="60" selection-start-column="29" selection-end-line="60" selection-end-column="29" />
+            <state relative-caret-position="234">
+              <caret line="97" lean-forward="true" selection-start-line="97" selection-end-line="97" />
+              <folding>
+                <element signature="e#2469#2470#0" expanded="true" />
+                <element signature="e#2494#2495#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -123,8 +143,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edu/virginia/engine/display/DisplayObjectContainer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1935">
-              <caret line="136" column="15" selection-start-line="136" selection-start-column="15" selection-end-line="136" selection-end-column="15" />
+            <state relative-caret-position="-755">
+              <caret line="56" column="5" selection-start-line="56" selection-start-column="5" selection-end-line="56" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -151,12 +171,12 @@
         <option value="$PROJECT_DIR$/src/edu/virginia/lab3test/LabThreeGame.java" />
         <option value="$PROJECT_DIR$/src/edu/virginia/engine/display/DisplayObjectContainer.java" />
         <option value="$PROJECT_DIR$/src/edu/virginia/engine/display/DisplayObject.java" />
-        <option value="$PROJECT_DIR$/src/edu/virginia/engine/display/Sprite.java" />
         <option value="$PROJECT_DIR$/src/edu/virginia/lab3test/LabThreeSimulator.java" />
+        <option value="$PROJECT_DIR$/src/edu/virginia/engine/display/Sprite.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="766" />
     <option name="y" value="23" />
     <option name="width" value="674" />
@@ -211,6 +231,9 @@
   </component>
   <component name="PropertiesComponent">
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540841004354" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -258,10 +281,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="766" y="23" width="674" height="823" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="821" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.0" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16523606" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -270,8 +293,8 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32968536" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3994528" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32921812" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39917696" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -354,41 +377,120 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/virginia/engine/display/DisplayObjectContainer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1935">
-          <caret line="136" column="15" selection-start-line="136" selection-start-column="15" selection-end-line="136" selection-end-column="15" />
+        <state relative-caret-position="-755">
+          <caret line="56" column="5" selection-start-line="56" selection-start-column="5" selection-end-line="56" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/virginia/engine/display/DisplayObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-310">
-          <caret line="60" column="29" selection-start-line="60" selection-start-column="29" selection-end-line="60" selection-end-column="29" />
+        <state relative-caret-position="234">
+          <caret line="97" lean-forward="true" selection-start-line="97" selection-end-line="97" />
+          <folding>
+            <element signature="e#2469#2470#0" expanded="true" />
+            <element signature="e#2494#2495#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/virginia/lab1test/LabOneGame.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
-          <caret line="53" column="46" lean-forward="true" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/virginia/engine/display/Sprite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="631">
-          <caret line="73" column="54" selection-start-line="73" selection-start-column="54" selection-end-line="73" selection-end-column="54" />
+          <caret line="53" column="46" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="46" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/virginia/lab3test/LabThreeSimulator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="80" column="33" lean-forward="true" selection-start-line="80" selection-start-column="33" selection-end-line="80" selection-end-column="33" />
+        <state relative-caret-position="-467">
+          <caret line="45" column="44" selection-start-line="45" selection-start-column="44" selection-end-line="45" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/virginia/engine/display/Sprite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="59" column="78" selection-start-line="59" selection-start-column="71" selection-end-line="59" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>Lab1</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>

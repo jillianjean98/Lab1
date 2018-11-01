@@ -45,13 +45,20 @@ public class Sprite extends DisplayObjectContainer {
 	public void rotateAroundParent() {
 		//rather, we should use setRotation method, then set the pivot point to be the origin of the parent
 		if(this.getParent() != null) {
-			Point pivotPoint = new Point(this.getParent().getPosition().x -this.getPosition().x,
-					this.getParent().getPosition().y -this.getPosition().y);
+			Point pivotPoint;
+			if(this.getParent().getParent() != null) {
+				pivotPoint = new Point(this.getParent().getPosition().x - this.getPosition().x,
+						this.getParent().getPosition().y - this.getPosition().y );
+			}else{
+				pivotPoint = new Point(this.getParent().getPosition().x - this.getPosition().x,
+						this.getParent().getPosition().y - this.getPosition().y);
+			}
+
 			//translate pivot point to center of object, rather than corner
-			int shift = (int)Math.round(400*this.getGlobalScale(this.getScaleX()));
+			int shift = (int)Math.round(400*this.getGlobalScale());
 			//System.out.println(this.getId() + " shift: " + shift);
 			setPivotPoint(new Point(pivotPoint.x + shift, pivotPoint.y + shift));
-			System.out.println(this.getClockwise());
+			//System.out.println(this.getClockwise());
 			if(this.getClockwise()) {
 				setRotation(getRotation() + this.rate);
 			}
@@ -70,7 +77,7 @@ public class Sprite extends DisplayObjectContainer {
 		ArrayList<DisplayObject> children = this.getChildren();
 		for(DisplayObject child : children){
 			if(child instanceof Sprite) {
-				((Sprite) child).setClockwise(this.getClockwise());
+				(child).setClockwise(this.getClockwise());
 				((Sprite) child).rotateAroundParent();
 			}
 		}

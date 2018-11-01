@@ -1,14 +1,11 @@
 package edu.virginia.lab3test;
 
 import edu.virginia.engine.display.Sprite;
-import edu.virginia.engine.display.DisplayObject;
-import edu.virginia.engine.display.DisplayObjectContainer;
 import edu.virginia.engine.display.Game;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
@@ -46,8 +43,8 @@ public class LabThreeSimulator extends Game{
 
 		mars.setPosition(new Point(1000,300));
 		earth.setPosition(new Point(1500,300));
-		moon1.setPosition(new Point(-500, -50));
-		moon2.setPosition(new Point(-500, -50));
+		moon1.setPosition(new Point(-400, -400));
+		moon2.setPosition(new Point(-200, -600));
 		mars.setRate(1);
 		earth.setRate(2);
 	}
@@ -59,63 +56,58 @@ public class LabThreeSimulator extends Game{
 	@Override
 	public void update(ArrayList<Integer> pressedKeys) {
 		super.update(pressedKeys);
-		if(sun!=null){
+		if(sun!=null) {
 			sun.rotateAroundParent();
 			sun.update(pressedKeys);
-		}
 
-		/* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
-
-		//zoom in
-		if (pressedKeys.contains(KeyEvent.VK_Q)) {
-			//Point currP = sun.getPosition();
-			//sun.setPosition(new Point(175, 125));//this is so the sun is center but u need center of sun @ center
-			sun.setPosition(new Point(sun.getPosition().x-4,
-							sun.getPosition().y-4));
-			sun.setScaleX(sun.getScaleX() + 0.01);
-			sun.setScaleY(sun.getScaleY() + 0.01);
-			//sun.setPosition(currP);
-		}
-
-		//zoom out
-		if (pressedKeys.contains(KeyEvent.VK_W)) {
-			if(sun.getScaleX()-0.1f>0.0f) {
-				sun.setPosition(new Point(sun.getPosition().x + 4,
-						sun.getPosition().y + 4));
-				sun.setScaleX(sun.getScaleX() - 0.01);
-				sun.setScaleY(sun.getScaleY() - 0.01);
+			//zoom in
+			if (pressedKeys.contains(KeyEvent.VK_Q)) {
+				sun.setPosition(new Point(sun.getPosition().x - 4,
+						sun.getPosition().y - 4));
+				sun.setScaleX(sun.getScaleX() + 0.01);
+				sun.setScaleY(sun.getScaleY() + 0.01);
 			}
-		}
 
-		if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
-			sun.setPosition(new Point(sun.getPosition().x,
-					sun.getPosition().y - 5));
-		}
-		if (pressedKeys.contains(KeyEvent.VK_UP)) {
-			sun.setPosition(new Point(sun.getPosition().x,
-					sun.getPosition().y + 5));
-		}
-		if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
-			sun.setPosition(new Point(sun.getPosition().x - 5,
-					sun.getPosition().y));
-		}
-		if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
-			sun.setPosition(new Point(sun.getPosition().x + 5,
-					sun.getPosition().y));
-		}
-		//ccw
-		if (pressedKeys.contains(KeyEvent.VK_A)) {
-			sun.setClockwise(false);
-			//earth.setClockwise(false);
-			//mars.setClockwise(false);
-			//moon1.setClockwise(false);
-		}
-		//cw
-		if (pressedKeys.contains(KeyEvent.VK_S)) {
-			sun.setClockwise(true);
-			//earth.setClockwise(true);
-			//mars.setClockwise(true);
-			//moon2.setClockwise(true);
+			//zoom out
+			if (pressedKeys.contains(KeyEvent.VK_W)) {
+				if (sun.getScaleX() - 0.1f > 0.0f) {
+					sun.setPosition(new Point(sun.getPosition().x + 4,
+							sun.getPosition().y + 4));
+					sun.setScaleX(sun.getScaleX() - 0.01);
+					sun.setScaleY(sun.getScaleY() - 0.01);
+				}
+			}
+
+			if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
+				sun.setPosition(new Point(sun.getPosition().x,
+						sun.getPosition().y - 5));
+			}
+			if (pressedKeys.contains(KeyEvent.VK_UP)) {
+				sun.setPosition(new Point(sun.getPosition().x,
+						sun.getPosition().y + 5));
+			}
+			if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
+				sun.setPosition(new Point(sun.getPosition().x - 5,
+						sun.getPosition().y));
+			}
+			if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
+				sun.setPosition(new Point(sun.getPosition().x + 5,
+						sun.getPosition().y));
+			}
+			//ccw
+			if (pressedKeys.contains(KeyEvent.VK_A)) {
+				sun.setClockwise(false);
+				//earth.setClockwise(false);
+				//mars.setClockwise(false);
+				//moon1.setClockwise(false);
+			}
+			//cw
+			if (pressedKeys.contains(KeyEvent.VK_S)) {
+				sun.setClockwise(true);
+				//earth.setClockwise(true);
+				//mars.setClockwise(true);
+				//moon2.setClockwise(true);
+			}
 		}
 	}
 	
@@ -129,8 +121,6 @@ public class LabThreeSimulator extends Game{
 		if(sun != null) {
 			sun.draw(g);
 		}
-		/* Same, just check for null in case a frame gets thrown in before Mario is initialized */
-
 	}
 
 	/**
