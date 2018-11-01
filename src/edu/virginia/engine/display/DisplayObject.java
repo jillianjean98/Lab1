@@ -28,6 +28,7 @@ public class DisplayObject {
 	private Point position;
 	private Point pivotPoint;
 	private double rotation;
+	private Shape hitbox;
 
 	/**
 	 * Constructors: can pass in the id OR the id and image's file path and
@@ -51,7 +52,20 @@ public class DisplayObject {
 		this.setPosition(new Point(0, 0));
 		this.setPivotPoint(new Point(0, 0));
 		this.setRotation(0);
+	}
 
+	public DisplayObject(String id, String fileName, Shape hitbox) {
+		this.setId(id);
+		this.setImage(fileName);
+		this.setAlpha(1.0f);
+		this.setVisible(true);
+		this.setOldAlpha(0.0f);
+		this.setScaleX(1.0);
+		this.setScaleY(1.0);
+		this.setPosition(new Point(0, 0));
+		this.setPivotPoint(new Point(0, 0));
+		this.setRotation(0);
+		this.setHitbox(hitbox);
 	}
 
 	public void setId(String id) {
@@ -96,7 +110,14 @@ public class DisplayObject {
         return rotation;
     }
 
-    /**
+	public void setHitbox(Shape hitbox) {
+		this.hitbox = hitbox;
+	}
+	public Shape getHitbox() {
+		return this.hitbox;
+	}
+
+	/**
 	 * Returns the unscaled width and height of this display object
 	 * */
 	public int getUnscaledWidth() {
@@ -168,8 +189,9 @@ public class DisplayObject {
 			 * (rotation, etc.)
 			 */
 			Graphics2D g2d = (Graphics2D) g;
-			applyTransformations(g2d);
 
+			applyTransformations(g2d);
+			g2d.draw(hitbox);
 			/* Actually draw the image, perform the pivot point translation here */
 			g2d.drawImage(displayImage, 0,0, (int) (getUnscaledWidth()),
 					(int)(getUnscaledHeight()), null);
@@ -211,5 +233,7 @@ public class DisplayObject {
 		g2d.translate(0,0);
 
 	}
+
+
 
 }
