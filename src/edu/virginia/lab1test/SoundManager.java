@@ -60,6 +60,3 @@ public class SoundManager {
     }
 
 }
-
-//questions: should hashmap contain the name of the file or the soundclip itself
-//
