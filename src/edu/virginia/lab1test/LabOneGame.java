@@ -1,9 +1,8 @@
 package edu.virginia.lab1test;
 
-import java.awt.Graphics;
+import java.awt.*;
 import java.util.ArrayList;
 import java.awt.event.KeyEvent;
-import java.awt.Point;
 
 import edu.virginia.engine.display.Game;
 import edu.virginia.engine.display.Sprite;

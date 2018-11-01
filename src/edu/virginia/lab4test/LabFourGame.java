@@ -3,6 +3,7 @@ package edu.virginia.lab4test;
 import edu.virginia.engine.display.AnimatedSprite;
 import edu.virginia.engine.display.Game;
 import edu.virginia.engine.display.Sprite;
+import org.w3c.dom.css.Rect;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -22,6 +23,8 @@ public class LabFourGame extends Game{
 	 * */
 	public LabFourGame() {
 		super("Lab One Test Game", 500, 300);
+		mario.setHitbox(new Rectangle(mario.getPosition().x, mario.getPosition().y,
+				(int)(mario.getUnscaledWidth()*mario.getScaleX()), (int)(mario.getUnscaledHeight()*mario.getScaleY())));
 	}
 
 	/**
@@ -31,7 +34,6 @@ public class LabFourGame extends Game{
 	@Override
 	public void update(ArrayList<Integer> pressedKeys){
 		super.update(pressedKeys);
-
 		/* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
 
 		if(mario != null) {
