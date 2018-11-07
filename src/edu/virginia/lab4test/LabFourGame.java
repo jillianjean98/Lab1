@@ -1,14 +1,11 @@
 package edu.virginia.lab4test;
 
-import edu.virginia.engine.display.AnimatedSprite;
 import edu.virginia.engine.display.Game;
 import edu.virginia.engine.display.Sprite;
-import org.w3c.dom.css.Rect;
-
+import edu.virginia.engine.util.SoundManager;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
@@ -17,10 +14,8 @@ import java.util.Arrays;
 public class LabFourGame extends Game{
 	/* Create a sprite object for our game. We'll use mario */
 	Sprite mario = new Sprite("Mario", "Mario.png");
+	public static SoundManager sm = new SoundManager();
 
-	/**
-	 * Constructor. See constructor in Game.java for details on the parameters given
-	 * */
 	public LabFourGame() {
 		super("Lab One Test Game", 500, 300);
 		mario.setHitbox(new Rectangle(mario.getPosition().x, mario.getPosition().y,
@@ -37,7 +32,7 @@ public class LabFourGame extends Game{
 		/* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
 
 		if(mario != null) {
-
+			sm.PlaySoundEffect("test");
 			if(pressedKeys.contains(KeyEvent.VK_V)) {
 				mario.setVisible(!mario.getVisible());
 				try
@@ -86,6 +81,7 @@ public class LabFourGame extends Game{
 						mario.getPosition().y));
 			}
 			if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
+				sm.PlaySoundEffect("testSE.wav");
 				mario.setPosition(new Point(mario.getPosition().x + 5,
 						mario.getPosition().y));
 			}
@@ -133,7 +129,7 @@ public class LabFourGame extends Game{
 	 * */
 	public static void main(String[] args) {
 		LabFourGame game = new LabFourGame();
+		sm.LoadSoundEffect("test", "Mario_Jumping-Mike_Koenig-989896458.wav");
 		game.start();
-
 	}
 }
