@@ -19,6 +19,8 @@ public class LabFourGame extends Game{
 	Sprite block = new Sprite("block", "block.png");
 	Sprite star = new Sprite("star", "Star.png");
 	int score = 1000;
+	boolean won = false;
+	boolean colliding = false;
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
 	 * */
@@ -48,13 +50,21 @@ public class LabFourGame extends Game{
 		if(mario != null) {
 
 			if(mario.collidesWith(block)) {
-				System.out.println("bang!");
-				score = score -10;
+				if(!colliding) {
+					score = score -100;
+					sm.PlaySoundEffect("test");
+					colliding = true;
+				}
+			} else {
+				colliding = false;
 			}
 			if(mario.collidesWith(star)) {
-				System.out.println("yay!");
-				sm.PlaySoundEffect("test");
+				if(!won){
+					sm.PlaySoundEffect("test");
+					won = true;
+				}
 			}
+
 			if(pressedKeys.contains(KeyEvent.VK_V)) {
 				mario.setVisible(!mario.getVisible());
 				try
@@ -144,10 +154,15 @@ public class LabFourGame extends Game{
 	@Override
 	public void draw(Graphics g){
 		super.draw(g);
+		g.drawString("score: " + score, 500,20);
+		if(won) {
+			g.drawString("Congratulations! You won! " , 400,40);
+		}
 		/* Same, just check for null in case a frame gets thrown in before Mario is initialized */
 		if((mario != null) && mario.getVisible()) mario.draw(g);
 		if((block != null) && block.getVisible()) block.draw(g);
 		if((star != null) && star.getVisible()) star.draw(g);
+
 	}
 
 	/**
