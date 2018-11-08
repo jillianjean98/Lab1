@@ -35,7 +35,6 @@ public class LabFourGame extends Game{
 				(int) (star.getUnscaledWidth() * star.getScaleX()), (int) (star.getUnscaledHeight() * star.getScaleY())) {
 		});
 		star.setStaticObject(true);
-		//JLabel scoreLabel = new JLabel("Score: " + score);
 	}
 
 	/**
@@ -104,7 +103,6 @@ public class LabFourGame extends Game{
 						mario.getPosition().y));
 			}
 			if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
-				sm.PlaySoundEffect("testSE.wav");
 				mario.setPosition(new Point(mario.getPosition().x + 5,
 						mario.getPosition().y));
 			}
