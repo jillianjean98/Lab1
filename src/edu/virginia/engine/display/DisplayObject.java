@@ -15,6 +15,8 @@ import javax.imageio.ImageIO;
  * */
 public class DisplayObject {
 
+	static int windowHeight = 380;
+	static int gravity = -3;
 	/* All DisplayObject have a unique id */
 	private String id;
 
@@ -31,6 +33,7 @@ public class DisplayObject {
 	private double rotation;
 	private Shape hitbox;
 	private boolean staticObject = false; //allow for static objects that shouldn't be redrawn
+	private boolean hasPhysics = false;
 
 	/**
 	 * Constructors: can pass in the id OR the id and image's file path and
@@ -119,6 +122,10 @@ public class DisplayObject {
 		return this.hitbox;
 	}
 
+	public void setHasPhysics(boolean hasPhysics) {
+		this.hasPhysics = hasPhysics;
+	}
+
 	public boolean isStaticObject() {
 		return staticObject;
 	}
@@ -182,7 +189,9 @@ public class DisplayObject {
 	 * to update objects appropriately.
 	 * */
 	protected void update(ArrayList<Integer> pressedKeys) {
-
+		if(this.hasPhysics) {
+			enactGravity();
+		}
 	}
 
 	/**
@@ -272,5 +281,14 @@ public class DisplayObject {
 		return !thisHitbox.isEmpty();
 	}
 
+	public boolean onBaseline() {
+		return this.getPosition().y + this.getUnscaledHeight()*this.getScaleY() >= windowHeight;
+	}
+
+	private void enactGravity() {
+		if(!this.onBaseline()){
+			this.setPosition(new Point(this.position.x, this.position.y - gravity));
+		}
+	}
 
 }

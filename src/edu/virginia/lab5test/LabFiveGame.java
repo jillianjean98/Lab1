@@ -30,6 +30,7 @@ public class LabFiveGame extends Game{
 		mario.setPosition(new Point(0, 250));
 		mario.setHitbox(new Rectangle(mario.getPosition().x, mario.getPosition().y,
 				(int)(mario.getUnscaledWidth()*mario.getScaleX()), (int)(mario.getUnscaledHeight()*mario.getScaleY())));
+		mario.setHasPhysics(true);
 		block.setPosition(new Point(150, 150));
 		block.setHitbox(new Rectangle(block.getPosition().x, block.getPosition().y,
 				(int)(block.getUnscaledWidth()*block.getScaleX()), (int)(block.getUnscaledHeight()*block.getScaleY())));
@@ -108,8 +109,10 @@ public class LabFiveGame extends Game{
 						mario.getPosition().y - 5));
 			}
 			if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
-				mario.setPosition(new Point(mario.getPosition().x,
-						mario.getPosition().y + 5));
+				if(!mario.onBaseline()) {
+					mario.setPosition(new Point(mario.getPosition().x,
+							mario.getPosition().y + 5));
+				}
 			}
 			if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
 				mario.setPosition(new Point(mario.getPosition().x - 5,
