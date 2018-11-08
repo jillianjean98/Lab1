@@ -44,7 +44,7 @@ public class SoundManager {
         Clip clip;
         try {
             File a = new File("resources" + File.separator + filename);
-            //System.out.println(a);
+            System.out.println(a);
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(a);
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
