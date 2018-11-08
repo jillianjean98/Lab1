@@ -1,8 +1,9 @@
-package edu.virginia.lab4test;
+package edu.virginia.lab5test;
 
 import edu.virginia.engine.display.Game;
 import edu.virginia.engine.display.Sprite;
 import edu.virginia.engine.util.SoundManager;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Ellipse2D;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
  * although, for now, it won't be a very fun game :)
  * */
-public class LabFourGame extends Game{
+public class LabFiveGame extends Game{
 	/* Create a sprite object for our game. We'll use mario */
 	Sprite mario = new Sprite("Mario", "Mario.png");
 	public static SoundManager sm = new SoundManager();
@@ -24,8 +25,9 @@ public class LabFourGame extends Game{
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
 	 * */
-	public LabFourGame() {
+	public LabFiveGame() {
 		super("Lab Four Test Game", 600, 400);
+		mario.setPosition(new Point(0, 250));
 		mario.setHitbox(new Rectangle(mario.getPosition().x, mario.getPosition().y,
 				(int)(mario.getUnscaledWidth()*mario.getScaleX()), (int)(mario.getUnscaledHeight()*mario.getScaleY())));
 		block.setPosition(new Point(150, 150));
@@ -169,13 +171,12 @@ public class LabFourGame extends Game{
 	/**
 	 * Quick main class that simply creates an instance of our game and starts the timer
 	 * that calls update() and draw() every frame
-	 *
+	 * */
 	public static void main(String[] args) {
-		LabFourGame game = new LabFourGame();
+		LabFiveGame game = new LabFiveGame();
 		sm.LoadMusic("music", "mario_09.wav");
 		sm.PlayMusic();
 		sm.LoadSoundEffect("test", "Mario_Jumping-Mike_Koenig-989896458.wav");
 		game.start();
 	}
-	 */
 }
