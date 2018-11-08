@@ -1,12 +1,4 @@
-Lindsey Ma and Jillian Ritchey Lab 2
+Lindsey Ma and Jillian Ritchey Lab 4
 
-Mario has 4 animations: Walk, Run, Jump, and Thumbs Up
-
-To walk: press the right/left arrow keys
-To run: Hold the shift key then use the right/left arrows to control direction.
-To jump: press and hold the space bar
-To give a thumbs up: Press and hold Enter/return
-
-To change the animation speed, use the +/= key and the -/_ key to increase/decrease it, respectively.
-
-The other movements (rotation, up/down, changing pivot point) work as implemented in Lab 1.
+The goal is for Mario to collide with the star. If he makes it to the star, you win the game. If you collide with the block, you lose 100 points.
+Control Mario with the arrow keys and the other controls from Lab 1. 
