@@ -105,22 +105,47 @@ public class LabFiveGame extends Game{
 			}
 
 			if (pressedKeys.contains(KeyEvent.VK_UP)) {
-				mario.setPosition(new Point(mario.getPosition().x,
-						mario.getPosition().y - 5));
-			}
-			if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
-				if(!mario.onBaseline()) {
+				if(colliding) {
 					mario.setPosition(new Point(mario.getPosition().x,
-							mario.getPosition().y + 5));
+							mario.getPosition().y + 40));
+					colliding = false;
+				} else {
+					mario.setPosition(new Point(mario.getPosition().x,
+							mario.getPosition().y - 5));
 				}
 			}
+			if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
+				if(colliding) {
+					mario.setPosition(new Point(mario.getPosition().x,
+							mario.getPosition().y - 40));
+					colliding = false;
+				} else {
+					if(!mario.onBaseline()) {
+						mario.setPosition(new Point(mario.getPosition().x,
+								mario.getPosition().y + 5));
+					}
+				}
+
+			}
 			if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
-				mario.setPosition(new Point(mario.getPosition().x - 5,
-						mario.getPosition().y));
+				if(colliding) {
+					mario.setPosition(new Point(mario.getPosition().x + 40,
+							mario.getPosition().y));
+					colliding =false;
+				} else {
+					mario.setPosition(new Point(mario.getPosition().x - 5,
+							mario.getPosition().y));
+				}
 			}
 			if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
-				mario.setPosition(new Point(mario.getPosition().x + 5,
-						mario.getPosition().y));
+				if(colliding){
+					mario.setPosition(new Point(mario.getPosition().x - 40,
+							mario.getPosition().y));
+					colliding = false;
+				} else {
+					mario.setPosition(new Point(mario.getPosition().x + 5,
+							mario.getPosition().y));
+				}
 			}
 			if (pressedKeys.contains(KeyEvent.VK_W)) {
 				mario.setRotation(mario.getRotation() + 5);
