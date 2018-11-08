@@ -5,7 +5,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Area;
 import javax.imageio.ImageIO;
 
 /**
@@ -29,6 +30,7 @@ public class DisplayObject {
 	private Point pivotPoint;
 	private double rotation;
 	private Shape hitbox;
+	private boolean staticObject = false; //allow for static objects that shouldn't be redrawn
 
 	/**
 	 * Constructors: can pass in the id OR the id and image's file path and
@@ -117,6 +119,14 @@ public class DisplayObject {
 		return this.hitbox;
 	}
 
+	public boolean isStaticObject() {
+		return staticObject;
+	}
+
+	public void setStaticObject(boolean staticObject) {
+		this.staticObject = staticObject;
+	}
+
 	/**
 	 * Returns the unscaled width and height of this display object
 	 * */
@@ -190,17 +200,15 @@ public class DisplayObject {
 			 */
 			Graphics2D g2d = (Graphics2D) g;
 
-			applyTransformations(g2d);
-			g2d.draw(hitbox);
-			/* Actually draw the image, perform the pivot point translation here */
-			g2d.drawImage(displayImage, 0,0, (int) (getUnscaledWidth()),
-					(int)(getUnscaledHeight()), null);
+				applyTransformations(g2d);
+				g2d.drawImage(displayImage, 0, 0, (int) (getUnscaledWidth()),
+						(int) (getUnscaledHeight()), null);
 
-			/*
-			 * undo the transformations so this doesn't affect other display
-			 * objects
-			 */
-			reverseTransformations(g2d);
+				/*
+				 * undo the transformations so this doesn't affect other display
+				 * objects
+				 */
+				reverseTransformations(g2d);
 		}
 	}
 
@@ -210,14 +218,23 @@ public class DisplayObject {
 	 * */
 
 	protected void applyTransformations(Graphics2D g2d){
-		g2d.translate(this.position.x, this.position.y);
-		g2d.rotate(Math.toRadians(this.getRotation()), this.pivotPoint.x, this.pivotPoint.y);
-		g2d.scale(this.scaleX, this.scaleY);
+		AffineTransform tx1 = new AffineTransform();
+		tx1.translate(this.position.x, this.position.y);
+		//g2d.translate(this.position.x, this.position.y);
+		tx1.rotate(Math.toRadians(this.getRotation()), this.pivotPoint.x, this.pivotPoint.y);
+		//g2d.rotate(Math.toRadians(this.getRotation()), this.pivotPoint.x, this.pivotPoint.y);
+		tx1.scale(this.scaleX, this.scaleY);
+		//g2d.scale(this.scaleX, this.scaleY);
+		g2d.setTransform(tx1);
 		float curAlpha;
 		this.oldAlpha = curAlpha = ((AlphaComposite)
 				g2d.getComposite()).getAlpha();
 		g2d.setComposite(AlphaComposite.getInstance(3, curAlpha *
 				this.alpha));
+		if(!staticObject){
+			Shape newHitbox = tx1.createTransformedShape(hitbox);
+			this.setHitbox(newHitbox);
+		}
 	}
 
 	/**
@@ -228,12 +245,32 @@ public class DisplayObject {
 	protected void reverseTransformations(Graphics2D g2d){
 		g2d.setComposite(AlphaComposite.getInstance(3,
 				this.oldAlpha));
-		g2d.scale(0.5, 0.5);
-		g2d.rotate(Math.toRadians(-this.getRotation()), this.pivotPoint.x, this.pivotPoint.y);
-		g2d.translate(0,0);
+		AffineTransform tx1 = new AffineTransform();
+		tx1.scale(1/this.scaleX, 1/this.scaleY);
+		tx1.rotate(Math.toRadians(-this.getRotation()), this.pivotPoint.x, this.pivotPoint.y);
+		tx1.translate(-this.position.x, -this.position.y);
+		//g2d.translate(this.position.x, this.position.y);
+		//g2d.rotate(Math.toRadians(this.getRotation()), this.pivotPoint.x, this.pivotPoint.y);
+
+		//g2d.scale(this.scaleX, this.scaleY);
+		g2d.setTransform(tx1);
+		//g2d.scale(1/this.scaleX, 1/this.scaleY);
+		//g2d.rotate(Math.toRadians(-this.getRotation()), this.pivotPoint.x, this.pivotPoint.y);
+		//g2d.translate(-this.getPosition().x, -this.getPosition().y);
+		if(!staticObject) {
+			Shape newHitbox = tx1.createTransformedShape(hitbox);
+			this.setHitbox(newHitbox);
+		}
+
 
 	}
 
+	public boolean collidesWith(DisplayObject other) {
+		Area thisHitbox = new Area(getHitbox());
+		Area otherHitbox = new Area(other.getHitbox());
+		thisHitbox.intersect(otherHitbox);
+		return !thisHitbox.isEmpty();
+	}
 
 
 }

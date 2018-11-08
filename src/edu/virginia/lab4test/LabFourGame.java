@@ -5,8 +5,10 @@ import edu.virginia.engine.display.Game;
 import edu.virginia.engine.display.Sprite;
 import org.w3c.dom.css.Rect;
 
+import javax.swing.JLabel;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -17,14 +19,26 @@ import java.util.Arrays;
 public class LabFourGame extends Game{
 	/* Create a sprite object for our game. We'll use mario */
 	Sprite mario = new Sprite("Mario", "Mario.png");
-
+	Sprite block = new Sprite("block", "block.png");
+	Sprite star = new Sprite("star", "Star.png");
+	int score = 1000;
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
 	 * */
 	public LabFourGame() {
-		super("Lab One Test Game", 500, 300);
+		super("Lab Four Test Game", 600, 400);
 		mario.setHitbox(new Rectangle(mario.getPosition().x, mario.getPosition().y,
 				(int)(mario.getUnscaledWidth()*mario.getScaleX()), (int)(mario.getUnscaledHeight()*mario.getScaleY())));
+		block.setPosition(new Point(150, 150));
+		block.setHitbox(new Rectangle(block.getPosition().x, block.getPosition().y,
+				(int)(block.getUnscaledWidth()*block.getScaleX()), (int)(block.getUnscaledHeight()*block.getScaleY())));
+		block.setStaticObject(true);
+		star.setPosition(new Point(450, 250));
+		star.setHitbox(new Ellipse2D.Double(star.getPosition().x, star.getPosition().y,
+				(int) (star.getUnscaledWidth() * star.getScaleX()), (int) (star.getUnscaledHeight() * star.getScaleY())) {
+		});
+		star.setStaticObject(true);
+		//JLabel scoreLabel = new JLabel("Score: " + score);
 	}
 
 	/**
@@ -35,9 +49,15 @@ public class LabFourGame extends Game{
 	public void update(ArrayList<Integer> pressedKeys){
 		super.update(pressedKeys);
 		/* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
-
 		if(mario != null) {
 
+			if(mario.collidesWith(block)) {
+				System.out.println("bang!");
+				score = score -10;
+			}
+			if(mario.collidesWith(star)) {
+				System.out.println("yay!");
+			}
 			if(pressedKeys.contains(KeyEvent.VK_V)) {
 				mario.setVisible(!mario.getVisible());
 				try
@@ -111,7 +131,12 @@ public class LabFourGame extends Game{
 				mario.setPivotPoint(new Point(mario.getPivotPoint().x,
 						mario.getPivotPoint().y + 1));
 			}
+
+			mario.setHitbox(new Rectangle(mario.getPosition().x, mario.getPosition().y,
+					(int)(mario.getUnscaledWidth()*mario.getScaleX()), (int)(mario.getUnscaledHeight()*mario.getScaleY())));
 			mario.update(pressedKeys);
+			block.update(pressedKeys);
+			star.update(pressedKeys);
 		}
 	}
 
@@ -122,9 +147,10 @@ public class LabFourGame extends Game{
 	@Override
 	public void draw(Graphics g){
 		super.draw(g);
-
 		/* Same, just check for null in case a frame gets thrown in before Mario is initialized */
 		if((mario != null) && mario.getVisible()) mario.draw(g);
+		if((block != null) && block.getVisible()) block.draw(g);
+		if((star != null) && star.getVisible()) star.draw(g);
 	}
 
 	/**
