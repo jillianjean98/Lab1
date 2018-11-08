@@ -220,11 +220,8 @@ public class DisplayObject {
 	protected void applyTransformations(Graphics2D g2d){
 		AffineTransform tx1 = new AffineTransform();
 		tx1.translate(this.position.x, this.position.y);
-		//g2d.translate(this.position.x, this.position.y);
 		tx1.rotate(Math.toRadians(this.getRotation()), this.pivotPoint.x, this.pivotPoint.y);
-		//g2d.rotate(Math.toRadians(this.getRotation()), this.pivotPoint.x, this.pivotPoint.y);
 		tx1.scale(this.scaleX, this.scaleY);
-		//g2d.scale(this.scaleX, this.scaleY);
 		g2d.setTransform(tx1);
 		float curAlpha;
 		this.oldAlpha = curAlpha = ((AlphaComposite)
@@ -249,14 +246,7 @@ public class DisplayObject {
 		tx1.scale(1/this.scaleX, 1/this.scaleY);
 		tx1.rotate(Math.toRadians(-this.getRotation()), this.pivotPoint.x, this.pivotPoint.y);
 		tx1.translate(-this.position.x, -this.position.y);
-		//g2d.translate(this.position.x, this.position.y);
-		//g2d.rotate(Math.toRadians(this.getRotation()), this.pivotPoint.x, this.pivotPoint.y);
-
-		//g2d.scale(this.scaleX, this.scaleY);
 		g2d.setTransform(tx1);
-		//g2d.scale(1/this.scaleX, 1/this.scaleY);
-		//g2d.rotate(Math.toRadians(-this.getRotation()), this.pivotPoint.x, this.pivotPoint.y);
-		//g2d.translate(-this.getPosition().x, -this.getPosition().y);
 		if(!staticObject) {
 			Shape newHitbox = tx1.createTransformedShape(hitbox);
 			this.setHitbox(newHitbox);

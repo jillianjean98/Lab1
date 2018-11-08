@@ -26,6 +26,7 @@ public class LabFourGame extends Game{
 	 * */
 	public LabFourGame() {
 		super("Lab Four Test Game", 600, 400);
+		mario.setPosition(new Point(0, 250));
 		mario.setHitbox(new Rectangle(mario.getPosition().x, mario.getPosition().y,
 				(int)(mario.getUnscaledWidth()*mario.getScaleX()), (int)(mario.getUnscaledHeight()*mario.getScaleY())));
 		block.setPosition(new Point(150, 150));
@@ -48,8 +49,6 @@ public class LabFourGame extends Game{
 		super.update(pressedKeys);
 		/* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
 		if(mario != null) {
-			//sm.PlayMusic();
-
 			if(mario.collidesWith(block)) {
 				if(!colliding) {
 					score = score -100;
