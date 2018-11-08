@@ -1,16 +1,12 @@
 package edu.virginia.lab4test;
 
-import edu.virginia.engine.display.AnimatedSprite;
 import edu.virginia.engine.display.Game;
 import edu.virginia.engine.display.Sprite;
-import org.w3c.dom.css.Rect;
-
-import javax.swing.JLabel;
+import edu.virginia.engine.util.SoundManager;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
@@ -19,6 +15,7 @@ import java.util.Arrays;
 public class LabFourGame extends Game{
 	/* Create a sprite object for our game. We'll use mario */
 	Sprite mario = new Sprite("Mario", "Mario.png");
+	public static SoundManager sm = new SoundManager();
 	Sprite block = new Sprite("block", "block.png");
 	Sprite star = new Sprite("star", "Star.png");
 	int score = 1000;
@@ -57,6 +54,7 @@ public class LabFourGame extends Game{
 			}
 			if(mario.collidesWith(star)) {
 				System.out.println("yay!");
+				sm.PlaySoundEffect("test");
 			}
 			if(pressedKeys.contains(KeyEvent.VK_V)) {
 				mario.setVisible(!mario.getVisible());
@@ -106,6 +104,7 @@ public class LabFourGame extends Game{
 						mario.getPosition().y));
 			}
 			if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
+				sm.PlaySoundEffect("testSE.wav");
 				mario.setPosition(new Point(mario.getPosition().x + 5,
 						mario.getPosition().y));
 			}
@@ -159,7 +158,7 @@ public class LabFourGame extends Game{
 	 * */
 	public static void main(String[] args) {
 		LabFourGame game = new LabFourGame();
+		sm.LoadSoundEffect("test", "Mario_Jumping-Mike_Koenig-989896458.wav");
 		game.start();
-
 	}
 }
