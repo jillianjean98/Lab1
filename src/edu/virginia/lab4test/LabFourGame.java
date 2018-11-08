@@ -47,6 +47,7 @@ public class LabFourGame extends Game{
 		super.update(pressedKeys);
 		/* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
 		if(mario != null) {
+			//sm.PlayMusic();
 
 			if(mario.collidesWith(block)) {
 				System.out.println("bang!");
@@ -104,7 +105,6 @@ public class LabFourGame extends Game{
 						mario.getPosition().y));
 			}
 			if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
-				sm.PlaySoundEffect("testSE.wav");
 				mario.setPosition(new Point(mario.getPosition().x + 5,
 						mario.getPosition().y));
 			}
@@ -158,6 +158,8 @@ public class LabFourGame extends Game{
 	 * */
 	public static void main(String[] args) {
 		LabFourGame game = new LabFourGame();
+		sm.LoadMusic("music", "mario_09.wav");
+		sm.PlayMusic();
 		sm.LoadSoundEffect("test", "Mario_Jumping-Mike_Koenig-989896458.wav");
 		game.start();
 	}

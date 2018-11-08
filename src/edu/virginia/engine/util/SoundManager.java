@@ -5,9 +5,9 @@ import java.net.*;
 import java.io.*;
 
 public class SoundManager {
-    String m;
     Clip music;
     public Map<String, Clip> soundEffectMap = new HashMap<>();
+    //public Map<String, Clip> MMap = new HashMap<>();
     //public Map<String, Clip> musicMap = new HashMap<>();
 
 
@@ -32,8 +32,6 @@ public class SoundManager {
 
     }
 
-
-
     public void PlaySoundEffect(String id){
         //retrieve sound frm the hashmap
         Clip curr = soundEffectMap.get(id);
@@ -42,26 +40,31 @@ public class SoundManager {
         curr.start();
     }
 
- /*   public void LoadMusic(String id, String filename){
-        try{
-            URL loc = this.getClass().getClassLoader().getResource(filename);
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(loc);
-            music = AudioSystem.getClip();
-            music.open(audioInputStream);
-        }
-        catch (UnsupportedAudioFileException e) {
+    public void LoadMusic(String id, String filename){
+        Clip clip;
+        try {
+            File a = new File("resources" + File.separator + filename);
+            System.out.println(a);
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(a);
+            clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            //soundEffectMap.put(id, clip);
+            this.music = clip;
+        } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (LineUnavailableException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 
-    public void PlayMusic(String id){
+    public void PlayMusic(){
         music.setFramePosition(0);
         music.start();
         music.loop(Clip.LOOP_CONTINUOUSLY);
+
+
     }
 
 }
