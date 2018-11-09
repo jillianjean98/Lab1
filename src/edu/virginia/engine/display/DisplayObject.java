@@ -270,8 +270,6 @@ public class DisplayObject {
 			Shape newHitbox = tx1.createTransformedShape(hitbox);
 			this.setHitbox(newHitbox);
 		}
-
-
 	}
 
 	public boolean collidesWith(DisplayObject other) {
@@ -289,6 +287,7 @@ public class DisplayObject {
 		if(!this.onBaseline()){
 			this.setPosition(new Point(this.position.x, this.position.y - gravity));
 		}
+
 	}
 
 }

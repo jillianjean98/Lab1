@@ -26,7 +26,7 @@ public class LabFiveGame extends Game{
 	 * Constructor. See constructor in Game.java for details on the parameters given
 	 * */
 	public LabFiveGame() {
-		super("Lab Four Test Game", 600, 400);
+		super("Lab Five Test Game", 600, 400);
 		mario.setPosition(new Point(0, 250));
 		mario.setHitbox(new Rectangle(mario.getPosition().x, mario.getPosition().y,
 				(int)(mario.getUnscaledWidth()*mario.getScaleX()), (int)(mario.getUnscaledHeight()*mario.getScaleY())));
@@ -55,9 +55,14 @@ public class LabFiveGame extends Game{
 
 			if(mario.collidesWith(block)) {
 				if(!colliding) {
-					score = score -100;
+					if(!won)
+						score = score -100;
 					sm.PlaySoundEffect("test");
 					colliding = true;
+				}
+				if(!mario.onBaseline()){
+					mario.setPosition(new Point(mario.getPosition().x,
+							mario.getPosition().y - 40));
 				}
 			} else {
 				colliding = false;
@@ -108,24 +113,18 @@ public class LabFiveGame extends Game{
 				if(colliding) {
 					mario.setPosition(new Point(mario.getPosition().x,
 							mario.getPosition().y + 40));
-					colliding = false;
+					//colliding = false;
 				} else {
 					mario.setPosition(new Point(mario.getPosition().x,
 							mario.getPosition().y - 5));
 				}
 			}
 			if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
-				if(colliding) {
-					mario.setPosition(new Point(mario.getPosition().x,
-							mario.getPosition().y - 40));
-					colliding = false;
-				} else {
-					if(!mario.onBaseline()) {
-						mario.setPosition(new Point(mario.getPosition().x,
-								mario.getPosition().y + 5));
-					}
-				}
 
+				if(!mario.onBaseline()) {
+					mario.setPosition(new Point(mario.getPosition().x,
+							mario.getPosition().y + 5));
+				}
 			}
 			if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
 				if(colliding) {
