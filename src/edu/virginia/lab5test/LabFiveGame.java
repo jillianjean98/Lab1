@@ -50,7 +50,7 @@ public class LabFiveGame extends Game{
 	public void update(ArrayList<Integer> pressedKeys){
 		super.update(pressedKeys);
 		/* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
-		if(mario != null) {
+		if(mario != null && !won) {
 			//sm.PlayMusic();
 
 			if(mario.collidesWith(block)) {
