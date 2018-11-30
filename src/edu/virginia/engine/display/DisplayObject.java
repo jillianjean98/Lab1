@@ -300,6 +300,35 @@ public class DisplayObject {
 		return this.getPosition().y + this.getUnscaledHeight()*this.getScaleY() >= windowHeight;
 	}
 
+	public boolean inParentYBottom() {
+		if(this.getParent() == null) {
+			return true;
+		}
+		return this.getPosition().y + this.getUnscaledHeight()*this.getScaleY()/2 <=
+				this.getParent().getPosition().y + this.getParent().getUnscaledHeight()*this.getParent().getScaleY();
+
+	}
+	public boolean inParentYTop() {
+		if(this.getParent() == null) {
+			return true;
+		}
+		return this.getPosition().y >= this.getParent().getPosition().y;
+	}
+	public boolean inParentXRight() {
+		if(this.getParent() == null) {
+			return true;
+		}
+		return this.getPosition().x + this.getUnscaledWidth()*this.getScaleX()/2 <=
+				this.getParent().getPosition().x + this.getParent().getUnscaledWidth()*this.getParent().getScaleX();
+
+	}
+	public boolean inParentXLeft() {
+		if(this.getParent() == null) {
+			return true;
+		}
+		return this.getPosition().x >= this.getParent().getPosition().x;
+	}
+
 	private void enactGravity() {
 		if(!this.onBaseline()){
 			this.setPosition(new Point(this.position.x, this.position.y - gravity));

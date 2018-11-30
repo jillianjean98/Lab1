@@ -60,10 +60,7 @@ public class LabFiveGame extends Game{
 					sm.PlaySoundEffect("test");
 					colliding = true;
 				}
-				if(!mario.onBaseline()){
-					mario.setPosition(new Point(mario.getPosition().x,
-							mario.getPosition().y - 40));
-				}
+
 			} else {
 				colliding = false;
 			}

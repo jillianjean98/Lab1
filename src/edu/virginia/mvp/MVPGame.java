@@ -21,10 +21,11 @@ public class MVPGame extends Game{
 	//setup lightbulb
 	private String[] bulbFiles = {"objects/bulb_off.png", "objects/bulb_on.png"};
 	private ArrayList<String> filenames = new ArrayList<>(Arrays.asList(bulbFiles));
-	Sprite bulb = new MultiModeSprite("bulb",filenames);
-
+	MultiModeSprite bulb = new MultiModeSprite("bulb",filenames);
 	//setup battery
 	Sprite battery = new Sprite("block", "objects/battery.png");
+	//setup cursor
+	Sprite cursor = new Sprite("cursor", "objects/cursor.png");
 
 	int score = 1000;
 	boolean won = false;
@@ -37,14 +38,18 @@ public class MVPGame extends Game{
 		super("Lab Five Test Game", 1000, 800);
 		workspace.addChild(bulb);
 		workspace.addChild(battery);
+		workspace.addChild(cursor);
 		workspace.setPosition(new Point(150, 50));
 		bulb.setPosition(new Point(770, 215));
 		battery.setPosition(new Point(150, 270));
 
+		cursor.setPosition(new Point(150, 50));
 		battery.setScaleX(0.7);
 		battery.setScaleY(0.7);
 		bulb.setScaleX(0.3);
 		bulb.setScaleY(0.3);
+		cursor.setScaleX(0.8);
+		cursor.setScaleY(0.8);
 		/*bulb.setHitbox(new Rectangle(mario.getPosition().x, mario.getPosition().y,
 				(int)(mario.getUnscaledWidth()*mario.getScaleX()), (int)(mario.getUnscaledHeight()*mario.getScaleY())));
 		mario.setHasPhysics(true);
@@ -92,35 +97,7 @@ public class MVPGame extends Game{
 				}
 			}
 
-			if(pressedKeys.contains(KeyEvent.VK_V)) {
-				mario.setVisible(!mario.getVisible());
-				try
-				{
-					Thread.sleep(300);
-				}
-				catch(InterruptedException ex)
-				{
-					Thread.currentThread().interrupt();
-				}
-			}
 
-
-			if (pressedKeys.contains(KeyEvent.VK_X)) {
-				if(mario.getAlpha()-0.1f>0.0f) {
-					mario.setAlpha(mario.getAlpha() - 0.01f);
-				}
-			}
-
-			if (pressedKeys.contains(KeyEvent.VK_Z)) {
-				if(mario.getAlpha()!=1.00f) {
-					mario.setAlpha(mario.getAlpha() + 0.01f);
-				}
-			}
-
-			if (pressedKeys.contains(KeyEvent.VK_A)) {
-				mario.setScaleX(mario.getScaleX() + 0.1);
-				mario.setScaleY(mario.getScaleY() + 0.1);
-			}
 
 			if (pressedKeys.contains(KeyEvent.VK_S)) {
 				mario.setScaleX(mario.getScaleX() - 0.1);
@@ -190,8 +167,32 @@ public class MVPGame extends Game{
 			mario.setHitbox(new Rectangle(mario.getPosition().x, mario.getPosition().y,
 					(int)(mario.getUnscaledWidth()*mario.getScaleX()), (int)(mario.getUnscaledHeight()*mario.getScaleY())));
 					*/
+
+			if (pressedKeys.contains(KeyEvent.VK_UP)) {
+				if(cursor.inParentYTop()) {
+					cursor.setPosition(new Point(cursor.getPosition().x,
+							cursor.getPosition().y - 5));
+				}
+			}
+			if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
+				if(cursor.inParentYBottom()) {
+					cursor.setPosition(new Point(cursor.getPosition().x,
+							cursor.getPosition().y + 5));
+				}
+			}
+			if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
+				if(cursor.inParentXLeft()) {
+					cursor.setPosition(new Point(cursor.getPosition().x - 5,
+							cursor.getPosition().y));
+				}
+			}
+			if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
+				if(cursor.inParentXRight()) {
+					cursor.setPosition(new Point(cursor.getPosition().x + 5,
+							cursor.getPosition().y));
+				}
+			}
 			workspace.update(pressedKeys);
-			//battery.update(pressedKeys);
 		}
 	}
 
@@ -208,7 +209,6 @@ public class MVPGame extends Game{
 		}
 		/* Same, just check for null in case a frame gets thrown in before Mario is initialized */
 		if((workspace != null) && workspace.getVisible()) workspace.draw(g);
-		//if((battery != null) && battery.getVisible()) battery.draw(g);
 
 	}
 
