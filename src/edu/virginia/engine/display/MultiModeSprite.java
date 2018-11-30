@@ -17,6 +17,7 @@ public class MultiModeSprite extends Sprite{
     private ArrayList<BufferedImage> images = new ArrayList<>();
     private int currentMode = 0;
     private int numModes = 0;
+    private boolean switched;
 
     private BufferedImage displayImage;
 
@@ -41,6 +42,13 @@ public class MultiModeSprite extends Sprite{
         super.draw(g);
     }
 
+    public void setSwitched(boolean switched) {
+        this.switched = switched;
+    }
+
+    public boolean isSwitched() {
+        return switched;
+    }
 
     private void initializeFrames(ArrayList<String> imageNames) {
         if (imageNames == null) {
@@ -75,7 +83,11 @@ public class MultiModeSprite extends Sprite{
     }
 
     public void nextMode() {
-        this.currentMode = this.currentMode + 1 % this.numModes;
-        this.displayImage = this.images.get(currentMode);
+        if(!this.switched) {
+            this.currentMode = (this.currentMode + 1) % this.numModes;
+            this.displayImage = this.images.get(currentMode);
+            super.setImage(displayImage);
+        }
+
     }
 }

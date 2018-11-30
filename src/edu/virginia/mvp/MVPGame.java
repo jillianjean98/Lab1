@@ -27,9 +27,17 @@ public class MVPGame extends Game{
 	//setup cursor
 	Sprite cursor = new Sprite("cursor", "objects/cursor.png");
 
+	Sprite toolbox = new Sprite("toolbox", "objects/toolbox.png");
+
+	private String[] wireFiles = {"objects/wire.png", "objects/wire_select.png"};
+	private ArrayList<String> wirefilenames = new ArrayList<>(Arrays.asList(wireFiles));
+	MultiModeSprite wire = new MultiModeSprite("wire", wirefilenames );
+
 	int score = 1000;
 	boolean won = false;
 	boolean colliding = false;
+
+	private Sprite toolSelected = null;
 	//public static SoundManager sm = new SoundManager();
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
@@ -50,6 +58,14 @@ public class MVPGame extends Game{
 		bulb.setScaleY(0.3);
 		cursor.setScaleX(0.8);
 		cursor.setScaleY(0.8);
+
+		toolbox.addChild(wire);
+		toolbox.setPosition(new Point(350, 575));
+		toolbox.setScaleX(1.3);
+		toolbox.setScaleY(0.55);
+		wire.setPosition(new Point(590, 626));
+		wire.setScaleX(0.3);
+		wire.setScaleY(0.3);
 		/*bulb.setHitbox(new Rectangle(mario.getPosition().x, mario.getPosition().y,
 				(int)(mario.getUnscaledWidth()*mario.getScaleX()), (int)(mario.getUnscaledHeight()*mario.getScaleY())));
 		mario.setHasPhysics(true);
@@ -194,6 +210,23 @@ public class MVPGame extends Game{
 			}
 			workspace.update(pressedKeys);
 		}
+
+		if(toolbox != null && !won) {
+			if (pressedKeys.contains(KeyEvent.VK_W)) {
+				wire.nextMode();
+				if(!wire.isSwitched()) {
+					if(toolSelected != null && toolSelected.getId().compareTo(wire.getId()) == 0) {
+						toolSelected = null;
+					} else {
+						toolSelected = wire;
+					}
+				}
+				wire.setSwitched(true);
+			} else {
+				wire.setSwitched(false);
+			}
+			toolbox.update(pressedKeys);
+		}
 	}
 
 	/**
@@ -209,6 +242,7 @@ public class MVPGame extends Game{
 		}
 		/* Same, just check for null in case a frame gets thrown in before Mario is initialized */
 		if((workspace != null) && workspace.getVisible()) workspace.draw(g);
+		if((toolbox != null) && toolbox.getVisible()) toolbox.draw(g);
 
 	}
 
