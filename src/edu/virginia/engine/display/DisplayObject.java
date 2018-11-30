@@ -35,6 +35,8 @@ public class DisplayObject {
 	private boolean staticObject = false; //allow for static objects that shouldn't be redrawn
 	private boolean hasPhysics = false;
 
+	private DisplayObject parent;
+
 	/**
 	 * Constructors: can pass in the id OR the id and image's file path and
 	 * position OR the id and a buffered image and position
@@ -134,6 +136,14 @@ public class DisplayObject {
 		this.staticObject = staticObject;
 	}
 
+	public void setParent(DisplayObject parent) {
+		this.parent = parent;
+	}
+
+	public DisplayObject getParent() {
+		return parent;
+	}
+
 	/**
 	 * Returns the unscaled width and height of this display object
 	 * */
@@ -145,6 +155,13 @@ public class DisplayObject {
 	public int getUnscaledHeight() {
 		if(displayImage == null) return 0;
 		return displayImage.getHeight();
+	}
+
+	public double getGlobalScale() {
+		if(parent == null) {
+			return this.scaleX;
+		}
+		return this.scaleX * this.parent.getGlobalScale();
 	}
 
 	public BufferedImage getDisplayImage() {
@@ -288,6 +305,19 @@ public class DisplayObject {
 			this.setPosition(new Point(this.position.x, this.position.y - gravity));
 		}
 
+	}
+
+	public Point localToGlobal(Point local) {
+		if(this.parent == null) {
+			return local;
+		}
+		return parent.localToGlobal(new Point(local.x+this.position.x, local.y+this.position.y));
+	}
+	public Point globalToLocal(Point global) {
+		if(this.parent == null) {
+			return global;
+		}
+		return parent.globalToLocal(new Point(global.x-this.position.x, global.y-this.position.y));
 	}
 
 }

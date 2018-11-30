@@ -1,34 +1,51 @@
-package edu.virginia.lab5test;
+package edu.virginia.mvp;
 
-import edu.virginia.engine.display.Game;
-import edu.virginia.engine.display.Sprite;
+import edu.virginia.engine.display.*;
 import edu.virginia.engine.util.SoundManager;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Ellipse2D;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
  * although, for now, it won't be a very fun game :)
  * */
-public class LabFiveGame extends Game{
-	/* Create a sprite object for our game. We'll use mario */
-	Sprite mario = new Sprite("Mario", "Mario.png");
-	public static SoundManager sm = new SoundManager();
-	Sprite block = new Sprite("block", "block.png");
-	Sprite star = new Sprite("star", "Star.png");
+public class MVPGame extends Game{
+	//set background
+	public Sprite workspace = new Sprite("workspace", "objects/grid.jpg");
+
+	//setup lightbulb
+	private String[] bulbFiles = {"objects/bulb_off.png", "objects/bulb_on.png"};
+	private ArrayList<String> filenames = new ArrayList<>(Arrays.asList(bulbFiles));
+	Sprite bulb = new MultiModeSprite("bulb",filenames);
+
+	//setup battery
+	Sprite battery = new Sprite("block", "objects/battery.png");
+
 	int score = 1000;
 	boolean won = false;
 	boolean colliding = false;
+	//public static SoundManager sm = new SoundManager();
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
 	 * */
-	public LabFiveGame() {
-		super("Lab Five Test Game", 600, 400);
-		mario.setPosition(new Point(0, 250));
-		mario.setHitbox(new Rectangle(mario.getPosition().x, mario.getPosition().y,
+	public MVPGame() {
+		super("Lab Five Test Game", 1000, 800);
+		workspace.addChild(bulb);
+		workspace.addChild(battery);
+		workspace.setPosition(new Point(150, 50));
+		bulb.setPosition(new Point(780, 300));
+		battery.setPosition(new Point(150, 270));
+
+		battery.setScaleX(0.7);
+		battery.setScaleY(0.7);
+		bulb.setScaleX(0.3);
+		bulb.setScaleY(0.3);
+		/*bulb.setHitbox(new Rectangle(mario.getPosition().x, mario.getPosition().y,
 				(int)(mario.getUnscaledWidth()*mario.getScaleX()), (int)(mario.getUnscaledHeight()*mario.getScaleY())));
 		mario.setHasPhysics(true);
 		block.setPosition(new Point(150, 150));
@@ -40,6 +57,7 @@ public class LabFiveGame extends Game{
 				(int) (star.getUnscaledWidth() * star.getScaleX()), (int) (star.getUnscaledHeight() * star.getScaleY())) {
 		});
 		star.setStaticObject(true);
+		*/
 	}
 
 	/**
@@ -50,10 +68,10 @@ public class LabFiveGame extends Game{
 	public void update(ArrayList<Integer> pressedKeys){
 		super.update(pressedKeys);
 		/* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
-		if(mario != null && !won) {
+		if(workspace != null && !won) {
 			//sm.PlayMusic();
 
-			if(mario.collidesWith(block)) {
+			/*if(mario.collidesWith(block)) {
 				if(!colliding) {
 					if(!won)
 						score = score -100;
@@ -171,9 +189,9 @@ public class LabFiveGame extends Game{
 
 			mario.setHitbox(new Rectangle(mario.getPosition().x, mario.getPosition().y,
 					(int)(mario.getUnscaledWidth()*mario.getScaleX()), (int)(mario.getUnscaledHeight()*mario.getScaleY())));
-			mario.update(pressedKeys);
-			block.update(pressedKeys);
-			star.update(pressedKeys);
+					*/
+			workspace.update(pressedKeys);
+			//battery.update(pressedKeys);
 		}
 	}
 
@@ -189,22 +207,20 @@ public class LabFiveGame extends Game{
 			g.drawString("Congratulations! You won! " , 400,40);
 		}
 		/* Same, just check for null in case a frame gets thrown in before Mario is initialized */
-		if((mario != null) && mario.getVisible()) mario.draw(g);
-		if((block != null) && block.getVisible()) block.draw(g);
-		if((star != null) && star.getVisible()) star.draw(g);
+		if((workspace != null) && workspace.getVisible()) workspace.draw(g);
+		//if((battery != null) && battery.getVisible()) battery.draw(g);
 
 	}
 
 	/**
 	 * Quick main class that simply creates an instance of our game and starts the timer
 	 * that calls update() and draw() every frame
-	 *
+	 * */
 	public static void main(String[] args) {
-		LabFiveGame game = new LabFiveGame();
-		sm.LoadMusic("music", "mario_09.wav");
-		sm.PlayMusic();
-		sm.LoadSoundEffect("test", "Mario_Jumping-Mike_Koenig-989896458.wav");
+		MVPGame game = new MVPGame();
+		//sm.LoadMusic("music", "mario_09.wav");
+		//sm.PlayMusic();
+		//sm.LoadSoundEffect("test", "Mario_Jumping-Mike_Koenig-989896458.wav");
 		game.start();
 	}
-	 */
 }

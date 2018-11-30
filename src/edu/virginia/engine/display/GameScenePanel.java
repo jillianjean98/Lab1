@@ -1,7 +1,11 @@
 package edu.virginia.engine.display;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /**
@@ -31,7 +35,19 @@ public class GameScenePanel extends JPanel {
 	public void setGameRef(Game sceneRef) {
 		this.gameRef = sceneRef;
 	}
-	
+
+	private BufferedImage readImage(String imageName) {
+		BufferedImage image = null;
+		try {
+			String file = ("resources" + File.separator + imageName);
+			image = ImageIO.read(new File(file));
+		} catch (IOException e) {
+			System.out.println("[Error in DisplayObject.java:readImage] Could not read image " + imageName);
+			e.printStackTrace();
+		}
+		return image;
+	}
+
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
