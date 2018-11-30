@@ -33,6 +33,7 @@ public class MVPGame extends Game{
 	private ArrayList<String> wirefilenames = new ArrayList<>(Arrays.asList(wireFiles));
 	MultiModeSprite wire = new MultiModeSprite("wire", wirefilenames );
 
+	ArrayList<ArrayList<Sprite>> wireSegments = new ArrayList<>();
 	int score = 1000;
 	boolean won = false;
 	boolean colliding = false;
@@ -49,7 +50,7 @@ public class MVPGame extends Game{
 		workspace.addChild(cursor);
 		workspace.setPosition(new Point(150, 50));
 		bulb.setPosition(new Point(770, 215));
-		battery.setPosition(new Point(150, 270));
+		battery.setPosition(new Point(150, 273));
 
 		cursor.setPosition(new Point(150, 50));
 		battery.setScaleX(0.7);
@@ -79,6 +80,17 @@ public class MVPGame extends Game{
 		});
 		star.setStaticObject(true);
 		*/
+		for(int i = 0; i<9; i++){
+			wireSegments.add(i, new ArrayList<Sprite>());
+			for(int j = 0; j<6; j++) {
+				Sprite seg = new Sprite("seg" + i + j, "objects/segment.png");
+				workspace.addChild(seg);
+				seg.setPosition(new Point(150 +(90*i), 90 + 90*j));
+				seg.setVisible(false);
+				wireSegments.get(i).add(j, seg);
+			}
+
+		}
 	}
 
 	/**
@@ -88,6 +100,24 @@ public class MVPGame extends Game{
 	@Override
 	public void update(ArrayList<Integer> pressedKeys){
 		super.update(pressedKeys);
+		if(pressedKeys.contains(KeyEvent.VK_SPACE)){
+			if(toolSelected != null && toolSelected.getId().compareTo("wire") == 0) {
+				int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
+				int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
+				wireSegments.get(gridX).get(gridY).setVisible(true);
+				Point cursorGridPos = new Point(((cursor.getPosition().x - cursor.getParent().getPosition().x) / 90),
+						((cursor.getPosition().y - cursor.getParent().getPosition().y) / 90));
+				System.out.println("space key: cursor at " + cursorGridPos);
+			}
+		}
+		if(pressedKeys.contains(KeyEvent.VK_BACK_SPACE) || pressedKeys.contains(KeyEvent.VK_DELETE)){
+				int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
+				int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
+				wireSegments.get(gridX).get(gridY).setVisible(false);
+				Point cursorGridPos = new Point(((cursor.getPosition().x - cursor.getParent().getPosition().x) / 90),
+						((cursor.getPosition().y - cursor.getParent().getPosition().y) / 90));
+				System.out.println("deleting wire at " + cursorGridPos);
+		}
 		/* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
 		if(workspace != null && !won) {
 			//sm.PlayMusic();

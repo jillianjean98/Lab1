@@ -227,8 +227,10 @@ public class DisplayObject {
 			Graphics2D g2d = (Graphics2D) g;
 
 				applyTransformations(g2d);
-				g2d.drawImage(displayImage, 0, 0, (int) (getUnscaledWidth()),
-						(int) (getUnscaledHeight()), null);
+				if(this.getVisible()) {
+					g2d.drawImage(displayImage, 0, 0, (int) (getUnscaledWidth()),
+							(int) (getUnscaledHeight()), null);
+				}
 
 				/*
 				 * undo the transformations so this doesn't affect other display
