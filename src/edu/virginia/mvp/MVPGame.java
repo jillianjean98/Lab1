@@ -38,7 +38,7 @@ public class MVPGame extends Game{
 		workspace.addChild(bulb);
 		workspace.addChild(battery);
 		workspace.setPosition(new Point(150, 50));
-		bulb.setPosition(new Point(780, 300));
+		bulb.setPosition(new Point(770, 215));
 		battery.setPosition(new Point(150, 270));
 
 		battery.setScaleX(0.7);
