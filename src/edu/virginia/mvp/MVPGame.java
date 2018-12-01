@@ -34,11 +34,11 @@ public class MVPGame extends Game{
 	MultiModeSprite wire = new MultiModeSprite("wire", wirefilenames );
 
 	ArrayList<ArrayList<Sprite>> wireSegments = new ArrayList<>();
-	int score = 1000;
+	boolean playing = false;
 	boolean won = false;
 	boolean soundPlaying = false;
 
-	private Sprite toolSelected = null;
+	private String toolSelected = null;
 
 	private int[][] solution = {{0,0,0,0,0,0},
 							{0,0,1,0,1,0},
@@ -103,6 +103,7 @@ public class MVPGame extends Game{
 			}
 
 		}
+		playing = true;
 	}
 
 	/**
@@ -116,7 +117,7 @@ public class MVPGame extends Game{
 		this.won = match;
 		if(!won) {
 			if (pressedKeys.contains(KeyEvent.VK_SPACE)) {
-				if (toolSelected != null && toolSelected.getId().compareTo("wire") == 0) {
+				if (toolSelected != null && toolSelected.compareTo("wire") == 0) {
 					int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
 					int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
 					wireSegments.get(gridX).get(gridY).setVisible(true);
@@ -262,10 +263,10 @@ public class MVPGame extends Game{
 				if (pressedKeys.contains(KeyEvent.VK_W)) {
 					wire.nextMode();
 					if (!wire.isSwitched()) {
-						if (toolSelected != null && toolSelected.getId().compareTo(wire.getId()) == 0) {
+						if (toolSelected != null && toolSelected.compareTo(wire.getId()) == 0) {
 							toolSelected = null;
 						} else {
-							toolSelected = wire;
+							toolSelected = wire.getId();
 						}
 					}
 					wire.setSwitched(true);
@@ -284,7 +285,7 @@ public class MVPGame extends Game{
 	@Override
 	public void draw(Graphics g){
 		super.draw(g);
-		if(won) {
+		if(won == true && playing) {
 			g.drawString("Congratulations! You won! " , 400,30);
 			bulb.nextModeStatic();
 			if(!this.soundPlaying) {

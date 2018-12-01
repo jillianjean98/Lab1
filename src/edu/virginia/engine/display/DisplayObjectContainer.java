@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * A very basic display object for a java based gaming engine
@@ -87,7 +88,9 @@ public class DisplayObjectContainer extends DisplayObject{
     @Override
     protected void update(ArrayList<Integer> pressedKeys) {
         super.update(pressedKeys);
-        for(DisplayObject child: children) {
+        Iterator<DisplayObject> iterator = this.children.iterator();
+        while (iterator.hasNext()) {
+            DisplayObject child = iterator.next();
             child.update(pressedKeys);
         }
     }
@@ -111,10 +114,12 @@ public class DisplayObjectContainer extends DisplayObject{
             applyTransformations(g2d);
             /* draw each child */
 
-            for (DisplayObject child : children) {
-
-                child.draw(g2d);
-
+            Iterator<DisplayObject> iterator = this.children.iterator();
+            while (iterator.hasNext()) {
+                DisplayObject child = iterator.next();
+                if(child != null) {
+                    child.draw(g2d);
+                }
             }
 
             /*
