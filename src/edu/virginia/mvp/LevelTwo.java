@@ -14,8 +14,7 @@ import java.util.Arrays;
  * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
  * although, for now, it won't be a very fun game :)
  * */
-public class MVPGame extends Game{
-	public boolean gameOver = false;
+public class LevelTwo extends Game{
 	//set background
 	public Sprite workspace = new Sprite("workspace", "objects/grid.jpg");
 
@@ -56,8 +55,8 @@ public class MVPGame extends Game{
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
 	 * */
-	public MVPGame() {
-		super("Lab Five Test Game", 1050, 800);
+	public LevelTwo() {
+		super("Level 2", 1050, 800);
 		workspace.addChild(bulb);
 		workspace.addChild(battery);
 		workspace.addChild(cursor);
@@ -105,6 +104,7 @@ public class MVPGame extends Game{
 
 		}
 		playing = true;
+		sm.LoadSoundEffect("won", "ting.wav");
 	}
 
 	/**
@@ -276,6 +276,13 @@ public class MVPGame extends Game{
 				}
 				toolbox.update(pressedKeys);
 			}
+		} else {
+			if(pressedKeys.contains(KeyEvent.VK_ENTER)) {
+				System.out.println("enter key  pressed");
+				this.closeGame();
+			} else {
+				System.out.println("game over, enter not pressed");
+			}
 		}
 	}
 
@@ -287,12 +294,15 @@ public class MVPGame extends Game{
 	public void draw(Graphics g){
 		super.draw(g);
 		if(won == true && playing) {
-			g.drawString("Congratulations! You won! " , 400,30);
+			g.drawString("Congratulations! You won! " , 400,25);
+			g.drawString("Press \"Enter\" to move on to the next level " , 400,40);
 			bulb.nextModeStatic();
 			if(!this.soundPlaying) {
 				sm.PlaySoundEffect("won");
 				this.soundPlaying=true;
 			}
+			//this.stop();
+			//this.closeGame();
 		}
 		/* Same, just check for null in case a frame gets thrown in before Mario is initialized */
 		if((workspace != null) && workspace.getVisible()) workspace.draw(g);
@@ -303,18 +313,13 @@ public class MVPGame extends Game{
 	/**
 	 * Quick main class that simply creates an instance of our game and starts the timer
 	 * that calls update() and draw() every frame
-	 * */
+	 *
 	public static void main(String[] args) {
-		LevelOne levelOne = new LevelOne();
+		LevelOne game = new LevelOne();
 		//sm.LoadMusic("music", "mario_09.wav");
 		//sm.PlayMusic();
-		levelOne.start();
-		while(!levelOne.levelComplete) {
-			System.out.println("level 1 open");
-		}
-		levelOne.closeGame();
-
-		LevelTwo levelTwo = new LevelTwo();
-		levelTwo.start();
+		sm.LoadSoundEffect("won", "ting.wav");
+		game.start();
 	}
+	 */
 }
