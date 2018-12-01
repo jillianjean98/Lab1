@@ -36,10 +36,22 @@ public class MVPGame extends Game{
 	ArrayList<ArrayList<Sprite>> wireSegments = new ArrayList<>();
 	int score = 1000;
 	boolean won = false;
-	boolean colliding = false;
+	boolean soundPlaying = false;
 
 	private Sprite toolSelected = null;
-	//public static SoundManager sm = new SoundManager();
+
+	private int[][] solution = {{0,0,0,0,0,0},
+							{0,0,1,0,1,0},
+							{0,0,1,0,1,0},
+							{0,0,1,0,1,0},
+							{0,0,1,0,1,0},
+							{0,0,1,0,1,0},
+							{0,0,1,0,1,0},
+							{0,0,0,0,1,0},
+							{0,0,0,0,0,0}};
+
+	private int[][] wirePositions = new int[9][6];
+	public static SoundManager sm = new SoundManager();
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
 	 * */
@@ -85,7 +97,7 @@ public class MVPGame extends Game{
 			for(int j = 0; j<6; j++) {
 				Sprite seg = new Sprite("seg" + i + j, "objects/segment.png");
 				workspace.addChild(seg);
-				seg.setPosition(new Point(150 +(90*i), 90 + 90*j));
+				seg.setPosition(new Point(150 +(89*i), 90 + 90*j));
 				seg.setVisible(false);
 				wireSegments.get(i).add(j, seg);
 			}
@@ -100,27 +112,32 @@ public class MVPGame extends Game{
 	@Override
 	public void update(ArrayList<Integer> pressedKeys){
 		super.update(pressedKeys);
-		if(pressedKeys.contains(KeyEvent.VK_SPACE)){
-			if(toolSelected != null && toolSelected.getId().compareTo("wire") == 0) {
-				int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
-				int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
-				wireSegments.get(gridX).get(gridY).setVisible(true);
-				Point cursorGridPos = new Point(((cursor.getPosition().x - cursor.getParent().getPosition().x) / 90),
-						((cursor.getPosition().y - cursor.getParent().getPosition().y) / 90));
-				System.out.println("space key: cursor at " + cursorGridPos);
+		boolean match = Arrays.deepEquals(wirePositions, solution);
+		this.won = match;
+		if(!won) {
+			if (pressedKeys.contains(KeyEvent.VK_SPACE)) {
+				if (toolSelected != null && toolSelected.getId().compareTo("wire") == 0) {
+					int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
+					int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
+					wireSegments.get(gridX).get(gridY).setVisible(true);
+					Point cursorGridPos = new Point(((cursor.getPosition().x - cursor.getParent().getPosition().x) / 90),
+							((cursor.getPosition().y - cursor.getParent().getPosition().y) / 90));
+					System.out.println("space key: cursor at " + cursorGridPos);
+					wirePositions[gridX][gridY] = 1;
+				}
 			}
-		}
-		if(pressedKeys.contains(KeyEvent.VK_BACK_SPACE) || pressedKeys.contains(KeyEvent.VK_DELETE)){
+			if (pressedKeys.contains(KeyEvent.VK_BACK_SPACE) || pressedKeys.contains(KeyEvent.VK_DELETE)) {
 				int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
 				int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
 				wireSegments.get(gridX).get(gridY).setVisible(false);
 				Point cursorGridPos = new Point(((cursor.getPosition().x - cursor.getParent().getPosition().x) / 90),
 						((cursor.getPosition().y - cursor.getParent().getPosition().y) / 90));
 				System.out.println("deleting wire at " + cursorGridPos);
-		}
-		/* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
-		if(workspace != null && !won) {
-			//sm.PlayMusic();
+				wirePositions[gridX][gridY] = 0;
+			}
+			/* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
+			if (workspace != null && !won) {
+				//sm.PlayMusic();
 
 			/*if(mario.collidesWith(block)) {
 				if(!colliding) {
@@ -214,48 +231,49 @@ public class MVPGame extends Game{
 					(int)(mario.getUnscaledWidth()*mario.getScaleX()), (int)(mario.getUnscaledHeight()*mario.getScaleY())));
 					*/
 
-			if (pressedKeys.contains(KeyEvent.VK_UP)) {
-				if(cursor.inParentYTop()) {
-					cursor.setPosition(new Point(cursor.getPosition().x,
-							cursor.getPosition().y - 5));
-				}
-			}
-			if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
-				if(cursor.inParentYBottom()) {
-					cursor.setPosition(new Point(cursor.getPosition().x,
-							cursor.getPosition().y + 5));
-				}
-			}
-			if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
-				if(cursor.inParentXLeft()) {
-					cursor.setPosition(new Point(cursor.getPosition().x - 5,
-							cursor.getPosition().y));
-				}
-			}
-			if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
-				if(cursor.inParentXRight()) {
-					cursor.setPosition(new Point(cursor.getPosition().x + 5,
-							cursor.getPosition().y));
-				}
-			}
-			workspace.update(pressedKeys);
-		}
-
-		if(toolbox != null && !won) {
-			if (pressedKeys.contains(KeyEvent.VK_W)) {
-				wire.nextMode();
-				if(!wire.isSwitched()) {
-					if(toolSelected != null && toolSelected.getId().compareTo(wire.getId()) == 0) {
-						toolSelected = null;
-					} else {
-						toolSelected = wire;
+				if (pressedKeys.contains(KeyEvent.VK_UP)) {
+					if (cursor.inParentYTop()) {
+						cursor.setPosition(new Point(cursor.getPosition().x,
+								cursor.getPosition().y - 5));
 					}
 				}
-				wire.setSwitched(true);
-			} else {
-				wire.setSwitched(false);
+				if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
+					if (cursor.inParentYBottom()) {
+						cursor.setPosition(new Point(cursor.getPosition().x,
+								cursor.getPosition().y + 5));
+					}
+				}
+				if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
+					if (cursor.inParentXLeft()) {
+						cursor.setPosition(new Point(cursor.getPosition().x - 5,
+								cursor.getPosition().y));
+					}
+				}
+				if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
+					if (cursor.inParentXRight()) {
+						cursor.setPosition(new Point(cursor.getPosition().x + 5,
+								cursor.getPosition().y));
+					}
+				}
+				workspace.update(pressedKeys);
 			}
-			toolbox.update(pressedKeys);
+
+			if (toolbox != null) {
+				if (pressedKeys.contains(KeyEvent.VK_W)) {
+					wire.nextMode();
+					if (!wire.isSwitched()) {
+						if (toolSelected != null && toolSelected.getId().compareTo(wire.getId()) == 0) {
+							toolSelected = null;
+						} else {
+							toolSelected = wire;
+						}
+					}
+					wire.setSwitched(true);
+				} else {
+					wire.setSwitched(false);
+				}
+				toolbox.update(pressedKeys);
+			}
 		}
 	}
 
@@ -266,9 +284,13 @@ public class MVPGame extends Game{
 	@Override
 	public void draw(Graphics g){
 		super.draw(g);
-		g.drawString("score: " + score, 500,20);
 		if(won) {
-			g.drawString("Congratulations! You won! " , 400,40);
+			g.drawString("Congratulations! You won! " , 400,30);
+			bulb.nextModeStatic();
+			if(!this.soundPlaying) {
+				sm.PlaySoundEffect("won");
+				this.soundPlaying=true;
+			}
 		}
 		/* Same, just check for null in case a frame gets thrown in before Mario is initialized */
 		if((workspace != null) && workspace.getVisible()) workspace.draw(g);
@@ -284,7 +306,7 @@ public class MVPGame extends Game{
 		MVPGame game = new MVPGame();
 		//sm.LoadMusic("music", "mario_09.wav");
 		//sm.PlayMusic();
-		//sm.LoadSoundEffect("test", "Mario_Jumping-Mike_Koenig-989896458.wav");
+		sm.LoadSoundEffect("won", "ting.wav");
 		game.start();
 	}
 }

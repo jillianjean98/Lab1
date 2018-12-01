@@ -18,7 +18,7 @@ public class MultiModeSprite extends Sprite{
     private int currentMode = 0;
     private int numModes = 0;
     private boolean switched;
-
+    private boolean fixedMode = false;
     private BufferedImage displayImage;
 
     private GameClock gameClock;
@@ -87,6 +87,16 @@ public class MultiModeSprite extends Sprite{
             this.currentMode = (this.currentMode + 1) % this.numModes;
             this.displayImage = this.images.get(currentMode);
             super.setImage(displayImage);
+        }
+
+    }
+
+    public void nextModeStatic() {
+        if(!this.fixedMode) {
+            this.currentMode = (this.currentMode + 1) % this.numModes;
+            this.displayImage = this.images.get(currentMode);
+            super.setImage(displayImage);
+            this.fixedMode=true;
         }
 
     }
