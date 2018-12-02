@@ -17,7 +17,7 @@ public class AnimatedSprite extends Sprite{
     private int currentFrame = 0;
     private int startFrame;
     private int endFrame;
-    private static final int DEFAULT_ANIMATION_SPEED = 500;
+    private static final int DEFAULT_ANIMATION_SPEED = 50;
     private int animationSpeed;
 
     private BufferedImage displayImage;
@@ -89,16 +89,18 @@ public class AnimatedSprite extends Sprite{
             }
             //add the image even if it is null, in order to keep numbering accurate
             frames.add(img);
-            String animationID[] = imageName.split("/|_");
-            Animation a = getAnimation(animationID[1]);
+            System.out.println(imageName);
+            String animationID[] = imageName.split("_");
+            Animation a = getAnimation(animationID[0]);
             if(a != null) {
                 a.setEndFrame(a.getEndFrame()+1);
             }else {
-                animations.add(new Animation(animationID[1], frameCounter, frameCounter));
+                animations.add(new Animation(animationID[0], frameCounter, frameCounter));
             }
             frameCounter++;
         }
         this.currentFrame = 0;
+        System.out.println("number of animations: " + animations.get(1).getEndFrame());
     }
 
 

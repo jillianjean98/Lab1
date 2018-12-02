@@ -310,11 +310,11 @@ public class MVPGame extends Game{
 		//sm.PlayMusic();
 		levelOne.start();
 		while(!levelOne.levelComplete) {
-			System.out.println("level 1 open");
 		}
 		levelOne.closeGame();
-
+/*
 		LevelTwo levelTwo = new LevelTwo();
 		levelTwo.start();
+		*/
 	}
 }
