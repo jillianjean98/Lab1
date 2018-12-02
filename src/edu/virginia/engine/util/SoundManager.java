@@ -15,7 +15,6 @@ public class SoundManager {
         Clip clip;
         //filename->clip
         //then put id and clip into hashmap
-
        try {
             File f = new File("resources" + File.separator + filename);
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(f);
@@ -36,7 +35,6 @@ public class SoundManager {
         //retrieve sound frm the hashmap
         Clip curr = soundEffectMap.get(id);
         curr.setFramePosition(0);
-       // System.out.println("play");
         curr.start();
     }
 

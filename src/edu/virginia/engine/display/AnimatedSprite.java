@@ -89,7 +89,6 @@ public class AnimatedSprite extends Sprite{
             }
             //add the image even if it is null, in order to keep numbering accurate
             frames.add(img);
-            System.out.println(imageName);
             String animationID[] = imageName.split("_");
             Animation a = getAnimation(animationID[0]);
             if(a != null) {
@@ -100,7 +99,6 @@ public class AnimatedSprite extends Sprite{
             frameCounter++;
         }
         this.currentFrame = 0;
-        System.out.println("number of animations: " + animations.get(1).getEndFrame());
     }
 
 

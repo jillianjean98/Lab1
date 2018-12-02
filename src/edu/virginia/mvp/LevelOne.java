@@ -48,7 +48,6 @@ public class LevelOne extends Game{
 	boolean playing = false;
 	boolean started = true;
 	boolean won = false;
-	boolean soundPlaying = false;
 
 	private String toolSelected = null;
 
@@ -91,7 +90,7 @@ public class LevelOne extends Game{
 		wire.setPosition(new Point(590, 626));
 		wire.setScaleX(0.3);
 		wire.setScaleY(0.3);
-		
+
 		phil.addChild(speech1);
 		phil.addChild(speech2);
 		phil.setPosition(new Point(20, 440));
@@ -128,7 +127,7 @@ public class LevelOne extends Game{
 	public void update(ArrayList<Integer> pressedKeys){
 		super.update(pressedKeys);
 		boolean match = Arrays.deepEquals(wirePositions, solution);
-		this.won = match;
+		if(match) won = true;
 		if(pressedKeys.contains(KeyEvent.VK_B)){
 			won = true;
 		}
@@ -195,7 +194,7 @@ public class LevelOne extends Game{
 		}
 		if(!playing){
 			if(pressedKeys.contains(KeyEvent.VK_ENTER)) {
-				System.out.println("enter detected");
+				System.out.println("moving to next level");
 				LevelTwo levelTwo  = new LevelTwo();
 				levelTwo.start();
 				this.closeGame();
@@ -223,12 +222,9 @@ public class LevelOne extends Game{
 				phil.animate("jump");
 				speech1.setVisible(false);
 				speech2.setVisible(true);
+				sm.PlaySoundEffect("won");
 			}
 			bulb.nextModeStatic();
-			if(!this.soundPlaying) {
-				sm.PlaySoundEffect("won");
-				this.soundPlaying=true;
-			}
 			playing = false;
 		}
 		/* Same, just check for null in case a frame gets thrown in before Mario is initialized */
@@ -238,17 +234,4 @@ public class LevelOne extends Game{
 		if((title != null) && title.getVisible()) title.draw(g);
 
 	}
-
-	/**
-	 * Quick main class that simply creates an instance of our game and starts the timer
-	 * that calls update() and draw() every frame
-	 *
-	public static void main(String[] args) {
-		LevelOne game = new LevelOne();
-		//sm.LoadMusic("music", "mario_09.wav");
-		//sm.PlayMusic();
-		sm.LoadSoundEffect("won", "ting.wav");
-		game.start();
-	}
-	 */
 }
