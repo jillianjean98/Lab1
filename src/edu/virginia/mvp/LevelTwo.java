@@ -107,6 +107,7 @@ public class LevelTwo extends Game{
 		log.setPosition(new Point(250, 660));
 		log.setScaleX(0.2);
 		log.setScaleY(0.2);
+		System.out.println(log.isSwitched());
 		nail.setPosition(new Point(440, 660));
 		nail.setScaleX(0.2);
 		nail.setScaleY(0.2);
@@ -160,15 +161,15 @@ public class LevelTwo extends Game{
 	 * the set of keys (as strings) that are currently being pressed down
 	 * */
 	@Override
-	public void update(ArrayList<Integer> pressedKeys){
+	public void update(ArrayList<Integer> pressedKeys) {
 		super.update(pressedKeys);
 		boolean match = Arrays.deepEquals(wirePositions, solution);
 		//this.won = match;
 		this.won = false;
-		if(pressedKeys.contains(KeyEvent.VK_B)){
+		if (pressedKeys.contains(KeyEvent.VK_B)) {
 			won = true;
 		}
-		if(!won && playing) {
+		if (!won && playing) {
 			if (pressedKeys.contains(KeyEvent.VK_SPACE)) {
 				if (toolSelected != null && toolSelected.compareTo("wire") == 0) {
 					int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
@@ -212,12 +213,22 @@ public class LevelTwo extends Game{
 			}
 
 			if (toolbox != null) {
-				if (pressedKeys.contains(KeyEvent.VK_W)) {
+
+				if (pressedKeys.contains(KeyEvent.VK_L)) {
 					log.nextMode();
 					if (!log.isSwitched()) {
 						if (toolSelected != null && toolSelected.compareTo(log.getId()) == 0) {
 							toolSelected = null;
 						} else {
+							if (toolSelected != null && toolSelected.compareTo(pan.getId()) == 0) {
+								pan.nextMode();
+							}
+							if (toolSelected != null && toolSelected.compareTo(nail.getId()) == 0) {
+								nail.nextMode();
+							}
+							if (toolSelected != null && toolSelected.compareTo(shoe.getId()) == 0) {
+								shoe.nextMode();
+							}
 							toolSelected = log.getId();
 						}
 					}
@@ -225,24 +236,96 @@ public class LevelTwo extends Game{
 				} else {
 					log.setSwitched(false);
 				}
+
+
+				if (pressedKeys.contains(KeyEvent.VK_P)) {
+					pan.nextMode();
+					if (!pan.isSwitched()) {
+						if (toolSelected != null && toolSelected.compareTo(pan.getId()) == 0) {
+							toolSelected = null;
+						} else {
+							if (toolSelected != null && toolSelected.compareTo(log.getId()) == 0) {
+								log.nextMode();
+							}
+							if (toolSelected != null && toolSelected.compareTo(nail.getId()) == 0) {
+								nail.nextMode();
+							}
+							if (toolSelected != null && toolSelected.compareTo(shoe.getId()) == 0) {
+								shoe.nextMode();
+							}
+							toolSelected = pan.getId();
+						}
+					}
+					pan.setSwitched(true);
+				} else {
+					pan.setSwitched(false);
+				}
+
+				if (pressedKeys.contains(KeyEvent.VK_N)) {
+					nail.nextMode();
+					if (!nail.isSwitched()) {
+						if (toolSelected != null && toolSelected.compareTo(nail.getId()) == 0) {
+							toolSelected = null;
+						} else {
+							if (toolSelected != null && toolSelected.compareTo(log.getId()) == 0) {
+								log.nextMode();
+							}
+							if (toolSelected != null && toolSelected.compareTo(pan.getId()) == 0) {
+								pan.nextMode();
+							}
+							if (toolSelected != null && toolSelected.compareTo(shoe.getId()) == 0) {
+								shoe.nextMode();
+							}
+							toolSelected = nail.getId();
+						}
+					}
+					nail.setSwitched(true);
+				} else {
+					nail.setSwitched(false);
+				}
+
+				if (pressedKeys.contains(KeyEvent.VK_S)) {
+					shoe.nextMode();
+					if (!shoe.isSwitched()) {
+						if (toolSelected != null && toolSelected.compareTo(shoe.getId()) == 0) {
+							toolSelected = null;
+						} else {
+							if (toolSelected != null && toolSelected.compareTo(log.getId()) == 0) {
+								log.nextMode();
+							}
+							if (toolSelected != null && toolSelected.compareTo(nail.getId()) == 0) {
+								nail.nextMode();
+							}
+							if (toolSelected != null && toolSelected.compareTo(pan.getId()) == 0) {
+								pan.nextMode();
+							}
+							toolSelected = shoe.getId();
+						}
+					}
+					shoe.setSwitched(true);
+				} else {
+					shoe.setSwitched(false);
+				}
+
 				toolbox.update(pressedKeys);
 			}
 
-		}
-		if(!playing){
-			if(pressedKeys.contains(KeyEvent.VK_ENTER)) {
-				System.out.println("moving to next level");
-				//LevelTwo levelTwo  = new LevelTwo();
-				//levelTwo.start();
-				this.closeGame();
-				//end the game
-				return;
+			}
+			if (!playing) {
+				if (pressedKeys.contains(KeyEvent.VK_ENTER)) {
+					System.out.println("moving to next level");
+					//LevelTwo levelTwo  = new LevelTwo();
+					//levelTwo.start();
+					this.closeGame();
+					//end the game
+					return;
+				}
+			}
+			if (phil != null) {
+				phil.update(pressedKeys);
 			}
 		}
-		if(phil != null) {
-			phil.update(pressedKeys);
-		}
-	}
+
 
 	/**
 	 * Engine automatically invokes draw() every frame as well. If we want to make sure mario gets drawn to
@@ -251,7 +334,7 @@ public class LevelTwo extends Game{
 	@Override
 	public void draw(Graphics g){
 		super.draw(g);
-		if(won == true && started) {
+		if(won == true && started){
 			g.drawString("Press \"Enter\" to move" , 20,80);
 			g.drawString("on to the next level" , 20,100);
 
