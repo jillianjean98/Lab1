@@ -140,7 +140,6 @@ public class LevelTwo extends Game{
 				seg.setVisible(false);
 				wireSegments.get(i).add(j, seg);
 			}
-
 		}
 
 		for(int i = 0; i < solution.length; i++){
@@ -150,6 +149,36 @@ public class LevelTwo extends Game{
 				}
 			}
 		}
+
+		//put four items in place, but invisible
+		Sprite panG = new Sprite("pan", "objects/pan.png");
+		Sprite logG = new Sprite("log", "objects/log.png");
+		Sprite nailG = new Sprite("nail", "objects/nail.png");
+		Sprite shoeG = new Sprite("shoe", "objects/shoe.png");
+		workspace.addChild(panG);
+		workspace.addChild(logG);
+		workspace.addChild(shoeG);
+		workspace.addChild(nailG);
+		panG.setPosition(new Point(220 + (89 * 4), 70 + 90 * 2));
+		logG.setPosition(new Point(220 + (89 * 4), 70 + 90 * 2));
+		shoeG.setPosition(new Point(220 + (89 * 4), 70 + 90 * 2));
+		nailG.setPosition(new Point(220 + (89 * 4), 70 + 90 * 2));
+
+		logG.setScaleX(0.1);
+		logG.setScaleY(0.1);
+		logG.setVisible(false);
+
+		panG.setScaleX(0.1);
+		panG.setScaleY(0.1);
+		panG.setVisible(false);
+
+		shoeG.setScaleX(0.1);
+		shoeG.setScaleY(0.1);
+		shoeG.setVisible(false);
+
+		nailG.setScaleX(0.1);
+		nailG.setScaleY(0.1);
+		nailG.setVisible(false);
 
 		wireSegments.get(4).get(2).setVisible(false);
 		playing = true;
