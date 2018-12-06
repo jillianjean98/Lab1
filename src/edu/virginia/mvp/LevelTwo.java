@@ -141,6 +141,16 @@ public class LevelTwo extends Game{
 			}
 
 		}
+
+		for(int i = 0; i < solution.length; i++){
+			for(int j = 0; j < solution[0].length; j++){
+				if(solution[i][j] == 1){
+					wireSegments.get(i).get(j).setVisible(true);
+				}
+			}
+		}
+
+		wireSegments.get(4).get(2).setVisible(false);
 		playing = true;
 		sm.LoadSoundEffect("won", "ting.wav");
 	}
@@ -153,7 +163,8 @@ public class LevelTwo extends Game{
 	public void update(ArrayList<Integer> pressedKeys){
 		super.update(pressedKeys);
 		boolean match = Arrays.deepEquals(wirePositions, solution);
-		this.won = match;
+		//this.won = match;
+		this.won = false;
 		if(pressedKeys.contains(KeyEvent.VK_B)){
 			won = true;
 		}
