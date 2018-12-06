@@ -30,10 +30,23 @@ public class LevelTwo extends Game{
 
 	//setup toolbag
 	Sprite toolbox = new Sprite("toolbox", "objects/toolbox.png");
-	//wire in toolbox
-	private String[] wireFiles = {"objects/wire.png", "objects/wire_select.png"};
-	private ArrayList<String> wirefilenames = new ArrayList<>(Arrays.asList(wireFiles));
-	MultiModeSprite wire = new MultiModeSprite("wire", wirefilenames );
+	//adding lvl 2 objs to toolbox
+	private String[] nailFiles = {"objects/nail.png", "objects/nail_select.png"};
+	private ArrayList<String> nailfilenames = new ArrayList<>(Arrays.asList(nailFiles));
+	MultiModeSprite nail = new MultiModeSprite("nail", nailfilenames );
+
+	private String[] logFiles = {"objects/log.png", "objects/log_select.png"};
+	private ArrayList<String> logfilenames = new ArrayList<>(Arrays.asList(logFiles));
+	MultiModeSprite log = new MultiModeSprite("log", logfilenames );
+
+	private String[] panFiles = {"objects/pan.png", "objects/pan_select.png"};
+	private ArrayList<String> panfilenames = new ArrayList<>(Arrays.asList(panFiles));
+	MultiModeSprite pan = new MultiModeSprite("pan", panfilenames );
+
+	private String[] shoeFiles = {"objects/shoe.png", "objects/shoe_select.png"};
+	private ArrayList<String> shoefilenames = new ArrayList<>(Arrays.asList(shoeFiles));
+	MultiModeSprite shoe = new MultiModeSprite("shoe", shoefilenames );
+
 	ArrayList<ArrayList<Sprite>> wireSegments = new ArrayList<>();
 
 	//setup character
@@ -84,13 +97,19 @@ public class LevelTwo extends Game{
 		cursor.setScaleX(0.8);
 		cursor.setScaleY(0.8);
 
-		toolbox.addChild(wire);
+		toolbox.addChild(log);
+		//toolbox.addChild(nail);
+		//toolbox.addChild(pan);
+		//toolbox.addChild(shoe);
 		toolbox.setPosition(new Point(350, 575));
 		toolbox.setScaleX(1.3);
 		toolbox.setScaleY(0.55);
-		wire.setPosition(new Point(590, 626));
-		wire.setScaleX(0.3);
-		wire.setScaleY(0.3);
+		log.setPosition(new Point(450, 675));
+		log.setScaleX(0.1);
+		log.setScaleY(0.1);
+		//nail.setPosition(new Point(590, 626));
+		//nail.setScaleX(0.3);
+		//nail.setScaleY(0.3);
 
 		phil.addChild(speech1);
 		phil.addChild(speech2);
@@ -177,17 +196,17 @@ public class LevelTwo extends Game{
 
 			if (toolbox != null) {
 				if (pressedKeys.contains(KeyEvent.VK_W)) {
-					wire.nextMode();
-					if (!wire.isSwitched()) {
-						if (toolSelected != null && toolSelected.compareTo(wire.getId()) == 0) {
+					log.nextMode();
+					if (!log.isSwitched()) {
+						if (toolSelected != null && toolSelected.compareTo(log.getId()) == 0) {
 							toolSelected = null;
 						} else {
-							toolSelected = wire.getId();
+							toolSelected = log.getId();
 						}
 					}
-					wire.setSwitched(true);
+					log.setSwitched(true);
 				} else {
-					wire.setSwitched(false);
+					log.setSwitched(false);
 				}
 				toolbox.update(pressedKeys);
 			}

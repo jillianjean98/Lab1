@@ -23,10 +23,15 @@ public class MVPGame{
 	 * that calls update() and draw() every frame
 	 * */
 	public static void main(String[] args) {
+		//for testing lvl 2
+		LevelTwo levelTwo = new LevelTwo();
+		levelTwo.start();
+		/*
 		LevelOne levelOne = new LevelOne();
 		//uncomment to play music
 		//sm.LoadMusic("music", "mario_09.wav");
 		//sm.PlayMusic();
 		levelOne.start();
+		*/
 	}
 }
