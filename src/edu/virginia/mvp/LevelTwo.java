@@ -31,19 +31,19 @@ public class LevelTwo extends Game{
 	//setup toolbag
 	Sprite toolbox = new Sprite("toolbox", "objects/toolbox.png");
 	//adding lvl 2 objs to toolbox
-	private String[] nailFiles = {"objects/nail.png", "objects/nail_select.png"};
+	private String[] nailFiles = {"objects/nail_label.png", "objects/nail_label_select.png"};
 	private ArrayList<String> nailfilenames = new ArrayList<>(Arrays.asList(nailFiles));
 	MultiModeSprite nail = new MultiModeSprite("nail", nailfilenames );
 
-	private String[] logFiles = {"objects/log.png", "objects/log_select.png"};
+	private String[] logFiles = {"objects/log_label.png", "objects/log_label_select.png"};
 	private ArrayList<String> logfilenames = new ArrayList<>(Arrays.asList(logFiles));
 	MultiModeSprite log = new MultiModeSprite("log", logfilenames );
 
-	private String[] panFiles = {"objects/pan.png", "objects/pan_select.png"};
+	private String[] panFiles = {"objects/pan_label.png", "objects/pan_label_select.png"};
 	private ArrayList<String> panfilenames = new ArrayList<>(Arrays.asList(panFiles));
 	MultiModeSprite pan = new MultiModeSprite("pan", panfilenames );
 
-	private String[] shoeFiles = {"objects/shoe.png", "objects/shoe_select.png"};
+	private String[] shoeFiles = {"objects/shoe_label.png", "objects/shoe_label_select.png"};
 	private ArrayList<String> shoefilenames = new ArrayList<>(Arrays.asList(shoeFiles));
 	MultiModeSprite shoe = new MultiModeSprite("shoe", shoefilenames );
 
@@ -98,18 +98,24 @@ public class LevelTwo extends Game{
 		cursor.setScaleY(0.8);
 
 		toolbox.addChild(log);
-		//toolbox.addChild(nail);
-		//toolbox.addChild(pan);
-		//toolbox.addChild(shoe);
-		toolbox.setPosition(new Point(350, 575));
-		toolbox.setScaleX(1.3);
+		toolbox.addChild(nail);
+		toolbox.addChild(pan);
+		toolbox.addChild(shoe);
+		toolbox.setPosition(new Point(140, 575));
+		toolbox.setScaleX(1.95);
 		toolbox.setScaleY(0.55);
-		log.setPosition(new Point(450, 675));
-		log.setScaleX(0.1);
-		log.setScaleY(0.1);
-		//nail.setPosition(new Point(590, 626));
-		//nail.setScaleX(0.3);
-		//nail.setScaleY(0.3);
+		log.setPosition(new Point(250, 660));
+		log.setScaleX(0.2);
+		log.setScaleY(0.2);
+		nail.setPosition(new Point(440, 660));
+		nail.setScaleX(0.2);
+		nail.setScaleY(0.2);
+		shoe.setPosition(new Point(627, 660));
+		shoe.setScaleX(0.2);
+		shoe.setScaleY(0.2);
+		pan.setPosition(new Point(820, 660));
+		pan.setScaleX(0.2);
+		pan.setScaleY(0.2);
 
 		phil.addChild(speech1);
 		phil.addChild(speech2);
