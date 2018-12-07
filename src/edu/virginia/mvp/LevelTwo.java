@@ -238,8 +238,11 @@ public class LevelTwo extends Game{
 	public void update(ArrayList<Integer> pressedKeys) {
 		super.update(pressedKeys);
 		boolean match = Arrays.deepEquals(wirePositions, solution);
+		if(panPositions[4][2] == 1 || nailPositions[4][2] == 1){
+			this.won = true;
+		}
 		//this.won = match;
-		this.won = false;
+		//this.won = false;
 		if (pressedKeys.contains(KeyEvent.VK_B)) {
 			won = true;
 		}
@@ -258,7 +261,7 @@ public class LevelTwo extends Game{
 					}
 					try
 					{
-						Thread.sleep(150);
+						Thread.sleep(100);
 					}
 					catch(InterruptedException ex)
 					{
@@ -279,7 +282,7 @@ public class LevelTwo extends Game{
 					}
 					try
 					{
-						Thread.sleep(150);
+						Thread.sleep(100);
 					}
 					catch(InterruptedException ex)
 					{
@@ -300,7 +303,7 @@ public class LevelTwo extends Game{
 					}
 					try
 					{
-						Thread.sleep(150);
+						Thread.sleep(100);
 					}
 					catch(InterruptedException ex)
 					{
@@ -321,7 +324,7 @@ public class LevelTwo extends Game{
 					}
 					try
 					{
-						Thread.sleep(150);
+						Thread.sleep(100);
 					}
 					catch(InterruptedException ex)
 					{
