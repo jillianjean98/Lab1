@@ -80,6 +80,10 @@ public class LevelTwo extends Game{
 							{0,0,0,0,0,0}};
 
 	private int[][] wirePositions = new int[9][6];
+	private int[][] logPositions = new int[9][6];
+	private int[][] nailPositions = new int[9][6];
+	private int[][] panPositions = new int[9][6];
+	private int[][] shoePositions = new int[9][6];
 	public static SoundManager sm = new SoundManager();
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
@@ -212,13 +216,13 @@ public class LevelTwo extends Game{
 		for(int i = 0; i<9; i++){
 			pans.add(i, new ArrayList<Sprite>());
 			for(int j = 0; j<6; j++) {
-				Sprite panG = new Sprite("panG" + i + j, "objects/segment.png");
+				Sprite panG = new Sprite("panG" + i + j, "objects/pan.png");
 				workspace.addChild(panG);
 				panG.setScaleX(0.1);
 				panG.setScaleY(0.1);
 				panG.setPosition(new Point(220 +(89*i), 70 + 90*j));
 				panG.setVisible(false);
-				wireSegments.get(i).add(j, panG);
+				pans.get(i).add(j, panG);
 			}
 		}
 
@@ -241,12 +245,90 @@ public class LevelTwo extends Game{
 		}
 		if (!won && playing) {
 			if (pressedKeys.contains(KeyEvent.VK_SPACE)) {
-				if (toolSelected != null && toolSelected.compareTo("wire") == 0) {
+				if (toolSelected != null && toolSelected.compareTo("log") == 0) {
 					int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
 					int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
-					wireSegments.get(gridX).get(gridY).setVisible(true);
-					wirePositions[gridX][gridY] = 1;
+					if(!logs.get(gridX).get(gridY).getVisible()) {
+						logs.get(gridX).get(gridY).setVisible(true);
+						logPositions[gridX][gridY] = 1;
+					}
+					else{
+						logs.get(gridX).get(gridY).setVisible(false);
+						logPositions[gridX][gridY] = 0;
+					}
+					try
+					{
+						Thread.sleep(150);
+					}
+					catch(InterruptedException ex)
+					{
+						Thread.currentThread().interrupt();
+					}
 				}
+
+				if (toolSelected != null && toolSelected.compareTo("shoe") == 0) {
+					int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
+					int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
+					if(!shoes.get(gridX).get(gridY).getVisible()) {
+						shoes.get(gridX).get(gridY).setVisible(true);
+						shoePositions[gridX][gridY] = 1;
+					}
+					else{
+						shoes.get(gridX).get(gridY).setVisible(false);
+						shoePositions[gridX][gridY] = 0;
+					}
+					try
+					{
+						Thread.sleep(150);
+					}
+					catch(InterruptedException ex)
+					{
+						Thread.currentThread().interrupt();
+					}
+				}
+
+				if (toolSelected != null && toolSelected.compareTo("nail") == 0) {
+					int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
+					int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
+					if(!nails.get(gridX).get(gridY).getVisible()) {
+						nails.get(gridX).get(gridY).setVisible(true);
+						nailPositions[gridX][gridY] = 1;
+					}
+					else{
+						nails.get(gridX).get(gridY).setVisible(false);
+						nailPositions[gridX][gridY] = 0;
+					}
+					try
+					{
+						Thread.sleep(150);
+					}
+					catch(InterruptedException ex)
+					{
+						Thread.currentThread().interrupt();
+					}
+				}
+
+				if (toolSelected != null && toolSelected.compareTo("pan") == 0) {
+					int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
+					int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
+					if(!pans.get(gridX).get(gridY).getVisible()) {
+						pans.get(gridX).get(gridY).setVisible(true);
+						panPositions[gridX][gridY] = 1;
+					}
+					else{
+						pans.get(gridX).get(gridY).setVisible(false);
+						panPositions[gridX][gridY] = 0;
+					}
+					try
+					{
+						Thread.sleep(150);
+					}
+					catch(InterruptedException ex)
+					{
+						Thread.currentThread().interrupt();
+					}
+				}
+
 			}
 			if (pressedKeys.contains(KeyEvent.VK_BACK_SPACE) || pressedKeys.contains(KeyEvent.VK_DELETE)) {
 				int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
