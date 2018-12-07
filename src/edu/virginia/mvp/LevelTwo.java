@@ -48,6 +48,10 @@ public class LevelTwo extends Game{
 	MultiModeSprite shoe = new MultiModeSprite("shoe", shoefilenames );
 
 	ArrayList<ArrayList<Sprite>> wireSegments = new ArrayList<>();
+	ArrayList<ArrayList<Sprite>> pans = new ArrayList<>();
+	ArrayList<ArrayList<Sprite>> shoes = new ArrayList<>();
+	ArrayList<ArrayList<Sprite>> nails = new ArrayList<>();
+	ArrayList<ArrayList<Sprite>> logs = new ArrayList<>();
 
 	//setup character
 	private String[] phil_files = {"jump_character2/Charac_F-F1-Jump_0.png", "jump_character2/Charac_F-F1-Jump_1.png", "jump_character2/Charac_F-F1-Jump_2.png", "jump_character2/Charac_F-F1-Jump_3.png", "jump_character2/Charac_F-F1-Jump_4.png", "jump_character2/Charac_F-F1-Jump_5.png", "jump_character2/Charac_F-F1-Jump_6.png", "jump_character2/Charac_F-F1-Jump_7.png", "jump_character2/Charac_F-F1-Jump_8.png", "jump_character2/Charac_F-F1-Jump_9.png", "jump_character2/Charac_F-F1-Jump_10.png", "jump_character2/Charac_F-F1-Jump_11.png", "jump_character2/Charac_F-F1-Jump_12.png", "jump_character2/Charac_F-F1-Jump_13.png", "jump_character2/Charac_F-F1-Jump_14.png", "jump_character2/Charac_F-F1-Jump_15.png", "jump_character2/Charac_F-F1-Jump_16.png", "jump_character2/Charac_F-F1-Jump_17.png", "jump_character2/Charac_F-F1-Jump_18.png", "jump_character2/Charac_F-F1-Jump_19.png", "jump_character2/Charac_F-F1-Jump_20.png", "jump_character2/Charac_F-F1-Jump_21.png", "jump_character2/Charac_F-F1-Jump_22.png", "jump_character2/Charac_F-F1-Jump_23.png", "jump_character2/Charac_F-F1-Jump_24.png", "jump_character2/Charac_F-F1-Jump_25.png", "jump_character2/Charac_F-F1-Jump_26.png", "jump_character2/Charac_F-F1-Jump_27.png", "jump_character2/Charac_F-F1-Jump_28.png", "jump_character2/Charac_F-F1-Jump_29.png",  "jump_character2/Charac_F-F1-Jump_30.png", "idle_character2/Charac_F-F1-idle_0.png", "idle_character2/Charac_F-F1-idle_1.png", "idle_character2/Charac_F-F1-idle_2.png", "idle_character2/Charac_F-F1-idle_3.png", "idle_character2/Charac_F-F1-idle_4.png", "idle_character2/Charac_F-F1-idle_5.png", "idle_character2/Charac_F-F1-idle_6.png", "idle_character2/Charac_F-F1-idle_7.png", "idle_character2/Charac_F-F1-idle_8.png", "idle_character2/Charac_F-F1-idle_9.png", "idle_character2/Charac_F-F1-idle_10.png", "idle_character2/Charac_F-F1-idle_11.png", "idle_character2/Charac_F-F1-idle_12.png", "idle_character2/Charac_F-F1-idle_13.png", "idle_character2/Charac_F-F1-idle_14.png", "idle_character2/Charac_F-F1-idle_15.png", "idle_character2/Charac_F-F1-idle_16.png", "idle_character2/Charac_F-F1-idle_17.png", "idle_character2/Charac_F-F1-idle_18.png", "idle_character2/Charac_F-F1-idle_19.png",  "idle_character2/Charac_F-F1-idle_20.png", "idle_character2/Charac_F-F1-idle_21.png", "idle_character2/Charac_F-F1-idle_22.png", "idle_character2/Charac_F-F1-idle_23.png", "idle_character2/Charac_F-F1-idle_24.png", "idle_character2/Charac_F-F1-idle_25.png", "idle_character2/Charac_F-F1-idle_26.png", "idle_character2/Charac_F-F1-idle_27.png", "idle_character2/Charac_F-F1-idle_28.png", "idle_character2/Charac_F-F1-idle_29.png",  "idle_character2/Charac_F-F1-idle_30.png"};
@@ -142,6 +146,7 @@ public class LevelTwo extends Game{
 			}
 		}
 
+		//level setup wire
 		for(int i = 0; i < solution.length; i++){
 			for(int j = 0; j < solution[0].length; j++){
 				if(solution[i][j] == 1){
@@ -150,37 +155,73 @@ public class LevelTwo extends Game{
 			}
 		}
 
-		//put four items in place, but invisible
-		Sprite panG = new Sprite("pan", "objects/pan.png");
-		Sprite logG = new Sprite("log", "objects/log.png");
-		Sprite nailG = new Sprite("nail", "objects/nail.png");
-		Sprite shoeG = new Sprite("shoe", "objects/shoe.png");
-		workspace.addChild(panG);
-		workspace.addChild(logG);
-		workspace.addChild(shoeG);
-		workspace.addChild(nailG);
-		panG.setPosition(new Point(220 + (89 * 4), 70 + 90 * 2));
-		logG.setPosition(new Point(220 + (89 * 4), 70 + 90 * 2));
-		shoeG.setPosition(new Point(220 + (89 * 4), 70 + 90 * 2));
-		nailG.setPosition(new Point(220 + (89 * 4), 70 + 90 * 2));
-
-		logG.setScaleX(0.1);
-		logG.setScaleY(0.1);
-		logG.setVisible(false);
-
-		panG.setScaleX(0.1);
-		panG.setScaleY(0.1);
-		panG.setVisible(false);
-
-		shoeG.setScaleX(0.1);
-		shoeG.setScaleY(0.1);
-		shoeG.setVisible(false);
-
-		nailG.setScaleX(0.1);
-		nailG.setScaleY(0.1);
-		nailG.setVisible(false);
-
 		wireSegments.get(4).get(2).setVisible(false);
+
+		for(int i = 0; i<9; i++){
+			pans.add(i, new ArrayList<Sprite>());
+			for(int j = 0; j<6; j++) {
+				Sprite panG = new Sprite("panG" + i + j, "objects/pan.png");
+				workspace.addChild(panG);
+				panG.setScaleX(0.1);
+				panG.setScaleY(0.1);
+				panG.setPosition(new Point(220 +(89*i), 70 + 90*j));
+				panG.setVisible(false);
+				pans.get(i).add(j, panG);
+			}
+		}
+
+		for(int i = 0; i<9; i++){
+			shoes.add(i, new ArrayList<Sprite>());
+			for(int j = 0; j<6; j++) {
+				Sprite shoeG = new Sprite("shoeG" + i + j, "objects/shoe.png");
+				workspace.addChild(shoeG);
+				shoeG.setScaleX(0.1);
+				shoeG.setScaleY(0.1);
+				shoeG.setPosition(new Point(220 +(89*i), 70 + 90*j));
+				shoeG.setVisible(false);
+				shoes.get(i).add(j, shoeG);
+			}
+		}
+
+		for(int i = 0; i<9; i++){
+			logs.add(i, new ArrayList<Sprite>());
+			for(int j = 0; j<6; j++) {
+				Sprite logG = new Sprite("logG" + i + j, "objects/log.png");
+				workspace.addChild(logG);
+				logG.setScaleX(0.1);
+				logG.setScaleY(0.1);
+				logG.setPosition(new Point(220 +(89*i), 70 + 90*j));
+				logG.setVisible(false);
+				logs.get(i).add(j, logG);
+			}
+		}
+
+		for(int i = 0; i<9; i++){
+			nails.add(i, new ArrayList<Sprite>());
+			for(int j = 0; j<6; j++) {
+				Sprite nailG = new Sprite("nailG" + i + j, "objects/nail.png");
+				workspace.addChild(nailG);
+				nailG.setScaleX(0.1);
+				nailG.setScaleY(0.1);
+				nailG.setPosition(new Point(220 +(89*i), 70 + 90*j));
+				nailG.setVisible(false);
+				nails.get(i).add(j, nailG);
+			}
+		}
+
+		for(int i = 0; i<9; i++){
+			pans.add(i, new ArrayList<Sprite>());
+			for(int j = 0; j<6; j++) {
+				Sprite panG = new Sprite("panG" + i + j, "objects/segment.png");
+				workspace.addChild(panG);
+				panG.setScaleX(0.1);
+				panG.setScaleY(0.1);
+				panG.setPosition(new Point(220 +(89*i), 70 + 90*j));
+				panG.setVisible(false);
+				wireSegments.get(i).add(j, panG);
+			}
+		}
+
 		playing = true;
 		sm.LoadSoundEffect("won", "ting.wav");
 	}
