@@ -48,6 +48,11 @@ public class LevelThree extends Game{
 	private ArrayList<String> nailfilenames = new ArrayList<>(Arrays.asList(nailFiles));
 	MultiModeSprite nail = new MultiModeSprite("nail", nailfilenames );
 
+	Sprite panG = new Sprite("pan", "objects/pan.png");
+	Sprite logG = new Sprite("log", "objects/log.png");
+	Sprite nailG = new Sprite("nail", "objects/nail.png");
+	Sprite shoeG = new Sprite("shoe", "objects/shoe.png");
+
 	ArrayList<ArrayList<Sprite>> wireSegments = new ArrayList<>();
 
 	//setup character
@@ -60,6 +65,8 @@ public class LevelThree extends Game{
 	Sprite speech1c = new Sprite("speech1c", "objects/speech1_3c.png");
 	Sprite speech2wrong = new Sprite("speech2wrong", "objects/speech2_3a.png");
 	Sprite speech2right = new Sprite("speech2right", "objects/speech2_3b.png");
+
+	Sprite speechWon = new Sprite("speechWon", "objects/speech2.png");
 
 	JLabel question = new JLabel("Why isn't the bulb lighting up?", JLabel.CENTER);
 	JLabel optionA = new JLabel("<html>A. The battery is out of power</html>", JLabel.LEFT);
@@ -75,6 +82,8 @@ public class LevelThree extends Game{
 	boolean started = true;
 	boolean won = false;
 	boolean questionAnswered = false;
+	boolean tried[] = new boolean[4];
+	int attempts = 0;
 
 	private String toolSelected = null;
 
@@ -137,6 +146,7 @@ public class LevelThree extends Game{
 		phil.addChild(speech1c);
 		phil.addChild(speech2wrong);
 		phil.addChild(speech2right);
+		phil.addChild(speechWon);
 		phil.setPosition(new Point(20, 440));
 		phil.setScaleX(0.3);
 		phil.setScaleY(0.3);
@@ -149,6 +159,8 @@ public class LevelThree extends Game{
 		speech2wrong.setVisible(false);
 		speech2right.setPosition(new Point(2, 350));
 		speech2right.setVisible(false);
+		speechWon.setPosition(speech2right.getPosition());
+		speechWon.setVisible(false);
 
 
 		question.setSize(400, 100);
@@ -160,8 +172,8 @@ public class LevelThree extends Game{
 		optionA.setSize(400, 100);
 		optionA.setLocation(500, 580);
 		optionA.setFont (font);
-		optionB.setSize(400, 100);
-		optionB.setLocation(500, 615);
+		optionB.setSize(300, 30);
+		optionB.setLocation(500, 650);
 		optionB.setFont (font);
 		optionC.setSize(400, 100);
 		optionC.setLocation(500, 650);
@@ -203,7 +215,27 @@ public class LevelThree extends Game{
 			}
 
 		}
-		playing = true;
+		workspace.addChild(panG);
+		workspace.addChild(logG);
+		workspace.addChild(shoeG);
+		workspace.addChild(nailG);
+		panG.setPosition(new Point(220 + (89 * 4), 70 + 90 * 2));
+		logG.setPosition(new Point(220 + (89 * 4), 70 + 90 * 2));
+		shoeG.setPosition(new Point(220 + (89 * 4), 70 + 90 * 2));
+		nailG.setPosition(new Point(220 + (89 * 4), 70 + 90 * 2));
+		logG.setScaleX(0.1);
+		logG.setScaleY(0.1);
+		logG.setVisible(false);
+		panG.setScaleX(0.1);
+		panG.setScaleY(0.1);
+		panG.setVisible(false);
+		shoeG.setScaleX(0.1);
+		shoeG.setScaleY(0.1);
+		shoeG.setVisible(false);
+		nailG.setScaleX(0.1);
+		nailG.setScaleY(0.1);
+		nailG.setVisible(false);
+		playing = false;
 		sm.LoadSoundEffect("won", "ting.wav");
 	}
 
@@ -212,197 +244,316 @@ public class LevelThree extends Game{
 	 * the set of keys (as strings) that are currently being pressed down
 	 * */
 	@Override
-	public void update(ArrayList<Integer> pressedKeys){
+	public void update(ArrayList<Integer> pressedKeys) {
 		super.update(pressedKeys);
-		boolean match = Arrays.deepEquals(wirePositions, solution);
-		this.won = match;
-		//shortcut to finish level
-		if (pressedKeys.contains(KeyEvent.VK_Q)) {
-			won = true;
-		}
-		if(!questionAnswered) {
-			if (pressedKeys.contains(KeyEvent.VK_A)) {
-				optionA.setText("<html><strike>A. The battery is out of power</strike></html>");
-				speech1a.setVisible(false);
-				speech1b.setVisible(false);
-				speech1c.setVisible(false);
-				speech2wrong.setVisible(true);
+		if (workspace != null) {
+			if ((panG != null && panG.getVisible()) || (nailG != null && nailG.getVisible())) {
+				won = true;
 			}
-			if (pressedKeys.contains(KeyEvent.VK_B)) {
-				optionB.setText("<html><u>B. Rope is an insulator</u></html>");
-				speech1a.setVisible(false);
-				speech1b.setVisible(false);
-				speech1c.setVisible(false);
-				speech2right.setVisible(true);
-				questionAnswered = true;
-				getScenePanel().remove(optionA);
-				getScenePanel().remove(optionB);
-				getScenePanel().remove(optionC);
-				getScenePanel().remove(optionD);
-				getScenePanel().remove(question);
-				getScenePanel().remove(instruct);
-				wireSegments.get(4).get(2).setVisible(false);
-				toolbox.setVisible(true);
-				cursor.setVisible(true);
+			//shortcut to finish level
+			if (pressedKeys.contains(KeyEvent.VK_Q)) {
+				won = true;
 			}
-			if (pressedKeys.contains(KeyEvent.VK_C)) {
-				optionC.setText("<html><u>C. Rope is a conductor</u></html>");
-				speech1a.setVisible(false);
-				speech1b.setVisible(false);
-				speech1c.setVisible(false);
-				speech2wrong.setVisible(true);
-			}
-			if (pressedKeys.contains(KeyEvent.VK_D)) {
-				optionC.setText("<html><u>D. The bulb is broken</u></html>");
-				speech1a.setVisible(false);
-				speech1b.setVisible(false);
-				speech1c.setVisible(false);
-				speech2wrong.setVisible(true);
-			}
-		}
-		if(!won && playing) {
-			if (pressedKeys.contains(KeyEvent.VK_SPACE)) {
-				if (toolSelected != null && toolSelected.compareTo("wire") == 0) {
-					int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
-					int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
-					wireSegments.get(gridX).get(gridY).setVisible(true);
-					wirePositions[gridX][gridY] = 1;
-				}
-			}
-			if (pressedKeys.contains(KeyEvent.VK_BACK_SPACE) || pressedKeys.contains(KeyEvent.VK_DELETE)) {
-				int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
-				int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
-				wireSegments.get(gridX).get(gridY).setVisible(false);
-				wirePositions[gridX][gridY] = 0;
-			}
-			if (workspace != null) {
-				if (pressedKeys.contains(KeyEvent.VK_UP)) {
-					if (cursor.inParentYTop()) {
-						cursor.setPosition(new Point(cursor.getPosition().x,
-								cursor.getPosition().y - 5));
-					}
-				}
-				if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
-					if (cursor.inParentYBottom()) {
-						cursor.setPosition(new Point(cursor.getPosition().x,
-								cursor.getPosition().y + 5));
-					}
-				}
-				if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
-					if (cursor.inParentXLeft()) {
-						cursor.setPosition(new Point(cursor.getPosition().x - 5,
-								cursor.getPosition().y));
-					}
-				}
-				if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
-					if (cursor.inParentXRight()) {
-						cursor.setPosition(new Point(cursor.getPosition().x + 5,
-								cursor.getPosition().y));
-					}
-				}
-				workspace.update(pressedKeys);
-			}
+			if (!questionAnswered && !playing) {
+				if (attempts < 2) {
+					if (pressedKeys.contains(KeyEvent.VK_A)) {
+						optionA.setText("<html><strike>A. The battery is out of power</strike></html>");
+						speech1a.setVisible(false);
+						speech1b.setVisible(false);
+						speech1c.setVisible(false);
+						speech2wrong.setVisible(true);
+						if (!tried[0]) attempts++;
+						tried[0] = true;
 
-			if (toolbox != null) {
-				if (pressedKeys.contains(KeyEvent.VK_L)) {
-					log.nextMode();
-					if (!log.isSwitched()) {
-						if (toolSelected != null && toolSelected.compareTo(log.getId()) == 0) {
-							toolSelected = null;
-						} else {
-							if (toolSelected != null && toolSelected.compareTo(pan.getId()) == 0) {
-								pan.nextMode();
-							}
-							if (toolSelected != null && toolSelected.compareTo(nail.getId()) == 0) {
-								nail.nextMode();
-							}
-							if (toolSelected != null && toolSelected.compareTo(shoe.getId()) == 0) {
-								shoe.nextMode();
-							}
-							toolSelected = log.getId();
-						}
 					}
-					log.setSwitched(true);
+					if (pressedKeys.contains(KeyEvent.VK_B)) {
+						optionB.setBorder(BorderFactory.createLineBorder(Color.BLUE, 4));
+						speech1a.setVisible(false);
+						speech1b.setVisible(false);
+						speech1c.setVisible(false);
+						speech2wrong.setVisible(false);
+						speech2right.setVisible(true);
+						questionAnswered = true;
+						question.setText("Correct! Now can you fix the circuit?");
+						instruct.setText("Press enter to view your toolbox.");
+						//getScenePanel().remove(optionA);
+						//getScenePanel().remove(optionB);
+						//getScenePanel().remove(optionC);
+						//getScenePanel().remove(optionD);
+						//getScenePanel().remove(question);
+						//getScenePanel().remove(instruct);
+						//wireSegments.get(4).get(2).setVisible(false);
+						//toolbox.setVisible(true);
+						//cursor.setVisible(true);
+					}
+					if (pressedKeys.contains(KeyEvent.VK_C)) {
+						optionC.setText("<html><strike>C. Rope is a conductor</strike></html>");
+						speech1a.setVisible(false);
+						speech1b.setVisible(false);
+						speech1c.setVisible(false);
+						speech2wrong.setVisible(true);
+						if (!tried[2]) attempts++;
+						tried[2] = true;
+					}
+					if (pressedKeys.contains(KeyEvent.VK_D)) {
+						optionD.setText("<html><strike>D. The bulb is broken</strike></html>");
+						speech1a.setVisible(false);
+						speech1b.setVisible(false);
+						speech1c.setVisible(false);
+						speech2wrong.setVisible(true);
+						if (!tried[3]) attempts++;
+						tried[3] = true;
+					}
 				} else {
-					log.setSwitched(false);
+					getScenePanel().remove(optionA);
+					getScenePanel().remove(optionB);
+					getScenePanel().remove(optionC);
+					getScenePanel().remove(optionD);
+					question.setSize(800, 100);
+					question.setText("It looks like you might want to go review conductors and insulators again!");
+					instruct.setText("Press enter to go back and replay level 2.");
+					if (pressedKeys.contains(KeyEvent.VK_ENTER)) {
+						System.out.println("moving to previous level");
+						LevelTwo levelTwo = new LevelTwo();
+						levelTwo.start();
+						this.closeGame();
+					}
 				}
+			} else if(!won){
+				if (pressedKeys.contains(KeyEvent.VK_ENTER)) {
+					getScenePanel().remove(optionA);
+					getScenePanel().remove(optionB);
+					getScenePanel().remove(optionC);
+					getScenePanel().remove(optionD);
+					getScenePanel().remove(question);
+					getScenePanel().remove(instruct);
+					wireSegments.get(4).get(2).setVisible(false);
+					toolbox.setVisible(true);
+					cursor.setVisible(true);
+					playing = true;
+					//System.out.println(playing);
+				}
+			}
+			if (!won && playing) {
+				//System.out.println("playing" + playing);
+				if (toolbox != null) {
 
-
-				if (pressedKeys.contains(KeyEvent.VK_P)) {
-					pan.nextMode();
-					if (!pan.isSwitched()) {
-						if (toolSelected != null && toolSelected.compareTo(pan.getId()) == 0) {
-							toolSelected = null;
-						} else {
+					if (pressedKeys.contains(KeyEvent.VK_L)) {
+						log.nextMode();
+						if (!log.isSwitched()) {
 							if (toolSelected != null && toolSelected.compareTo(log.getId()) == 0) {
-								log.nextMode();
+								toolSelected = null;
+							} else {
+								if (toolSelected != null && toolSelected.compareTo(pan.getId()) == 0) {
+									pan.nextMode();
+								}
+								if (toolSelected != null && toolSelected.compareTo(nail.getId()) == 0) {
+									nail.nextMode();
+								}
+								if (toolSelected != null && toolSelected.compareTo(shoe.getId()) == 0) {
+									shoe.nextMode();
+								}
+								toolSelected = log.getId();
 							}
-							if (toolSelected != null && toolSelected.compareTo(nail.getId()) == 0) {
-								nail.nextMode();
-							}
-							if (toolSelected != null && toolSelected.compareTo(shoe.getId()) == 0) {
-								shoe.nextMode();
-							}
-							toolSelected = pan.getId();
 						}
+						log.setSwitched(true);
+					} else {
+						log.setSwitched(false);
 					}
-					pan.setSwitched(true);
-				} else {
-					pan.setSwitched(false);
-				}
 
-				if (pressedKeys.contains(KeyEvent.VK_N)) {
-					nail.nextMode();
-					if (!nail.isSwitched()) {
-						if (toolSelected != null && toolSelected.compareTo(nail.getId()) == 0) {
-							toolSelected = null;
-						} else {
-							if (toolSelected != null && toolSelected.compareTo(log.getId()) == 0) {
-								log.nextMode();
-							}
+
+					if (pressedKeys.contains(KeyEvent.VK_P)) {
+						pan.nextMode();
+						if (!pan.isSwitched()) {
 							if (toolSelected != null && toolSelected.compareTo(pan.getId()) == 0) {
-								pan.nextMode();
+								toolSelected = null;
+							} else {
+								if (toolSelected != null && toolSelected.compareTo(log.getId()) == 0) {
+									log.nextMode();
+								}
+								if (toolSelected != null && toolSelected.compareTo(nail.getId()) == 0) {
+									nail.nextMode();
+								}
+								if (toolSelected != null && toolSelected.compareTo(shoe.getId()) == 0) {
+									shoe.nextMode();
+								}
+								toolSelected = pan.getId();
 							}
-							if (toolSelected != null && toolSelected.compareTo(shoe.getId()) == 0) {
-								shoe.nextMode();
-							}
-							toolSelected = nail.getId();
 						}
+						pan.setSwitched(true);
+					} else {
+						pan.setSwitched(false);
 					}
-					nail.setSwitched(true);
-				} else {
-					nail.setSwitched(false);
-				}
 
-				if (pressedKeys.contains(KeyEvent.VK_S)) {
-					shoe.nextMode();
-					if (!shoe.isSwitched()) {
-						if (toolSelected != null && toolSelected.compareTo(shoe.getId()) == 0) {
-							toolSelected = null;
-						} else {
-							if (toolSelected != null && toolSelected.compareTo(log.getId()) == 0) {
-								log.nextMode();
-							}
+					if (pressedKeys.contains(KeyEvent.VK_N)) {
+						nail.nextMode();
+						if (!nail.isSwitched()) {
 							if (toolSelected != null && toolSelected.compareTo(nail.getId()) == 0) {
-								nail.nextMode();
+								toolSelected = null;
+							} else {
+								if (toolSelected != null && toolSelected.compareTo(log.getId()) == 0) {
+									log.nextMode();
+								}
+								if (toolSelected != null && toolSelected.compareTo(pan.getId()) == 0) {
+									pan.nextMode();
+								}
+								if (toolSelected != null && toolSelected.compareTo(shoe.getId()) == 0) {
+									shoe.nextMode();
+								}
+								toolSelected = nail.getId();
 							}
-							if (toolSelected != null && toolSelected.compareTo(pan.getId()) == 0) {
-								pan.nextMode();
+						}
+						nail.setSwitched(true);
+					} else {
+						nail.setSwitched(false);
+					}
+
+					if (pressedKeys.contains(KeyEvent.VK_S)) {
+						shoe.nextMode();
+						if (!shoe.isSwitched()) {
+							if (toolSelected != null && toolSelected.compareTo(shoe.getId()) == 0) {
+								toolSelected = null;
+							} else {
+								if (toolSelected != null && toolSelected.compareTo(log.getId()) == 0) {
+									log.nextMode();
+								}
+								if (toolSelected != null && toolSelected.compareTo(nail.getId()) == 0) {
+									nail.nextMode();
+								}
+								if (toolSelected != null && toolSelected.compareTo(pan.getId()) == 0) {
+									pan.nextMode();
+								}
+								toolSelected = shoe.getId();
 							}
-							toolSelected = shoe.getId();
+						}
+						shoe.setSwitched(true);
+					} else {
+						shoe.setSwitched(false);
+					}
+
+					toolbox.update(pressedKeys);
+				}
+					if (pressedKeys.contains(KeyEvent.VK_BACK_SPACE) || pressedKeys.contains(KeyEvent.VK_DELETE)) {
+						int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
+						int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
+						if (gridX == 4 && gridY == 2) {
+							if (logG.getVisible()) {
+								logG.setVisible(false);
+							}
+							if (shoeG.getVisible()) {
+								shoeG.setVisible(false);
+							}
 						}
 					}
-					shoe.setSwitched(true);
-				} else {
-					shoe.setSwitched(false);
-				}
+					if (pressedKeys.contains(KeyEvent.VK_SPACE)) {
+						if (toolSelected != null && toolSelected.compareTo("log") == 0) {
+							int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
+							int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
+							if (gridX == 4 && gridY == 2) {
+								if (shoeG.getVisible()) {
+									shoeG.setVisible(false);
+								}
+								logG.setVisible(true);
+								try {
+									Thread.sleep(200);
+								} catch (InterruptedException ex) {
+									Thread.currentThread().interrupt();
+								}
+							}
+						}
 
-				toolbox.update(pressedKeys);
+						if (toolSelected != null && toolSelected.compareTo("shoe") == 0) {
+							int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
+							int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
+							System.out.println("what");
+							if (gridX == 4 && gridY == 2) {
+								if (logG.getVisible()) {
+									logG.setVisible(false);
+								}
+								shoeG.setVisible(true);
+								try {
+									Thread.sleep(200);
+								} catch (InterruptedException ex) {
+									Thread.currentThread().interrupt();
+								}
+							}
+						}
+
+						if (toolSelected != null && toolSelected.compareTo("nail") == 0) {
+							int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
+							int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
+							if (gridX == 4 && gridY == 2) {
+								if (!nailG.getVisible()) {
+									if (logG.getVisible()) {
+										logG.setVisible(false);
+									}
+									if (shoeG.getVisible()) {
+										shoeG.setVisible(false);
+									}
+									nailG.setVisible(true);
+								} else {
+									nailG.setVisible(false);
+								}
+								try {
+									Thread.sleep(200);
+								} catch (InterruptedException ex) {
+									Thread.currentThread().interrupt();
+								}
+							}
+						}
+
+						if (toolSelected != null && toolSelected.compareTo("pan") == 0) {
+							int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
+							int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
+							if (gridX == 4 && gridY == 2) {
+								if (!panG.getVisible()) {
+									if (logG.getVisible()) {
+										logG.setVisible(false);
+									}
+									if (shoeG.getVisible()) {
+										shoeG.setVisible(false);
+									}
+									panG.setVisible(true);
+								} else {
+									panG.setVisible(false);
+								}
+								try {
+									Thread.sleep(200);
+								} catch (InterruptedException ex) {
+									Thread.currentThread().interrupt();
+								}
+							}
+						}
+					}
+					if (pressedKeys.contains(KeyEvent.VK_UP)) {
+						if (cursor.inParentYTop()) {
+							cursor.setPosition(new Point(cursor.getPosition().x,
+									cursor.getPosition().y - 5));
+						}
+					}
+					if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
+						if (cursor.inParentYBottom()) {
+							cursor.setPosition(new Point(cursor.getPosition().x,
+									cursor.getPosition().y + 5));
+						}
+					}
+					if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
+						if (cursor.inParentXLeft()) {
+							cursor.setPosition(new Point(cursor.getPosition().x - 5,
+									cursor.getPosition().y));
+						}
+					}
+					if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
+						if (cursor.inParentXRight()) {
+							cursor.setPosition(new Point(cursor.getPosition().x + 5,
+									cursor.getPosition().y));
+						}
+					}
+					workspace.update(pressedKeys);
 			}
-
 		}
-		if(!playing){
-			if(pressedKeys.contains(KeyEvent.VK_ENTER)) {
+		if (!playing) {
+			if (pressedKeys.contains(KeyEvent.VK_ENTER)) {
 				System.out.println("moving to next level");
 				//LevelTwo levelTwo  = new LevelTwo();
 				//levelTwo.start();
@@ -411,7 +562,7 @@ public class LevelThree extends Game{
 				return;
 			}
 		}
-		if(phil != null) {
+		if (phil != null) {
 			phil.update(pressedKeys);
 		}
 	}
@@ -424,14 +575,16 @@ public class LevelThree extends Game{
 	public void draw(Graphics g){
 		super.draw(g);
 		if(won == true && started) {
-			g.drawString("Press \"Enter\" to move" , 20,80);
-			g.drawString("on to the next level" , 20,100);
+			g.drawString("You finished the MVP game!" , 20,80);
+			g.drawString("Press \"Enter\" to exit" , 20,100);
 
 			if(playing) {
 				phil.stopAnimation();
 				phil.setPosition(new Point(phil.getPosition().x, phil.getPosition().y - 67));
 				phil.animate("jump");
 				sm.PlaySoundEffect("won");
+				speech2right.setVisible(false);
+				speechWon.setVisible(true);
 			}
 			//bulb.nextModeStatic();
 			playing = false;

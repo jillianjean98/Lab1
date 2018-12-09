@@ -24,8 +24,10 @@ public class MVPGame{
 	 * */
 	public static void main(String[] args) {
 		//for testing lvl 2
-		LevelTwo levelTwo = new LevelTwo();
-		levelTwo.start();
+		//LevelOne levelOne = new LevelOne();
+		//levelOne.start();
+		LevelOne level = new LevelOne();
+		level.start();
 
 /*
 		LevelOne levelOne = new LevelOne();

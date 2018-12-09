@@ -300,12 +300,6 @@ public class LevelTwo extends Game{
 				}
 
 			}
-			if (pressedKeys.contains(KeyEvent.VK_BACK_SPACE) || pressedKeys.contains(KeyEvent.VK_DELETE)) {
-				int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
-				int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
-				wireSegments.get(gridX).get(gridY).setVisible(false);
-				wirePositions[gridX][gridY] = 0;
-			}
 			if (workspace != null) {
 				if (pressedKeys.contains(KeyEvent.VK_UP)) {
 					if (cursor.inParentYTop()) {
@@ -436,8 +430,8 @@ public class LevelTwo extends Game{
 			if (!playing) {
 				if (pressedKeys.contains(KeyEvent.VK_ENTER)) {
 					System.out.println("moving to next level");
-					//LevelTwo levelTwo  = new LevelTwo();
-					//levelTwo.start();
+					LevelThree levelThree  = new LevelThree();
+					levelThree.start();
 					this.closeGame();
 					//end the game
 					return;
