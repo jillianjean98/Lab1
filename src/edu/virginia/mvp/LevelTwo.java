@@ -198,7 +198,7 @@ public class LevelTwo extends Game{
 		super.update(pressedKeys);
 		boolean match = Arrays.deepEquals(wirePositions, solution);
 		if(workspace != null) {
-		if(panG.getVisible() || nailG.getVisible()){
+		if((panG != null && panG.getVisible()) || (nailG != null && nailG.getVisible())){
 			this.won = true;
 		}
 		//this.won = match;
