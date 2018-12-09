@@ -210,11 +210,11 @@ public class LevelTwo extends Game{
 				if (toolSelected != null && toolSelected.compareTo("log") == 0) {
 					int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
 					int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
-					if(gridX == 4 && gridY == 2 &&
-					!shoeG.getVisible() &&
-					!nailG.getVisible() &&
-					!panG.getVisible()) {
-						if (!logG.getVisible()) {
+					if(gridX == 4 && gridY == 2){
+						if (!logG.getVisible()){
+							if(shoeG.getVisible()){
+								shoeG.setVisible(false);
+							}
 							logG.setVisible(true);
 						} else {
 							logG.setVisible(false);
@@ -231,11 +231,11 @@ public class LevelTwo extends Game{
 					int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
 					int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
 					System.out.println("what");
-					if(gridX == 4 && gridY == 2 &&
-					!logG.getVisible() &&
-					!nailG.getVisible() &&
-					!panG.getVisible()) {
+					if(gridX == 4 && gridY == 2) {
 						if (!shoeG.getVisible()) {
+							if(logG.getVisible()){
+								logG.setVisible(false);
+							}
 							shoeG.setVisible(true);
 						} else {
 							shoeG.setVisible(false);
@@ -251,11 +251,14 @@ public class LevelTwo extends Game{
 				if (toolSelected != null && toolSelected.compareTo("nail") == 0) {
 					int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
 					int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
-					if(gridX == 4 && gridY == 2 &&
-					!logG.getVisible() &&
-					!shoeG.getVisible() &&
-					!panG.getVisible()) {
+					if(gridX == 4 && gridY == 2) {
 						if (!nailG.getVisible()) {
+							if(logG.getVisible()){
+								logG.setVisible(false);
+							}
+							if(shoeG.getVisible()){
+								shoeG.setVisible(false);
+							}
 							nailG.setVisible(true);
 						} else {
 							nailG.setVisible(false);
@@ -271,11 +274,14 @@ public class LevelTwo extends Game{
 				if (toolSelected != null && toolSelected.compareTo("pan") == 0) {
 					int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
 					int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
-					if(gridX == 4 && gridY == 2 &&
-					!logG.getVisible() &&
-					!shoeG.getVisible() &&
-					!nailG.getVisible()) {
+					if(gridX == 4 && gridY == 2) {
 						if (!panG.getVisible()) {
+							if(logG.getVisible()){
+								logG.setVisible(false);
+							}
+							if(shoeG.getVisible()){
+								shoeG.setVisible(false);
+							}
 							panG.setVisible(true);
 						} else {
 							panG.setVisible(false);
