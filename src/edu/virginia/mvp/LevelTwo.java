@@ -197,6 +197,7 @@ public class LevelTwo extends Game{
 	public void update(ArrayList<Integer> pressedKeys) {
 		super.update(pressedKeys);
 		boolean match = Arrays.deepEquals(wirePositions, solution);
+		if(workspace != null) {
 		if(panG.getVisible() || nailG.getVisible()){
 			this.won = true;
 		}
@@ -209,11 +210,11 @@ public class LevelTwo extends Game{
 			if (pressedKeys.contains(KeyEvent.VK_BACK_SPACE) || pressedKeys.contains(KeyEvent.VK_DELETE)) {
 				int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
 				int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
-				if(gridX == 4 && gridY == 2){
-					if(logG.getVisible()){
+				if (gridX == 4 && gridY == 2) {
+					if (logG.getVisible()) {
 						logG.setVisible(false);
 					}
-					if(shoeG.getVisible()){
+					if (shoeG.getVisible()) {
 						shoeG.setVisible(false);
 					}
 				}
@@ -222,11 +223,11 @@ public class LevelTwo extends Game{
 				if (toolSelected != null && toolSelected.compareTo("log") == 0) {
 					int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
 					int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
-					if(gridX == 4 && gridY == 2){
-							if(shoeG.getVisible()){
-								shoeG.setVisible(false);
-							}
-							logG.setVisible(true);
+					if (gridX == 4 && gridY == 2) {
+						if (shoeG.getVisible()) {
+							shoeG.setVisible(false);
+						}
+						logG.setVisible(true);
 						try {
 							Thread.sleep(200);
 						} catch (InterruptedException ex) {
@@ -239,11 +240,11 @@ public class LevelTwo extends Game{
 					int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
 					int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
 					System.out.println("what");
-					if(gridX == 4 && gridY == 2) {
-							if(logG.getVisible()){
-								logG.setVisible(false);
-							}
-							shoeG.setVisible(true);
+					if (gridX == 4 && gridY == 2) {
+						if (logG.getVisible()) {
+							logG.setVisible(false);
+						}
+						shoeG.setVisible(true);
 						try {
 							Thread.sleep(200);
 						} catch (InterruptedException ex) {
@@ -255,12 +256,12 @@ public class LevelTwo extends Game{
 				if (toolSelected != null && toolSelected.compareTo("nail") == 0) {
 					int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
 					int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
-					if(gridX == 4 && gridY == 2) {
+					if (gridX == 4 && gridY == 2) {
 						if (!nailG.getVisible()) {
-							if(logG.getVisible()){
+							if (logG.getVisible()) {
 								logG.setVisible(false);
 							}
-							if(shoeG.getVisible()){
+							if (shoeG.getVisible()) {
 								shoeG.setVisible(false);
 							}
 							nailG.setVisible(true);
@@ -278,12 +279,12 @@ public class LevelTwo extends Game{
 				if (toolSelected != null && toolSelected.compareTo("pan") == 0) {
 					int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
 					int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
-					if(gridX == 4 && gridY == 2) {
+					if (gridX == 4 && gridY == 2) {
 						if (!panG.getVisible()) {
-							if(logG.getVisible()){
+							if (logG.getVisible()) {
 								logG.setVisible(false);
 							}
-							if(shoeG.getVisible()){
+							if (shoeG.getVisible()) {
 								shoeG.setVisible(false);
 							}
 							panG.setVisible(true);
@@ -332,7 +333,7 @@ public class LevelTwo extends Game{
 				}
 				workspace.update(pressedKeys);
 			}
-
+		}
 			if (toolbox != null) {
 
 				if (pressedKeys.contains(KeyEvent.VK_L)) {
