@@ -206,19 +206,27 @@ public class LevelTwo extends Game{
 			won = true;
 		}
 		if (!won && playing) {
+			if (pressedKeys.contains(KeyEvent.VK_BACK_SPACE) || pressedKeys.contains(KeyEvent.VK_DELETE)) {
+				int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
+				int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
+				if(gridX == 4 && gridY == 2){
+					if(logG.getVisible()){
+						logG.setVisible(false);
+					}
+					if(shoeG.getVisible()){
+						shoeG.setVisible(false);
+					}
+				}
+			}
 			if (pressedKeys.contains(KeyEvent.VK_SPACE)) {
 				if (toolSelected != null && toolSelected.compareTo("log") == 0) {
 					int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
 					int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
 					if(gridX == 4 && gridY == 2){
-						if (!logG.getVisible()){
 							if(shoeG.getVisible()){
 								shoeG.setVisible(false);
 							}
 							logG.setVisible(true);
-						} else {
-							logG.setVisible(false);
-						}
 						try {
 							Thread.sleep(200);
 						} catch (InterruptedException ex) {
@@ -232,14 +240,10 @@ public class LevelTwo extends Game{
 					int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
 					System.out.println("what");
 					if(gridX == 4 && gridY == 2) {
-						if (!shoeG.getVisible()) {
 							if(logG.getVisible()){
 								logG.setVisible(false);
 							}
 							shoeG.setVisible(true);
-						} else {
-							shoeG.setVisible(false);
-						}
 						try {
 							Thread.sleep(200);
 						} catch (InterruptedException ex) {
