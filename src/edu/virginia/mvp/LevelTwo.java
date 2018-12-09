@@ -220,7 +220,7 @@ public class LevelTwo extends Game{
 							logG.setVisible(false);
 						}
 						try {
-							Thread.sleep(100);
+							Thread.sleep(200);
 						} catch (InterruptedException ex) {
 							Thread.currentThread().interrupt();
 						}
@@ -241,7 +241,7 @@ public class LevelTwo extends Game{
 							shoeG.setVisible(false);
 						}
 						try {
-							Thread.sleep(100);
+							Thread.sleep(200);
 						} catch (InterruptedException ex) {
 							Thread.currentThread().interrupt();
 						}
@@ -264,7 +264,7 @@ public class LevelTwo extends Game{
 							nailG.setVisible(false);
 						}
 						try {
-							Thread.sleep(100);
+							Thread.sleep(200);
 						} catch (InterruptedException ex) {
 							Thread.currentThread().interrupt();
 						}
@@ -287,7 +287,7 @@ public class LevelTwo extends Game{
 							panG.setVisible(false);
 						}
 						try {
-							Thread.sleep(100);
+							Thread.sleep(200);
 						} catch (InterruptedException ex) {
 							Thread.currentThread().interrupt();
 						}
