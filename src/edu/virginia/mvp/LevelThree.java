@@ -98,7 +98,7 @@ public class LevelThree extends Game{
 	 * Constructor. See constructor in Game.java for details on the parameters given
 	 * */
 	public LevelThree() {
-		super("Level 2", 1050, 800);
+		super("Level 3", 1050, 800);
 		workspace.addChild(bulb);
 		workspace.addChild(battery);
 		workspace.addChild(cursor);
