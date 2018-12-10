@@ -12,10 +12,6 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/**
- * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
- * although, for now, it won't be a very fun game :)
- * */
 public class LevelThree extends Game{
 	public boolean levelComplete = false;
 	//set background
@@ -78,12 +74,12 @@ public class LevelThree extends Game{
 
 	Sprite title = new Sprite("title", "level3.png");
 
-	boolean playing = false;
-	boolean started = true;
-	boolean won = false;
-	boolean questionAnswered = false;
-	boolean tried[] = new boolean[4];
-	int attempts = 0;
+	private boolean playing;
+	private boolean started = true;
+	private boolean won = false;
+	private boolean questionAnswered = false;
+	private boolean tried[] = new boolean[4];
+	private int attempts = 0;
 
 	private String toolSelected = null;
 
@@ -97,7 +93,6 @@ public class LevelThree extends Game{
 							{0,0,0,0,1,0},
 							{0,0,0,0,0,0}};
 
-	private int[][] wirePositions = new int[9][6];
 	public static SoundManager sm = new SoundManager();
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
@@ -250,8 +245,8 @@ public class LevelThree extends Game{
 			if ((panG != null && panG.getVisible()) || (nailG != null && nailG.getVisible())) {
 				won = true;
 			}
-			//shortcut to finish level
-			if (pressedKeys.contains(KeyEvent.VK_Q)) {
+			//developer shortcut to complete the level
+			if (pressedKeys.contains(KeyEvent.VK_Q) && pressedKeys.contains(KeyEvent.VK_SLASH)) {
 				won = true;
 			}
 			if (!questionAnswered && !playing) {
@@ -276,15 +271,6 @@ public class LevelThree extends Game{
 						questionAnswered = true;
 						question.setText("Correct! Now can you fix the circuit?");
 						instruct.setText("Press enter to view your toolbox.");
-						//getScenePanel().remove(optionA);
-						//getScenePanel().remove(optionB);
-						//getScenePanel().remove(optionC);
-						//getScenePanel().remove(optionD);
-						//getScenePanel().remove(question);
-						//getScenePanel().remove(instruct);
-						//wireSegments.get(4).get(2).setVisible(false);
-						//toolbox.setVisible(true);
-						//cursor.setVisible(true);
 					}
 					if (pressedKeys.contains(KeyEvent.VK_C)) {
 						optionC.setText("<html><strike>C. Rope is a conductor</strike></html>");
@@ -327,15 +313,12 @@ public class LevelThree extends Game{
 					getScenePanel().remove(optionD);
 					getScenePanel().remove(question);
 					getScenePanel().remove(instruct);
-					wireSegments.get(4).get(2).setVisible(false);
 					toolbox.setVisible(true);
 					cursor.setVisible(true);
 					playing = true;
-					//System.out.println(playing);
 				}
 			}
 			if (!won && playing) {
-				//System.out.println("playing" + playing);
 				if (toolbox != null) {
 
 					if (pressedKeys.contains(KeyEvent.VK_L)) {
@@ -443,84 +426,88 @@ public class LevelThree extends Game{
 							if (shoeG.getVisible()) {
 								shoeG.setVisible(false);
 							}
+							wireSegments.get(4).get(2).setVisible(false);
 						}
 					}
 					if (pressedKeys.contains(KeyEvent.VK_SPACE)) {
-						if (toolSelected != null && toolSelected.compareTo("log") == 0) {
-							int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
-							int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
-							if (gridX == 4 && gridY == 2) {
-								if (shoeG.getVisible()) {
-									shoeG.setVisible(false);
-								}
-								logG.setVisible(true);
-								try {
-									Thread.sleep(200);
-								} catch (InterruptedException ex) {
-									Thread.currentThread().interrupt();
-								}
-							}
-						}
+						if(!wireSegments.get(4).get(2).getVisible()) {
 
-						if (toolSelected != null && toolSelected.compareTo("shoe") == 0) {
-							int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
-							int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
-							System.out.println("what");
-							if (gridX == 4 && gridY == 2) {
-								if (logG.getVisible()) {
-									logG.setVisible(false);
-								}
-								shoeG.setVisible(true);
-								try {
-									Thread.sleep(200);
-								} catch (InterruptedException ex) {
-									Thread.currentThread().interrupt();
-								}
-							}
-						}
 
-						if (toolSelected != null && toolSelected.compareTo("nail") == 0) {
-							int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
-							int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
-							if (gridX == 4 && gridY == 2) {
-								if (!nailG.getVisible()) {
-									if (logG.getVisible()) {
-										logG.setVisible(false);
-									}
+							if (toolSelected != null && toolSelected.compareTo("log") == 0) {
+								int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
+								int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
+								if (gridX == 4 && gridY == 2) {
 									if (shoeG.getVisible()) {
 										shoeG.setVisible(false);
 									}
-									nailG.setVisible(true);
-								} else {
-									nailG.setVisible(false);
-								}
-								try {
-									Thread.sleep(200);
-								} catch (InterruptedException ex) {
-									Thread.currentThread().interrupt();
+									logG.setVisible(true);
+									try {
+										Thread.sleep(200);
+									} catch (InterruptedException ex) {
+										Thread.currentThread().interrupt();
+									}
 								}
 							}
-						}
 
-						if (toolSelected != null && toolSelected.compareTo("pan") == 0) {
-							int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
-							int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
-							if (gridX == 4 && gridY == 2) {
-								if (!panG.getVisible()) {
+							if (toolSelected != null && toolSelected.compareTo("shoe") == 0) {
+								int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
+								int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
+								if (gridX == 4 && gridY == 2) {
 									if (logG.getVisible()) {
 										logG.setVisible(false);
 									}
-									if (shoeG.getVisible()) {
-										shoeG.setVisible(false);
+									shoeG.setVisible(true);
+									try {
+										Thread.sleep(200);
+									} catch (InterruptedException ex) {
+										Thread.currentThread().interrupt();
 									}
-									panG.setVisible(true);
-								} else {
-									panG.setVisible(false);
 								}
-								try {
-									Thread.sleep(200);
-								} catch (InterruptedException ex) {
-									Thread.currentThread().interrupt();
+							}
+
+							if (toolSelected != null && toolSelected.compareTo("nail") == 0) {
+								int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
+								int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
+								if (gridX == 4 && gridY == 2) {
+									if (!nailG.getVisible()) {
+										if (logG.getVisible()) {
+											logG.setVisible(false);
+										}
+										if (shoeG.getVisible()) {
+											shoeG.setVisible(false);
+										}
+										nailG.setVisible(true);
+									} else {
+										nailG.setVisible(false);
+									}
+									try {
+										Thread.sleep(200);
+									} catch (InterruptedException ex) {
+										Thread.currentThread().interrupt();
+									}
+								}
+							}
+
+							if (toolSelected != null && toolSelected.compareTo("pan") == 0) {
+								int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
+								int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
+								if (gridX == 4 && gridY == 2) {
+									if (!panG.getVisible()) {
+										if (logG.getVisible()) {
+											logG.setVisible(false);
+										}
+										if (shoeG.getVisible()) {
+											shoeG.setVisible(false);
+										}
+										panG.setVisible(true);
+									} else {
+										panG.setVisible(false);
+									}
+									try {
+										Thread.sleep(200);
+									} catch (InterruptedException ex) {
+										Thread.currentThread().interrupt();
+									}
 								}
 							}
 						}
@@ -554,9 +541,6 @@ public class LevelThree extends Game{
 		}
 		if (!playing) {
 			if (pressedKeys.contains(KeyEvent.VK_ENTER)) {
-				System.out.println("moving to next level");
-				//LevelTwo levelTwo  = new LevelTwo();
-				//levelTwo.start();
 				this.closeGame();
 				//end the game
 				return;
@@ -567,10 +551,6 @@ public class LevelThree extends Game{
 		}
 	}
 
-	/**
-	 * Engine automatically invokes draw() every frame as well. If we want to make sure mario gets drawn to
-	 * the screen, we need to make sure to override this method and call mario's draw method.
-	 * */
 	@Override
 	public void draw(Graphics g){
 		super.draw(g);
@@ -586,10 +566,8 @@ public class LevelThree extends Game{
 				speech2right.setVisible(false);
 				speechWon.setVisible(true);
 			}
-			//bulb.nextModeStatic();
 			playing = false;
 		}
-		/* Same, just check for null in case a frame gets thrown in before Mario is initialized */
 		if((workspace != null) && workspace.getVisible()) workspace.draw(g);
 		if((toolbox != null) && toolbox.getVisible()) toolbox.draw(g);
 		if((phil != null) && phil.getVisible()) phil.draw(g);

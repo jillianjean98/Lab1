@@ -16,7 +16,6 @@ import java.util.Arrays;
  * although, for now, it won't be a very fun game :)
  * */
 public class LevelTwo extends Game{
-	public boolean levelComplete = false;
 	//set background
 	public Sprite workspace = new Sprite("workspace", "objects/grid.jpg");
 	//setup lightbulb
@@ -64,9 +63,9 @@ public class LevelTwo extends Game{
 	Sprite nailG = new Sprite("nail", "objects/nail.png");
 	Sprite shoeG = new Sprite("shoe", "objects/shoe.png");
 
-	boolean playing = false;
-	boolean started = true;
-	boolean won = false;
+	private boolean playing = false;
+	private boolean started = true;
+	private boolean won = false;
 
 	private String toolSelected = null;
 
@@ -80,11 +79,6 @@ public class LevelTwo extends Game{
 							{0,0,0,0,1,0},
 							{0,0,0,0,0,0}};
 
-	private int[][] wirePositions = new int[9][6];
-	private int[][] logPositions = new int[9][6];
-	private int[][] nailPositions = new int[9][6];
-	private int[][] panPositions = new int[9][6];
-	private int[][] shoePositions = new int[9][6];
 	public static SoundManager sm = new SoundManager();
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
@@ -196,14 +190,12 @@ public class LevelTwo extends Game{
 	@Override
 	public void update(ArrayList<Integer> pressedKeys) {
 		super.update(pressedKeys);
-		boolean match = Arrays.deepEquals(wirePositions, solution);
 		if(workspace != null) {
 		if((panG != null && panG.getVisible()) || (nailG != null && nailG.getVisible())){
 			this.won = true;
 		}
-		//this.won = match;
-		//this.won = false;
-		if (pressedKeys.contains(KeyEvent.VK_B)) {
+		//developer shortcut to complete the level
+		if (pressedKeys.contains(KeyEvent.VK_Q) && pressedKeys.contains(KeyEvent.VK_SLASH)) {
 			won = true;
 		}
 		if (!won && playing) {
@@ -239,7 +231,6 @@ public class LevelTwo extends Game{
 				if (toolSelected != null && toolSelected.compareTo("shoe") == 0) {
 					int gridX = (cursor.getPosition().x - cursor.getParent().getPosition().x) / 90;
 					int gridY = (cursor.getPosition().y - cursor.getParent().getPosition().y) / 90;
-					System.out.println("what");
 					if (gridX == 4 && gridY == 2) {
 						if (logG.getVisible()) {
 							logG.setVisible(false);

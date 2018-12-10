@@ -5,8 +5,6 @@ import edu.virginia.engine.util.SoundManager;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.geom.Ellipse2D;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -15,7 +13,6 @@ import java.util.Arrays;
  * although, for now, it won't be a very fun game :)
  * */
 public class LevelOne extends Game{
-	public boolean levelComplete = false;
 	//set background
 	public Sprite workspace = new Sprite("workspace", "objects/grid.jpg");
 	//setup lightbulb
@@ -45,9 +42,9 @@ public class LevelOne extends Game{
 
 	Sprite title = new Sprite("title", "level1.png");
 
-	boolean playing = false;
-	boolean started = true;
-	boolean won = false;
+	private boolean playing;
+	private boolean started = true;
+	private boolean won = false;
 
 	private String toolSelected = null;
 
@@ -128,7 +125,8 @@ public class LevelOne extends Game{
 		super.update(pressedKeys);
 		boolean match = Arrays.deepEquals(wirePositions, solution);
 		if(match) won = true;
-		if(pressedKeys.contains(KeyEvent.VK_B)){
+		//developer shortcut to complete the level
+		if (pressedKeys.contains(KeyEvent.VK_Q) && pressedKeys.contains(KeyEvent.VK_SLASH)) {
 			won = true;
 		}
 		if(!won && playing) {
