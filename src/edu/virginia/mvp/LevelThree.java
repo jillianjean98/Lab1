@@ -324,7 +324,7 @@ public class LevelThree extends Game{
 						Thread.currentThread().interrupt();
 					}
 					if (pressedKeys.contains(KeyEvent.VK_ENTER)) {
-						System.out.println("moving to previous level");
+						//return to previous level
 						LevelTwo levelTwo = new LevelTwo();
 						levelTwo.start();
 						this.closeGame();
@@ -341,6 +341,11 @@ public class LevelThree extends Game{
 					toolbox.setVisible(true);
 					cursor.setVisible(true);
 					playing = true;
+					try {
+						Thread.sleep(300);
+					} catch (InterruptedException ex) {
+						Thread.currentThread().interrupt();
+					}
 				}
 			}
 			if (!won && playing) {

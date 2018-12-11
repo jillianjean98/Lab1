@@ -11,10 +11,6 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/**
- * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
- * although, for now, it won't be a very fun game :)
- * */
 public class LevelTwo extends Game{
 	//set background
 	public Sprite workspace = new Sprite("workspace", "objects/grid.jpg");
@@ -110,7 +106,6 @@ public class LevelTwo extends Game{
 		log.setPosition(new Point(250, 660));
 		log.setScaleX(0.2);
 		log.setScaleY(0.2);
-		System.out.println(log.isSwitched());
 		nail.setPosition(new Point(440, 660));
 		nail.setScaleX(0.2);
 		nail.setScaleY(0.2);
@@ -420,7 +415,6 @@ public class LevelTwo extends Game{
 			}
 			if (!playing) {
 				if (pressedKeys.contains(KeyEvent.VK_ENTER)) {
-					System.out.println("moving to next level");
 					LevelThree levelThree  = new LevelThree();
 					levelThree.start();
 					this.closeGame();

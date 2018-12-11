@@ -8,10 +8,6 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/**
- * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
- * although, for now, it won't be a very fun game :)
- * */
 public class LevelOne extends Game{
 	//set background
 	public Sprite workspace = new Sprite("workspace", "objects/grid.jpg");
@@ -192,7 +188,7 @@ public class LevelOne extends Game{
 		}
 		if(!playing){
 			if(pressedKeys.contains(KeyEvent.VK_ENTER)) {
-				System.out.println("moving to next level");
+				//moving to next level
 				LevelTwo levelTwo  = new LevelTwo();
 				levelTwo.start();
 				this.closeGame();
@@ -225,7 +221,7 @@ public class LevelOne extends Game{
 			bulb.nextModeStatic();
 			playing = false;
 		}
-		/* Same, just check for null in case a frame gets thrown in before Mario is initialized */
+		/* check for null in case a frame gets thrown in before initialized */
 		if(started) {
 			if ((workspace != null) && workspace.getVisible()) workspace.draw(g);
 			if ((toolbox != null) && toolbox.getVisible()) toolbox.draw(g);
