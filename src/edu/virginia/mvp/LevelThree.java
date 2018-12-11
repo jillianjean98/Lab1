@@ -259,6 +259,11 @@ public class LevelThree extends Game{
 						speech2wrong.setVisible(true);
 						if (!tried[0]) attempts++;
 						tried[0] = true;
+						try {
+							Thread.sleep(300);
+						} catch (InterruptedException ex) {
+							Thread.currentThread().interrupt();
+						}
 
 					}
 					if (pressedKeys.contains(KeyEvent.VK_B)) {
@@ -271,6 +276,11 @@ public class LevelThree extends Game{
 						questionAnswered = true;
 						question.setText("Correct! Now can you fix the circuit?");
 						instruct.setText("Press enter to view your toolbox.");
+						try {
+							Thread.sleep(300);
+						} catch (InterruptedException ex) {
+							Thread.currentThread().interrupt();
+						}
 					}
 					if (pressedKeys.contains(KeyEvent.VK_C)) {
 						optionC.setText("<html><strike>C. Rope is a conductor</strike></html>");
@@ -280,6 +290,11 @@ public class LevelThree extends Game{
 						speech2wrong.setVisible(true);
 						if (!tried[2]) attempts++;
 						tried[2] = true;
+						try {
+							Thread.sleep(300);
+						} catch (InterruptedException ex) {
+							Thread.currentThread().interrupt();
+						}
 					}
 					if (pressedKeys.contains(KeyEvent.VK_D)) {
 						optionD.setText("<html><strike>D. The bulb is broken</strike></html>");
@@ -289,6 +304,11 @@ public class LevelThree extends Game{
 						speech2wrong.setVisible(true);
 						if (!tried[3]) attempts++;
 						tried[3] = true;
+						try {
+							Thread.sleep(300);
+						} catch (InterruptedException ex) {
+							Thread.currentThread().interrupt();
+						}
 					}
 				} else {
 					getScenePanel().remove(optionA);
@@ -298,6 +318,11 @@ public class LevelThree extends Game{
 					question.setSize(800, 100);
 					question.setText("It looks like you might want to go review conductors and insulators again!");
 					instruct.setText("Press enter to go back and replay level 2.");
+					try {
+						Thread.sleep(300);
+					} catch (InterruptedException ex) {
+						Thread.currentThread().interrupt();
+					}
 					if (pressedKeys.contains(KeyEvent.VK_ENTER)) {
 						System.out.println("moving to previous level");
 						LevelTwo levelTwo = new LevelTwo();
@@ -565,13 +590,16 @@ public class LevelThree extends Game{
 				sm.PlaySoundEffect("won");
 				speech2right.setVisible(false);
 				speechWon.setVisible(true);
+				bulb.nextMode();
 			}
 			playing = false;
 		}
-		if((workspace != null) && workspace.getVisible()) workspace.draw(g);
-		if((toolbox != null) && toolbox.getVisible()) toolbox.draw(g);
-		if((phil != null) && phil.getVisible()) phil.draw(g);
-		if((title != null) && title.getVisible()) title.draw(g);
+		if(started) {
+			if ((workspace != null) && workspace.getVisible()) workspace.draw(g);
+			if ((toolbox != null) && toolbox.getVisible()) toolbox.draw(g);
+			if ((phil != null) && phil.getVisible()) phil.draw(g);
+			if ((title != null) && title.getVisible()) title.draw(g);
+		}
 
 	}
 }

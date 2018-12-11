@@ -457,10 +457,12 @@ public class LevelTwo extends Game{
 			playing = false;
 		}
 		/* Same, just check for null in case a frame gets thrown in before Mario is initialized */
-		if((workspace != null) && workspace.getVisible()) workspace.draw(g);
-		if((toolbox != null) && toolbox.getVisible()) toolbox.draw(g);
-		if((phil != null) && phil.getVisible()) phil.draw(g);
-		if((title != null) && title.getVisible()) title.draw(g);
+		if(started) {
+			if ((workspace != null) && workspace.getVisible()) workspace.draw(g);
+			if ((toolbox != null) && toolbox.getVisible()) toolbox.draw(g);
+			if ((phil != null) && phil.getVisible()) phil.draw(g);
+			if ((title != null) && title.getVisible()) title.draw(g);
+		}
 
 	}
 }
